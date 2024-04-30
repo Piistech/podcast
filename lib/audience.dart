@@ -12,27 +12,55 @@ class _AudiencePageState extends State<AudiencePage> {
   late Map<String, dynamic> config; // Configuration parameters
   String appId = "5e28584de45545a09bdda7983a85cff6";
   static const String channelName = 'ban-vs-ind-match-1-t20wc2024';
-  static const String channelToken = '007eJxTYDAO7n+3py9ejH2NwQvXczcP8fs/ibFS/F/HuWOW4ae92bkKDKapRhamFiYpqSampiamiQaWSSkpieaWFsaJFqbJaWlmFyYYpDUEMjJs09RhYmRgZGABYhCfCUwyg0kWMCnDkJSYp1tWrJuZl6Kbm1iSnKFrqFtiZFCebGRgZMLAAAAjcCkS';
+  static const String channelToken =
+      '007eJxTYDAO7n+3py9ejH2NwQvXczcP8fs/ibFS/F/HuWOW4ae92bkKDKapRhamFiYpqSampiamiQaWSSkpieaWFsaJFqbJaWlmFyYYpDUEMjJs09RhYmRgZGABYhCfCUwyg0kWMCnDkJSYp1tWrJuZl6Kbm1iSnKFrqFtiZFCebGRgZMLAAAAjcCkS';
   bool isJoined = false; // Indicates if the local user has joined the channel
   RtcEngine? agoraEngine; // Agora engine instance
 
   QualityType quality = QualityType.qualityUnknown;
 
+  bool connecting = false;
+  bool connected = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: isJoined ? Colors.green : Colors.red,
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          if (isJoined) {
-            leave();
-          } else {
-            setupAgoraEngine();
-          }
-          setState(() {});
-        },
-        child: Icon(isJoined ? Icons.logout_rounded : Icons.login_rounded),
-      ),
+      body: connected
+          ? Center(
+              child: IconButton(
+                iconSize: 72,
+                onPressed: () {
+                  leave();
+                },
+                icon: const CircleAvatar(
+                  radius: 72,
+                  child: Icon(
+                    Icons.logout_rounded,
+                    size: 72,
+                  ),
+                ),
+              ),
+            )
+          : connecting
+              ? const Center(
+                  child: CircularProgressIndicator(),
+                )
+              : Center(
+                  child: IconButton(
+                    iconSize: 72,
+                    onPressed: () {
+                      setupAgoraEngine();
+                    },
+                    icon: const CircleAvatar(
+                      radius: 72,
+                      child: Icon(
+                        Icons.wifi_tethering_rounded,
+                        size: 72,
+                      ),
+                    ),
+                  ),
+                ),
     );
   }
 
@@ -66,6 +94,22 @@ class _AudiencePageState extends State<AudiencePage> {
       },
       onConnectionStateChanged: (connection, state, reason) {
         print("Connection State Changed: $state $reason");
+        if (state == ConnectionStateType.connectionStateConnecting) {
+          setState(() {
+            connecting = true;
+            connected = false;
+          });
+        } else if (state == ConnectionStateType.connectionStateConnected) {
+          setState(() {
+            connected = true;
+            connecting = false;
+          });
+        } else if (state == ConnectionStateType.connectionStateDisconnected) {
+          setState(() {
+            connected = false;
+            connecting = false;
+          });
+        }
       },
       // Occurs when a local user joins a channel
       onJoinChannelSuccess: (RtcConnection connection, int elapsed) {
