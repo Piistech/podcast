@@ -58,6 +58,7 @@ class _HostPageState extends State<HostPage> {
         setState(() {
           quality = rxQuality;
         });
+        print(rxQuality);
       },
       onError: (err, msg) {
         print(msg);
@@ -100,6 +101,9 @@ class _HostPageState extends State<HostPage> {
       },
       onUserInfoUpdated: (uid, userInfo) {
         print("User Info Updated: $uid");
+      },
+      onAudioPublishStateChanged: (channel, oldState, newState, elapseSinceLastState) {
+        print("Audio Publish State Changed: $newState");
       },
     );
   }
