@@ -20,21 +20,48 @@ class _HostPageState extends State<HostPage> {
 
   QualityType quality = QualityType.qualityUnknown;
 
+  bool connecting = false;
+  bool connected = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: isJoined ? Colors.green : Colors.red,
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          if (isJoined) {
-            leave();
-          } else {
-            setupAgoraEngine();
-          }
-          setState(() {});
-        },
-        child: Icon(isJoined ? Icons.logout_rounded : Icons.login_rounded),
-      ),
+      body: connected
+          ? Center(
+              child: IconButton(
+                iconSize: 72,
+                onPressed: () {
+                  leave();
+                },
+                icon: const CircleAvatar(
+                  radius: 72,
+                  child: Icon(
+                    Icons.logout_rounded,
+                    size: 72,
+                  ),
+                ),
+              ),
+            )
+          : connecting
+              ? const Center(
+                  child: CircularProgressIndicator(),
+                )
+              : Center(
+                  child: IconButton(
+                    iconSize: 72,
+                    onPressed: () {
+                      setupAgoraEngine();
+                    },
+                    icon: const CircleAvatar(
+                      radius: 72,
+                      child: Icon(
+                        Icons.campaign_rounded,
+                        size: 72,
+                      ),
+                    ),
+                  ),
+                ),
     );
   }
 
@@ -72,6 +99,22 @@ class _HostPageState extends State<HostPage> {
       },
       onConnectionStateChanged: (connection, state, reason) {
         print("Connection State Changed: $state $reason");
+        if (state == ConnectionStateType.connectionStateConnecting) {
+          setState(() {
+            connecting = true;
+            connected = false;
+          });
+        } else if (state == ConnectionStateType.connectionStateConnected) {
+          setState(() {
+            connected = true;
+            connecting = false;
+          });
+        } else if (state == ConnectionStateType.connectionStateDisconnected) {
+          setState(() {
+            connected = false;
+            connecting = false;
+          });
+        }
       },
       // Occurs when a local user joins a channel
       onJoinChannelSuccess: (RtcConnection connection, int elapsed) {
