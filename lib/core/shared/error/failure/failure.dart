@@ -45,3 +45,21 @@ class FixtureNotFoundFailure extends Failure {
 class CommentaryNotFoundFailure extends Failure {
   CommentaryNotFoundFailure() : super(message: 'Commentary not found.');
 }
+
+class AnalysisModelParsingFailure extends Failure {
+  AnalysisModelParsingFailure({
+    required super.message,
+    required super.stackTrace,
+  });
+}
+
+class AnalysisFactorModelParsingFailure extends Failure {
+  AnalysisFactorModelParsingFailure({
+    required super.message,
+    required super.stackTrace,
+  });
+}
+
+class AnalysisNotFoundFailure extends Failure {
+  AnalysisNotFoundFailure() : super(message: 'Analysis not found.');
+}
