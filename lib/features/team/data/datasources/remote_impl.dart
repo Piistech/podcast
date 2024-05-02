@@ -36,8 +36,8 @@ class TeamRemoteDataSourceImpl extends TeamRemoteDataSource {
       response: response,
     );
     if (result.success) {
-      final TeamModel teamModel = TeamModel.parse(map: result.result!);
-      return teamModel;
+      final TeamModel team = TeamModel.parse(map: result.result!);
+      return team;
     } else {
       throw RemoteFailure(message: result.error!);
     }

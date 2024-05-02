@@ -22,9 +22,9 @@ class TeamLocalDataSourceImpl implements TeamLocalDataSource {
 
   @override
   void cache({
-    required TeamModel teamModel,
+    required TeamModel team,
     required String fixtureGuid,
   }) {
-    _cache[fixtureGuid] = teamModel;
+    _cache[fixtureGuid] = team;
   }
 }

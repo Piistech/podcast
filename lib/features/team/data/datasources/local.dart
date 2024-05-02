@@ -5,7 +5,7 @@ abstract class TeamLocalDataSource {
     required String fixtureGuid,
   });
   void cache({
-    required TeamModel teamModel,
+    required TeamModel team,
     required String fixtureGuid,
   });
 

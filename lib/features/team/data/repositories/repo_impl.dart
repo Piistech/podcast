@@ -31,7 +31,7 @@ class TeamRepositoryImpl extends TeamRepository {
             fixtureGuid: fixtureGuid,
           );
           local.cache(
-            teamModel: team,
+            team: team,
             fixtureGuid: fixtureGuid,
           );
           return Right(team);

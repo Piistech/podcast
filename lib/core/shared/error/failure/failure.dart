@@ -39,7 +39,7 @@ class CommentaryModelParsingFailure extends Failure {
 }
 
 class FixtureNotFoundFailure extends Failure {
-  FixtureNotFoundFailure() : super(message: 'Team not found.');
+  FixtureNotFoundFailure() : super(message: 'Fixture not found.');
 }
 class TeamModelParsingFailure extends Failure {
   TeamModelParsingFailure({
