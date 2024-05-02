@@ -7,6 +7,7 @@ Future<void> _setupDependencies() async {
     _core,
     _fixtures,
     _commentary,
+    _team,
   ]);
 }
 
@@ -130,5 +131,37 @@ Future<void> get _commentary async {
 
   sl.registerLazySingleton<CommentaryLocalDataSource>(
     () => CommentaryLocalDataSourceImpl(),
+  );
+}
+
+Future<void> get _team async {
+  sl.registerFactory(
+    () => TeamBloc(
+      useCase: sl(),
+    ),
+  );
+
+  sl.registerLazySingleton<TeamRepository>(
+    () => TeamRepositoryImpl(
+      network: sl(),
+      remote: sl(),
+      local: sl(),
+    ),
+  );
+
+  sl.registerLazySingleton<TeamRemoteDataSource>(
+    () => TeamRemoteDataSourceImpl(
+      client: sl(),
+    ),
+  );
+
+  sl.registerLazySingleton<TeamLocalDataSource>(
+    () => TeamLocalDataSourceImpl(),
+  );
+
+  sl.registerFactory<TeamUsecase>(
+    () => TeamUsecase(
+      repository: sl(),
+    ),
   );
 }
