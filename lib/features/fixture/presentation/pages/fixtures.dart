@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../../core/shared/shared.dart';
 import '../../fixture.dart';
@@ -27,17 +28,27 @@ class FixturesPage extends StatelessWidget {
                   separatorBuilder: (_, __) => const Divider(),
                   itemBuilder: (_, index) {
                     final fixture = state.fixtures[index];
-                    return Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Text(fixture.title),
-                        if (fixture.isLive) const Text('Live'),
-                        if (fixture.isUpcoming) Text(fixture.startTime),
-                        if (fixture.isFinished) Text(fixture.result!),
-                        Text(fixture.homeTeamId),
-                        Text(fixture.awayTeamId),
-                        Text(fixture.startDate),
-                      ],
+                    return InkWell(
+                      onTap: () {
+                        context.pushNamed(
+                          FixtureDetailsPage.name,
+                          pathParameters: {
+                            'id': fixture.guid,
+                          },
+                        );
+                      },
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(fixture.title),
+                          if (fixture.isLive) const Text('Live'),
+                          if (fixture.isUpcoming) Text(fixture.startTime),
+                          if (fixture.isFinished) Text(fixture.result!),
+                          Text(fixture.homeTeamId),
+                          Text(fixture.awayTeamId),
+                          Text(fixture.startDate),
+                        ],
+                      ),
                     );
                   },
                 );

@@ -21,31 +21,24 @@ class FixtureDetailsPage extends StatelessWidget {
         final theme = state.scheme;
         return Scaffold(
           backgroundColor: theme.background,
-          body: BlocBuilder<FixturesBloc, FixturesState>(
+          body: BlocBuilder<FindFixtureByIdBloc, FindFixtureByIdState>(
             builder: (_, state) {
-              if (state is FixturesLoading) {
+              if (state is FindFixtureByIdLoading) {
                 return const Center(child: CircularProgressIndicator());
-              } else if (state is FixturesDone) {
-                return ListView.separated(
-                  itemCount: state.fixtures.length,
-                  separatorBuilder: (_, __) => const Divider(),
-                  itemBuilder: (_, index) {
-                    final fixture = state.fixtures[index];
-                    return Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Text(fixture.title),
-                        if (fixture.isLive) const Text('Live'),
-                        if (fixture.isUpcoming) Text(fixture.startTime),
-                        if (fixture.isFinished) Text(fixture.result!),
-                        Text(fixture.homeTeamId),
-                        Text(fixture.awayTeamId),
-                        Text(fixture.startDate),
-                      ],
-                    );
-                  },
+              } else if (state is FindFixtureByIdDone) {
+                final fixture = state.fixture;
+                return ListView(
+                  children: [
+                    Text(fixture.title),
+                    if (fixture.isLive) const Text('Live'),
+                    if (fixture.isUpcoming) Text(fixture.startTime),
+                    if (fixture.isFinished) Text(fixture.result!),
+                    Text(fixture.homeTeamId),
+                    Text(fixture.awayTeamId),
+                    Text(fixture.startDate),
+                  ],
                 );
-              } else if (state is FixturesError) {
+              } else if (state is FindFixtureByIdError) {
                 return Center(child: Text(state.failure.message));
               } else {
                 return Container();
