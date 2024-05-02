@@ -31,9 +31,17 @@ class FixtureModelParsingFailure extends Failure {
   });
 }
 
+class CommentaryModelParsingFailure extends Failure {
+  CommentaryModelParsingFailure({
+    required super.message,
+    required super.stackTrace,
+  });
+}
+
 class FixtureNotFoundFailure extends Failure {
   FixtureNotFoundFailure() : super(message: 'Fixture not found.');
 }
+
 class PredictionModelParsingFailure extends Failure {
   PredictionModelParsingFailure({
     required super.message,
@@ -43,4 +51,9 @@ class PredictionModelParsingFailure extends Failure {
 
 class PredictionNotFoundFailure extends Failure {
   PredictionNotFoundFailure() : super(message: 'Prediction not found.');
+
+
+class CommentaryNotFoundFailure extends Failure {
+  CommentaryNotFoundFailure() : super(message: 'Commentary not found.');
+
 }

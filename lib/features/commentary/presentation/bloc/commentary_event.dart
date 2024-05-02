@@ -6,3 +6,10 @@ abstract class CommentaryEvent extends Equatable {
   @override
   List<Object> get props => [];
 }
+class FetchCommentary extends CommentaryEvent {
+  final String fixtureGuid;
+  const FetchCommentary({
+    required this.fixtureGuid,
+  });
+}
+
