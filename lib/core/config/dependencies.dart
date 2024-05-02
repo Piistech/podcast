@@ -72,6 +72,11 @@ Future<void> get _fixtures async {
       useCase: sl(),
     ),
   );
+  sl.registerFactory(
+    () => FindFixtureByIdBloc(
+      useCase: sl(),
+    ),
+  );
 
   sl.registerFactory(
     () => FixturesUseCase(
