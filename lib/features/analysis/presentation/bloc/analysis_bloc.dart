@@ -20,7 +20,7 @@ class AnalysisBloc extends Bloc<AnalysisEvent, AnalysisState> {
       );
       result.fold(
         (failure) => emit(AnalysisError(failure: failure)),
-        (commentary) => emit(AnalysisDone(commentary: commentary)),
+        (analysis) => emit(AnalysisDone(analysis: analysis)),
       );
     });
   }

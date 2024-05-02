@@ -25,12 +25,12 @@ final class FindAnalysisByIdError extends FindAnalysisByIdState {
 }
 
 final class FindAnalysisByIdDone extends FindAnalysisByIdState {
-  final AnalysisEntity fixture;
+  final AnalysisEntity analysis;
 
   const FindAnalysisByIdDone({
-    required this.fixture,
+    required this.analysis,
   });
 
   @override
-  List<Object> get props => [fixture];
+  List<Object> get props => [analysis];
 }

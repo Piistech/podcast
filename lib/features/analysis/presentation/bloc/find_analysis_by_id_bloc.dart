@@ -19,7 +19,7 @@ class FindAnalysisByIdBloc extends Bloc<FindAnalysisByIdEvent, FindAnalysisByIdS
       );
       result.fold(
         (failure) => emit(FindAnalysisByIdError(failure: failure)),
-        (fixture) => emit(FindAnalysisByIdDone(fixture: fixture)),
+        (analysis) => emit(FindAnalysisByIdDone(analysis: analysis)),
       );
     });
   }

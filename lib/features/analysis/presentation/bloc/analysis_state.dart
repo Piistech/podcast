@@ -27,12 +27,12 @@ class AnalysisError extends AnalysisState {
 }
 
 class AnalysisDone extends AnalysisState {
-  final AnalysisEntity commentary;
+  final AnalysisEntity analysis;
 
   const AnalysisDone({
-    required this.commentary,
+    required this.analysis,
   });
 
   @override
-  List<Object> get props => [commentary];
+  List<Object> get props => [analysis];
 }
