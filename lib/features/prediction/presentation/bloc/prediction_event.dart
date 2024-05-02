@@ -6,3 +6,6 @@ abstract class PredictionEvent extends Equatable {
   @override
   List<Object> get props => [];
 }
+class FetchPrediction extends PredictionEvent {
+  const FetchPrediction();
+}

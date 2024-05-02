@@ -9,6 +9,10 @@ import 'package:http/http.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:podcast/features/prediction/data/repositories/repo_impl.dart';
+import 'package:podcast/features/prediction/domain/repositories/repo.dart';
+import 'package:podcast/features/prediction/prediction.dart';
+import 'package:podcast/features/prediction/presentation/bloc/prediction_bloc.dart';
 
 import '../../features/fixture/fixture.dart';
 import '../shared/shared.dart';

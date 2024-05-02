@@ -6,6 +6,7 @@ Future<void> _setupDependencies() async {
   await Future.wait([
     _core,
     _fixtures,
+    _prediction,
   ]);
 }
 
@@ -83,6 +84,33 @@ Future<void> get _fixtures async {
 
   sl.registerLazySingleton<FixturesUseCase>(
     () => FixturesUseCase(
+      repository: sl(),
+    ),
+  );
+}
+
+Future<void> get _prediction async {
+  sl.registerFactory(
+    () => PredictionBloc(
+      useCase: sl(),
+    ),
+  );
+
+  sl.registerLazySingleton<PredictionRepository>(
+    () => PredictionRepositoryImpl(
+      network: sl(),
+      remote: sl(),
+    ),
+  );
+
+  sl.registerLazySingleton<PredictionRemoteDataSource>(
+    () => PredictionDataSourceImpl(
+      client: sl(),
+    ),
+  );
+
+  sl.registerLazySingleton<PredictionUseCase>(
+    () => PredictionUseCase(
       repository: sl(),
     ),
   );

@@ -34,3 +34,13 @@ class FixtureModelParsingFailure extends Failure {
 class FixtureNotFoundFailure extends Failure {
   FixtureNotFoundFailure() : super(message: 'Fixture not found.');
 }
+class PredictionModelParsingFailure extends Failure {
+  PredictionModelParsingFailure({
+    required super.message,
+    required super.stackTrace,
+  });
+}
+
+class PredictionNotFoundFailure extends Failure {
+  PredictionNotFoundFailure() : super(message: 'Prediction not found.');
+}
