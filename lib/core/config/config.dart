@@ -11,6 +11,7 @@ import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:path_provider/path_provider.dart';
 
 import '../../features/fixture/fixture.dart';
+import '../../features/team/team.dart';
 import '../shared/shared.dart';
 
 part 'dependencies.dart';

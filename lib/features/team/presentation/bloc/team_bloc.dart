@@ -1,13 +1,25 @@
 import 'package:bloc/bloc.dart';
+import 'package:either_dart/either.dart';
 import 'package:equatable/equatable.dart';
+
+import '../../../../core/shared/shared.dart';
+import '../../team.dart';
 
 part 'team_event.dart';
 part 'team_state.dart';
 
 class TeamBloc extends Bloc<TeamEvent, TeamState> {
-  TeamBloc() : super(TeamInitial()) {
-    on<TeamEvent>((event, emit) {
-      // TODO: implement event handler
+  final TeamUsecase useCase;
+  TeamBloc({
+    required this.useCase,
+  }) : super(TeamInitial()) {
+    on<FetchTeam>((event, emit) {
+      emit(const TeamLoading());
+      final result = useCase(fixtureGuid: event.fixtureGuid);
+      result.fold(
+        (failure) => emit(TeamError(failure: failure)),
+        (team) => emit(TeamDone(team: team)),
+      );
     });
   }
 }

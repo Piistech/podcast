@@ -6,6 +6,7 @@ Future<void> _setupDependencies() async {
   await Future.wait([
     _core,
     _fixtures,
+    _team,
   ]);
 }
 
@@ -83,6 +84,37 @@ Future<void> get _fixtures async {
 
   sl.registerLazySingleton<FixturesUseCase>(
     () => FixturesUseCase(
+      repository: sl(),
+    ),
+  );
+}
+Future<void> get _team async {
+  sl.registerFactory(
+    () => TeamBloc(
+      useCase: sl(),
+    ),
+  );
+
+  sl.registerLazySingleton<TeamRepository>(
+    () => TeamRepositoryImpl(
+      network: sl(),
+      remote: sl(),
+      local: sl(),
+    ),
+  );
+
+  sl.registerLazySingleton<TeamRemoteDataSource>(
+    () => TeamRemoteDataSourceImpl(
+      client: sl(),
+    ),
+  );
+
+  sl.registerLazySingleton<TeamLocalDataSource>(
+    () => TeamLocalDataSourceImpl(),
+  );
+
+  sl.registerFactory<TeamUsecase>(
+    () => TeamUsecase(
       repository: sl(),
     ),
   );
