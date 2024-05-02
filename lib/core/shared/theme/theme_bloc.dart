@@ -7,7 +7,7 @@ part 'theme_event.dart';
 part 'theme_state.dart';
 
 class ThemeBloc extends HydratedBloc<ThemeEvent, ThemeState> {
-  ThemeBloc() : super(ThemeState()) {
+  ThemeBloc() : super(const ThemeState()) {
     on<ToggleTheme>((event, emit) {
       final newTheme = state.copyWith(type: event.type);
       emit(newTheme);
@@ -17,7 +17,7 @@ class ThemeBloc extends HydratedBloc<ThemeEvent, ThemeState> {
   @override
   ThemeState? fromJson(Map<String, dynamic> json) {
     if (json.isEmpty) {
-      return ThemeState();
+      return const ThemeState();
     }
     return ThemeState.parse(map: json);
   }

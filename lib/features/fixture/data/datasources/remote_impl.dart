@@ -38,7 +38,7 @@ class FixtureRemoteDataSourceImpl extends FixtureRemoteDataSource {
       final List<FixtureModel?> fixtures = result.result!.map(
         (map) {
           try {
-            return FixtureModel.parse(
+           return FixtureModel.parse(
               map: Map<String, dynamic>.from(map),
             );
           } catch (e) {
@@ -47,7 +47,7 @@ class FixtureRemoteDataSourceImpl extends FixtureRemoteDataSource {
         },
       ).toList();
 
-      return fixtures.where((element) => element != null).toList() as List<FixtureModel>;
+      return fixtures.whereType<FixtureModel>().toList();
     } else {
       throw RemoteFailure(message: result.error!);
     }

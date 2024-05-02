@@ -1,6 +1,5 @@
 import '../../../../core/shared/shared.dart';
 import '../../fixture.dart';
-import 'local.dart';
 
 class FixtureLocalDataSourceImpl extends FixtureLocalDataSource {
   final Map<String, FixtureModel> _cache = {};

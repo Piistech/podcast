@@ -12,3 +12,5 @@ export 'data/datasources/local_impl.dart';
 
 export 'presentation/bloc/find_fixture_by_id_bloc.dart';
 export 'presentation/bloc/fixtures_bloc.dart';
+export 'presentation/pages/fixtures.dart';
+export 'presentation/pages/details.dart';
