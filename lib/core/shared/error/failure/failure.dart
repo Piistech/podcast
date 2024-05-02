@@ -41,6 +41,16 @@ class CommentaryModelParsingFailure extends Failure {
 class FixtureNotFoundFailure extends Failure {
   FixtureNotFoundFailure() : super(message: 'Fixture not found.');
 }
+class TeamModelParsingFailure extends Failure {
+  TeamModelParsingFailure({
+    required super.message,
+    required super.stackTrace,
+  });
+}
+
+class TeamNotFoundFailure extends Failure {
+  TeamNotFoundFailure() : super(message: 'Team not found.');
+}
 
 class PredictionModelParsingFailure extends Failure {
   PredictionModelParsingFailure({

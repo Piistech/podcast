@@ -13,6 +13,7 @@ import 'package:path_provider/path_provider.dart';
 import '../../features/commentary/commentary.dart';
 import '../../features/fixture/fixture.dart';
 import '../../features/prediction/prediction.dart';
+import '../../features/team/team.dart';
 import '../shared/shared.dart';
 
 part 'dependencies.dart';
