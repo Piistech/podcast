@@ -6,5 +6,7 @@ import '../../../../core/shared/shared.dart';
 import '../../prediction.dart';
 
 abstract class PredictionRepository {
-  Future<Either<Failure, PredictionEntity>> get prediction;
+  Future<Either<Failure, PredictionEntity>> fetchPrediction({
+    required String fixtureGuid,
+  });
 }

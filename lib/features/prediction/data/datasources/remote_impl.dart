@@ -14,13 +14,15 @@ class PredictionDataSourceImpl extends PredictionRemoteDataSource {
   });
 
   @override
-  Future<PredictionModel> get prediction async {
+  Future<PredictionModel> fetch({
+    required String fixtureGuid,
+  }) async {
     //! initialize headers
     // final Map<String, String> headers = {};
-
+    // final Map<String, String> headers = {"fixtureGuid": fixtureGuid};
     //! initialize response
     // final Response response = await client.get(
-    //   RemoteEndpoints.fixtures,
+    //   RemoteEndpoints.prediction,
     //   headers: headers,
     // );
 
@@ -35,8 +37,8 @@ class PredictionDataSourceImpl extends PredictionRemoteDataSource {
     );
 
     if (result.success) {
-      final data = PredictionModel.parse(result.result!);
-      return data;
+      final PredictionModel prediction = PredictionModel.parse(result.result!);
+      return prediction;
     } else {
       throw RemoteFailure(message: result.error!);
     }

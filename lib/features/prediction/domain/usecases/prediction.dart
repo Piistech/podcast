@@ -8,7 +8,9 @@ class PredictionUseCase {
   PredictionUseCase({
     required this.repository,
   });
-   Future<Either<Failure,PredictionEntity>> call() async {
-    return await repository.prediction;
+   Future<Either<Failure,PredictionEntity>> call({
+     required String fixtureGuid,
+   }) async {
+    return await repository.fetchPrediction(fixtureGuid: fixtureGuid);
   }
 }

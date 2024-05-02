@@ -12,7 +12,7 @@ class PredictionBloc extends Bloc<PredictionEvent, PredictionState> {
   PredictionBloc({required this.useCase}) : super(const PredictionInitial()) {
     on<FetchPrediction>((event, emit) async {
       emit(const PredictionLoading());
-      final result = await useCase();
+      final result = await useCase(fixtureGuid: event.fixtureGuid);
       result.fold(
         (failure) => emit(PredictionError(failure: failure)),
         (prediction) => emit(PredictionDone(prediction: prediction)),

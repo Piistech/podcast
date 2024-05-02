@@ -109,7 +109,7 @@ Future<void> get _prediction async {
     ),
   );
 
-  sl.registerLazySingleton<PredictionUseCase>(
+  sl.registerFactory<PredictionUseCase>(
     () => PredictionUseCase(
       repository: sl(),
     ),

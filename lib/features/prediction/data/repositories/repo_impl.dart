@@ -1,11 +1,10 @@
-
 import 'package:either_dart/either.dart';
 
 import '../../../../core/shared/shared.dart';
 import '../../prediction.dart';
 
 class PredictionRepositoryImpl implements PredictionRepository {
-   final NetworkInfo network;
+  final NetworkInfo network;
   final PredictionRemoteDataSource remote;
 
   const PredictionRepositoryImpl({
@@ -14,10 +13,12 @@ class PredictionRepositoryImpl implements PredictionRepository {
   });
 
   @override
-  Future<Either<Failure, PredictionEntity>> get prediction async {
-if (await network.online) {
+  Future<Either<Failure, PredictionEntity>> fetchPrediction({
+    required String fixtureGuid,
+  }) async {
+    if (await network.online) {
       try {
-        final PredictionModel prediction = await remote.prediction;
+        final PredictionModel prediction = await remote.fetch(fixtureGuid: fixtureGuid);
         return Right(prediction);
       } on Failure catch (e) {
         return Left(e);

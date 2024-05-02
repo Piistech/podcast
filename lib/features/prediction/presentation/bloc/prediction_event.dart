@@ -7,5 +7,11 @@ abstract class PredictionEvent extends Equatable {
   List<Object> get props => [];
 }
 class FetchPrediction extends PredictionEvent {
-  const FetchPrediction();
+  final String fixtureGuid;
+
+  const FetchPrediction({
+    required this.fixtureGuid,
+  });
+    @override
+  List<Object> get props => [fixtureGuid];
 }
