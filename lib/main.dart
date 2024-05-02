@@ -1,9 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:podcast/host.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'core/config/config.dart';
+import 'core/shared/shared.dart';
 
-void main() {
-  runApp(const MainApp());
+void main() async {
+  await AppConfig.init();
+  
+  runApp(
+    MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (_) => ThemeBloc()),
+      ],
+      child: const MainApp(),
+    ),
+  );
 }
 
 class MainApp extends StatelessWidget {
@@ -11,8 +22,8 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: HostPage(),
+    return MaterialApp.router(
+      routerConfig: router,
     );
   }
 }

@@ -4,18 +4,18 @@
     "result": [
         {
             "fixtureId": "fc42542f-38ba-4f02-8773-428e22fead9d",
-            "matchName": "Match 1 0f 21",
-            "tournamentName": "T20 World Cup 2024",
-            "startDate": "2024-05-02T15:00:00Z",
+            "matchName": "2nd ODI",
+            "tournamentName": "Cycle Pure Agarbatti Series",
+            "startDate": "2024-05-02T15:00:00",
             "result": null,
             "homeTeamId": "c4eaacd5-6e17-44ee-a82b-9cef84f9f7c3",
             "awayTeamId": "b4566820-b923-4045-aac6-4970690ef101"
         },
         {
             "fixtureId": "1e23471a-3027-4df8-8bcd-d80702caa1fe",
-            "matchName": "Match 2 of 21",
-            "tournamentName": "T20 World Cup 2024",
-            "startDate": "2024-05-02T19:00:00Z",
+            "matchName": "1st T20I",
+            "tournamentName": "Walton Series",
+            "startDate": "2024-05-02T19:00:00",
             "result": null,
             "homeTeamId": "50375151-f2f0-43d6-a679-825481faf3c2",
             "awayTeamId": "a0b35646-f74c-47ff-81c0-d699dc3b9588"
