@@ -6,6 +6,7 @@ Future<void> _setupDependencies() async {
   await Future.wait([
     _core,
     _fixtures,
+    _commentary,
     _team,
   ]);
 }
@@ -64,6 +65,18 @@ Future<void> get _fixtures async {
     ),
   );
 
+  sl.registerFactory(
+    () => FixturesUseCase(
+      repository: sl(),
+    ),
+  );
+
+  sl.registerFactory(
+    () => FindFixtureByIdUseCase(
+      repository: sl(),
+    ),
+  );
+
   sl.registerLazySingleton<FixtureRepository>(
     () => FixtureRepositoryImpl(
       network: sl(),
@@ -81,13 +94,46 @@ Future<void> get _fixtures async {
   sl.registerLazySingleton<FixtureLocalDataSource>(
     () => FixtureLocalDataSourceImpl(),
   );
+}
 
-  sl.registerLazySingleton<FixturesUseCase>(
-    () => FixturesUseCase(
+Future<void> get _commentary async {
+  sl.registerFactory(
+    () => CommentaryBloc(
+      useCase: sl(),
+    ),
+  );
+
+  sl.registerFactory(
+    () => FetchCommentaryUseCase(
       repository: sl(),
     ),
   );
+
+  sl.registerFactory(
+    () => FindCommentaryByIdUseCase(
+      repository: sl(),
+    ),
+  );
+
+  sl.registerLazySingleton<CommentaryRepository>(
+    () => CommentaryRepositoryImpl(
+      network: sl(),
+      remote: sl(),
+      local: sl(),
+    ),
+  );
+
+  sl.registerLazySingleton<CommentaryRemoteDataSource>(
+    () => CommentaryRemoteDataSourceImpl(
+      client: sl(),
+    ),
+  );
+
+  sl.registerLazySingleton<CommentaryLocalDataSource>(
+    () => CommentaryLocalDataSourceImpl(),
+  );
 }
+
 Future<void> get _team async {
   sl.registerFactory(
     () => TeamBloc(
