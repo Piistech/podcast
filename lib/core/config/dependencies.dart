@@ -6,6 +6,7 @@ Future<void> _setupDependencies() async {
   await Future.wait([
     _core,
     _fixtures,
+    _prediction,
     _commentary,
     _team,
   ]);
@@ -109,6 +110,29 @@ Future<void> get _commentary async {
     ),
   );
 
+}
+
+Future<void> get _prediction async {
+  sl.registerFactory(
+    () => PredictionBloc(
+      useCase: sl(),
+    ),
+  );
+
+  sl.registerLazySingleton<PredictionRepository>(
+    () => PredictionRepositoryImpl(
+      network: sl(),
+      remote: sl(),
+    ),
+  );
+
+  sl.registerLazySingleton<PredictionRemoteDataSource>(
+    () => PredictionDataSourceImpl(
+      client:sl(),
+    ),
+  );
+
+
   sl.registerFactory(
     () => FindCommentaryByIdUseCase(
       repository: sl(),
@@ -128,6 +152,14 @@ Future<void> get _commentary async {
       client: sl(),
     ),
   );
+
+
+  sl.registerFactory<PredictionUseCase>(
+    () => PredictionUseCase(
+      repository: sl(),
+    ),
+  );
+
 
   sl.registerLazySingleton<CommentaryLocalDataSource>(
     () => CommentaryLocalDataSourceImpl(),
