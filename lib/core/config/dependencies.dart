@@ -7,6 +7,7 @@ Future<void> _setupDependencies() async {
     _core,
     _fixtures,
     _commentary,
+    _analysis,
   ]);
 }
 
@@ -130,5 +131,43 @@ Future<void> get _commentary async {
 
   sl.registerLazySingleton<CommentaryLocalDataSource>(
     () => CommentaryLocalDataSourceImpl(),
+  );
+}
+
+Future<void> get _analysis async {
+  sl.registerFactory(
+    () => AnalysisBloc(
+      useCase: sl(),
+    ),
+  );
+
+  sl.registerFactory(
+    () => FetchAnalysisUseCase(
+      repository: sl(),
+    ),
+  );
+
+  sl.registerFactory(
+    () => FindAnalysisByIdUseCase(
+      repository: sl(),
+    ),
+  );
+
+  sl.registerLazySingleton<AnalysisRepository>(
+    () => AnalysisRepositoryImpl(
+      network: sl(),
+      remote: sl(),
+      local: sl(),
+    ),
+  );
+
+  sl.registerLazySingleton<AnalysisRemoteDataSource>(
+    () => AnalysisRemoteDataSourceImpl(
+      client: sl(),
+    ),
+  );
+
+  sl.registerLazySingleton<AnalysisLocalDataSource>(
+    () => AnalysisLocalDataSourceImpl(),
   );
 }
