@@ -6,7 +6,9 @@ Future<void> _setupDependencies() async {
   await Future.wait([
     _core,
     _fixtures,
+    _prediction,
     _commentary,
+    _team,
     _analysis,
   ]);
 }
@@ -109,6 +111,29 @@ Future<void> get _commentary async {
     ),
   );
 
+}
+
+Future<void> get _prediction async {
+  sl.registerFactory(
+    () => PredictionBloc(
+      useCase: sl(),
+    ),
+  );
+
+  sl.registerLazySingleton<PredictionRepository>(
+    () => PredictionRepositoryImpl(
+      network: sl(),
+      remote: sl(),
+    ),
+  );
+
+  sl.registerLazySingleton<PredictionRemoteDataSource>(
+    () => PredictionDataSourceImpl(
+      client:sl(),
+    ),
+  );
+
+
   sl.registerFactory(
     () => FindCommentaryByIdUseCase(
       repository: sl(),
@@ -129,8 +154,48 @@ Future<void> get _commentary async {
     ),
   );
 
+
+  sl.registerFactory<PredictionUseCase>(
+    () => PredictionUseCase(
+      repository: sl(),
+    ),
+  );
+
+
   sl.registerLazySingleton<CommentaryLocalDataSource>(
     () => CommentaryLocalDataSourceImpl(),
+  );
+}
+
+Future<void> get _team async {
+  sl.registerFactory(
+    () => TeamBloc(
+      useCase: sl(),
+    ),
+  );
+
+  sl.registerLazySingleton<TeamRepository>(
+    () => TeamRepositoryImpl(
+      network: sl(),
+      remote: sl(),
+      local: sl(),
+    ),
+  );
+
+  sl.registerLazySingleton<TeamRemoteDataSource>(
+    () => TeamRemoteDataSourceImpl(
+      client: sl(),
+    ),
+  );
+
+  sl.registerLazySingleton<TeamLocalDataSource>(
+    () => TeamLocalDataSourceImpl(),
+  );
+
+  sl.registerFactory<TeamUsecase>(
+    () => TeamUsecase(
+      repository: sl(),
+    ),
   );
 }
 

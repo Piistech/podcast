@@ -6,3 +6,14 @@ abstract class TeamEvent extends Equatable {
   @override
   List<Object> get props => [];
 }
+
+class FetchTeam extends TeamEvent {
+  final String fixtureGuid;
+
+  const FetchTeam({
+    required this.fixtureGuid,
+  });
+
+  @override
+  List<Object> get props => [fixtureGuid];
+}
