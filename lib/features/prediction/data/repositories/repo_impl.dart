@@ -13,7 +13,7 @@ class PredictionRepositoryImpl implements PredictionRepository {
   });
 
   @override
-  Future<Either<Failure, PredictionEntity>> fetchPrediction({
+  Future<Either<Failure, PredictionEntity>> fetch({
     required String fixtureGuid,
   }) async {
     if (await network.online) {
