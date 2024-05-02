@@ -15,5 +15,18 @@ final router = GoRouter(
         child: const FixturesPage(),
       ),
     ),
+    GoRoute(
+      path: FixtureDetailsPage.path,
+      name: FixtureDetailsPage.name,
+      builder: (context, state) {
+        final String guid = state.pathParameters['id']!;
+        return BlocProvider(
+          create: (context) => sl<FindFixtureByIdBloc>()..add(FindFixtureById(guid: guid)),
+          child: FixtureDetailsPage(
+            guid: guid,
+          ),
+        );
+      },
+    ),
   ],
 );
