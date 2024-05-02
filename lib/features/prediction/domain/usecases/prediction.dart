@@ -11,6 +11,6 @@ class PredictionUseCase {
    Future<Either<Failure,PredictionEntity>> call({
      required String fixtureGuid,
    }) async {
-    return await repository.fetchPrediction(fixtureGuid: fixtureGuid);
+    return await repository.fetch(fixtureGuid: fixtureGuid);
   }
 }
