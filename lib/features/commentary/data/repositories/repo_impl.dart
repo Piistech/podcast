@@ -18,19 +18,24 @@ class CommentaryRepositoryImpl implements CommentaryRepository {
   Future<Either<Failure, CommentaryEntity>> fetch({
     required String fixtureGuid,
   }) async {
-    if (await network.online) {
-      try {
-        final CommentaryModel commentary = await remote.fetch(fixtureGuid: fixtureGuid);
-        local.cache(
-          fixtureGuid: fixtureGuid,
-          commentary: commentary,
-        );
-        return Right(commentary);
-      } on Failure catch (e) {
-        return Left(e);
+    try {
+      final CommentaryModel commentary = local.findById(fixtureGuid: fixtureGuid);
+      return Right(commentary);
+    } on CommentaryNotFoundFailure {
+      if (await network.online) {
+        try {
+          final CommentaryModel commentary = await remote.fetch(fixtureGuid: fixtureGuid);
+          local.cache(
+            fixtureGuid: fixtureGuid,
+            commentary: commentary,
+          );
+          return Right(commentary);
+        } on Failure catch (e) {
+          return Left(e);
+        }
+      } else {
+        return Left(NoInternetFailure());
       }
-    } else {
-      return Left(NoInternetFailure());
     }
   }
 

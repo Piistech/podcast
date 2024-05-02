@@ -9,6 +9,7 @@ Future<void> _setupDependencies() async {
     _prediction,
     _commentary,
     _team,
+    _analysis,
   ]);
 }
 
@@ -195,5 +196,43 @@ Future<void> get _team async {
     () => TeamUsecase(
       repository: sl(),
     ),
+  );
+}
+
+Future<void> get _analysis async {
+  sl.registerFactory(
+    () => AnalysisBloc(
+      useCase: sl(),
+    ),
+  );
+
+  sl.registerFactory(
+    () => FetchAnalysisUseCase(
+      repository: sl(),
+    ),
+  );
+
+  sl.registerFactory(
+    () => FindAnalysisByIdUseCase(
+      repository: sl(),
+    ),
+  );
+
+  sl.registerLazySingleton<AnalysisRepository>(
+    () => AnalysisRepositoryImpl(
+      network: sl(),
+      remote: sl(),
+      local: sl(),
+    ),
+  );
+
+  sl.registerLazySingleton<AnalysisRemoteDataSource>(
+    () => AnalysisRemoteDataSourceImpl(
+      client: sl(),
+    ),
+  );
+
+  sl.registerLazySingleton<AnalysisLocalDataSource>(
+    () => AnalysisLocalDataSourceImpl(),
   );
 }
