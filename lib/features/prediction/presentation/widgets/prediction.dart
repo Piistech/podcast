@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:podcast/features/prediction/prediction.dart';
-import 'package:podcast/features/prediction/presentation/bloc/prediction_bloc.dart';
 
+import '../../prediction.dart';
 import 'after_prediction.dart';
 import 'before_prediction.dart';
 

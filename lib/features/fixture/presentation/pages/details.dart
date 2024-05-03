@@ -42,8 +42,7 @@ class FixtureDetailsPage extends StatelessWidget {
               } else if (state is FindFixtureByIdDone) {
                 final fixture = state.fixture;
                 return ListView(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                  padding: const EdgeInsets.all(8.0),
                   children: [
                     AnalysisWidget(fixtureGuid: fixture.guid),
                     const SizedBox(height: 16),
