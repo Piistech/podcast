@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:podcast/core/config/config.dart';
 import 'package:podcast/features/analysis/presentation/widgets/analysis.dart';
 import 'package:podcast/features/prediction/presentation/widgets/prediction.dart';
+import 'package:podcast/features/team/team.dart';
 
 import '../../../../core/shared/shared.dart';
 import '../../fixture.dart';
@@ -23,6 +25,16 @@ class FixtureDetailsPage extends StatelessWidget {
         final theme = state.scheme;
         return Scaffold(
           backgroundColor: theme.background,
+          appBar: AppBar(
+            title: Text(
+              "Details",
+              style: TextStyles.title(
+                context: context,
+                color: theme.text,
+              ),
+            ),
+            backgroundColor: theme.background,
+          ),
           body: BlocBuilder<FindFixtureByIdBloc, FindFixtureByIdState>(
             builder: (_, state) {
               if (state is FindFixtureByIdLoading) {
@@ -30,10 +42,19 @@ class FixtureDetailsPage extends StatelessWidget {
               } else if (state is FindFixtureByIdDone) {
                 final fixture = state.fixture;
                 return ListView(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
                   children: [
                     AnalysisWidget(fixtureGuid: fixture.guid),
                     const SizedBox(height: 16),
-                    PredictionWidget(fixtureGuid: fixture.guid),
+                    MultiBlocProvider(
+                      providers: [
+                        BlocProvider(
+                          create: (context) => sl<TeamBloc>(),
+                        ),
+                      ],
+                      child: PredictionWidget(fixtureGuid: fixture.guid),
+                    ),
                   ],
                 );
               } else if (state is FindFixtureByIdError) {
