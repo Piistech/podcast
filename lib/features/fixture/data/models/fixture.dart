@@ -11,6 +11,7 @@ class FixtureModel extends FixtureEntity {
     required super.result,
     required super.homeTeamId,
     required super.awayTeamId,
+    required super.matchDescription,
   });
 
   factory FixtureModel.parse({
@@ -79,6 +80,14 @@ class FixtureModel extends FixtureEntity {
         map['awayTeamId'] is String,
         "FixtureModel.parse: map['awayTeamId'] is not a String",
       );
+      assert(
+        map.containsKey('matchDescription'),
+        "FixtureModel.parse: map doesn't contain key 'matchDescription'",
+      );
+      assert(
+        map['matchDescription'] is String,
+        "FixtureModel.parse: map['matchDescription'] is not a String",
+      );
 
       return FixtureModel(
         guid: map['fixtureId'],
@@ -88,6 +97,7 @@ class FixtureModel extends FixtureEntity {
         result: map['result'],
         homeTeamId: map['homeTeamId'],
         awayTeamId: map['awayTeamId'],
+        matchDescription: map['matchDescription'],
       );
     } catch (e, stackTrace) {
       throw FixtureModelParsingFailure(
