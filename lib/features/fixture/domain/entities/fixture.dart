@@ -9,6 +9,7 @@ class FixtureEntity extends Equatable {
   final String homeTeamId;
   final String awayTeamId;
   final String matchDescription;
+  final String logo;
 
   const FixtureEntity({
     required this.guid,
@@ -19,6 +20,7 @@ class FixtureEntity extends Equatable {
     required this.homeTeamId,
     required this.awayTeamId,
     required this.matchDescription,
+    required this.logo,
   });
 
   @override
@@ -31,5 +33,6 @@ class FixtureEntity extends Equatable {
         homeTeamId,
         awayTeamId,
         matchDescription,
+        logo,
       ];
 }

@@ -47,6 +47,7 @@ class FixturesPage extends StatelessWidget {
                           Text(fixture.homeTeamId),
                           Text(fixture.awayTeamId),
                           Text(fixture.startDate),
+                          Text(fixture.matchDescription),
                         ],
                       ),
                     );
