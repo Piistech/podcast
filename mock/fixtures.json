@@ -10,7 +10,7 @@
             "result": null,
             "homeTeamId": "c4eaacd5-6e17-44ee-a82b-9cef84f9f7c3",
             "awayTeamId": "b4566820-b923-4045-aac6-4970690ef101",
-            "matchDescription": "IPL - CSK vs MI 2nd T20,Eden garden kolkata",
+            "stadiumName": "Eden garden kolkata",
             "logo":"https://resize.indiatvnews.com/en/resize/newbucket/1200_-/2024/04/mi-csk-highlights-1713095803.jpg"
         },
         {
@@ -21,7 +21,7 @@
             "result": null,
             "homeTeamId": "50375151-f2f0-43d6-a679-825481faf3c2",
             "awayTeamId": "a0b35646-f74c-47ff-81c0-d699dc3b9588",
-            "matchDescription": "Bangladesh vs Sri lanka live from Johur ahmed stadium.",
+            "stadiumName": "Johur ahmed stadium.",
             "logo":"https://static.toiimg.com/thumb/msid-108208018,width-320,height-320,resizemode-4,imgsize-107262/108208018.jpg"
         }
     ]

@@ -38,17 +38,25 @@ class ThemeScheme {
   }) {
     final theme = ThemeScheme(
       accent: type == ThemeType.light ? Colors.teal : Colors.teal,
-      background: type == ThemeType.light ? Colors.white : Colors.black,
+      background: type == ThemeType.light ? Colors.white : Colors.black87,
       text: type == ThemeType.light ? Colors.black : Colors.white,
       link: type == ThemeType.light ? Colors.teal.shade700 : Colors.blue,
       button: type == ThemeType.light ? Colors.blue : Colors.blue,
       card: type == ThemeType.light ? Colors.grey.shade100 : Colors.grey[800]!,
-      shadow: type == ThemeType.light ? Colors.grey.shade200 : Colors.grey[800]!,
-      success: type == ThemeType.light ? Colors.greenAccent.shade700 : Colors.grey[800]!,
-      error: type == ThemeType.light ? Colors.redAccent.shade700 : Colors.grey[800]!,
-      warning: type == ThemeType.light ? Colors.deepOrangeAccent.shade200 : Colors.grey[800]!,
+      shadow:
+          type == ThemeType.light ? Colors.grey.shade200 : Colors.grey[800]!,
+      success: type == ThemeType.light
+          ? Colors.greenAccent.shade700
+          : Colors.grey[800]!,
+      error: type == ThemeType.light
+          ? Colors.redAccent.shade700
+          : Colors.grey[800]!,
+      warning: type == ThemeType.light
+          ? Colors.deepOrangeAccent.shade200
+          : Colors.grey[800]!,
       tag: type == ThemeType.light ? Colors.red.shade100 : Colors.grey[800]!,
-      highlight: type == ThemeType.light ? Colors.red.shade200 : Colors.grey[800]!,
+      highlight:
+          type == ThemeType.light ? Colors.red.shade200 : Colors.grey[800]!,
       hint: type == ThemeType.light ? Colors.grey : Colors.grey[800]!,
     );
 
