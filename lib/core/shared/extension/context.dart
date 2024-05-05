@@ -113,6 +113,7 @@ extension BuildContextExtension on BuildContext {
   double get horizontalMargin8 => 8.w;
   double get horizontalMargin12 => 12.w;
   double get horizontalMargin15 => 15.w;
+  double get horizontalMargin16 => 16.w;
 
   double get verticalMargin4 => 4.h;
   double get verticalMargin6 => 6.h;
