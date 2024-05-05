@@ -1,15 +1,5 @@
 library config;
 
-import 'dart:async';
-import 'dart:io';
-
-import 'package:flutter/material.dart';
-import 'package:flutter_native_splash/flutter_native_splash.dart';
-import 'package:get_it/get_it.dart';
-import 'package:http/http.dart';
-import 'package:hydrated_bloc/hydrated_bloc.dart';
-import 'package:internet_connection_checker/internet_connection_checker.dart';
-import 'package:path_provider/path_provider.dart';
 
 import '../../features/analysis/analysis.dart';
 import '../../features/commentary/commentary.dart';

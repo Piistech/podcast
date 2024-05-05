@@ -4,7 +4,7 @@ import '../../../features/fixture/fixture.dart';
 
 extension FixtureEntityExtension on FixtureEntity {
   String get title {
-    return '$matchName, $tournamentName';
+    return '$matchTitle, $matchDescription';
   }
 
   bool get isLive {

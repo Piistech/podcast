@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:podcast/core/shared/shared.dart';
 
 import '../../../../core/config/config.dart';

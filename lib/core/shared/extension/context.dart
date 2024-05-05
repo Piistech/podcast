@@ -1,6 +1,3 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-
 import '../shared.dart';
 
 extension BuildContextExtension on BuildContext {
@@ -74,7 +71,7 @@ extension BuildContextExtension on BuildContext {
       ..showSnackBar(snackBar);
   }
 
-  ThemeBloc get themeBloc => read<ThemeBloc>();
+  ThemeBloc get themeBloc => this.read<ThemeBloc>();
 
   bool get isMobile {
     final size = MediaQuery.of(this).size;
