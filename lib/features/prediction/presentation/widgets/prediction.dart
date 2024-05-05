@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../prediction.dart';
-import 'after_toss.dart';
-import 'before_toss.dart';
 
 class PredictionWidget extends StatefulWidget {
   final String fixtureGuid;

@@ -9,7 +9,6 @@ import '../../../../core/shared/shared.dart';
 import '../../../team/team.dart';
 import '../../fixture.dart';
 import '../widgets/match_description.dart';
-import '../../../team/presentation/widgets/title.dart';
 
 class FixturesPage extends StatelessWidget {
   static const String path = '/fixtures';
