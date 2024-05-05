@@ -9,8 +9,10 @@ class TeamUsecase {
     required this.repository,
   });
   Future<Either<Failure, TeamEntity>> call({
-    required String fixtureGuid,
+    required String teamGuid,
   }) async {
-    return await repository.fetch(fixtureGuid: fixtureGuid);
+    return await repository.fetch(
+      teamGuid: teamGuid,
+    );
   }
 }

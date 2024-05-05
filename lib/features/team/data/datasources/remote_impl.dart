@@ -15,7 +15,7 @@ class TeamRemoteDataSourceImpl extends TeamRemoteDataSource {
 
   @override
   Future<TeamModel> fetch({
-    required String fixtureGuid,
+    required String teamGuid,
   }) async {
     //! initialize headers
     // final Map<String, String> headers = {'fixtureGuid': fixtureGuid};
@@ -32,7 +32,7 @@ class TeamRemoteDataSourceImpl extends TeamRemoteDataSource {
       HttpStatus.ok,
     );
 
-    final RemoteResponse<Map<String,dynamic>> result = RemoteResponse.parse(
+    final RemoteResponse<Map<String, dynamic>> result = RemoteResponse.parse(
       response: response,
     );
     if (result.success) {

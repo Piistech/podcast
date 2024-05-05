@@ -85,10 +85,9 @@ class _HostPageState extends State<HostPage> {
         setState(() {
           quality = rxQuality;
         });
-        print(rxQuality);
       },
       onError: (err, msg) {
-        print(msg);
+        debugPrint(msg);
         switch (err) {
           case ErrorCodeType.errConnectionLost:
           case ErrorCodeType.errAborted:
@@ -98,7 +97,7 @@ class _HostPageState extends State<HostPage> {
         }
       },
       onConnectionStateChanged: (connection, state, reason) {
-        print("Connection State Changed: $state $reason");
+        debugPrint("Connection State Changed: $state $reason");
         if (state == ConnectionStateType.connectionStateConnecting) {
           setState(() {
             connecting = true;
@@ -128,25 +127,25 @@ class _HostPageState extends State<HostPage> {
         });
       },
       onUserJoined: (connection, remoteUid, elapsed) {
-        print("User $remoteUid joined");
+        debugPrint("User $remoteUid joined");
       },
       onUserStateChanged: (connection, remoteUid, state) {
-        print("User $remoteUid state changed: $state");
+        debugPrint("User $remoteUid state changed: $state");
       },
       onLocalUserRegistered: (uid, userAccount) {
-        print("Local user $uid registered");
+        debugPrint("Local user $uid registered");
         setState(() {
           isJoined = true;
         });
       },
       onAudioSubscribeStateChanged: (channel, uid, oldState, newState, elapseSinceLastState) {
-        print("Audio Subscribe State Changed: $uid $newState");
+        debugPrint("Audio Subscribe State Changed: $uid $newState");
       },
       onUserInfoUpdated: (uid, userInfo) {
-        print("User Info Updated: $uid");
+        debugPrint("User Info Updated: $uid");
       },
       onAudioPublishStateChanged: (channel, oldState, newState, elapseSinceLastState) {
-        print("Audio Publish State Changed: $newState");
+        debugPrint("Audio Publish State Changed: $newState");
       },
     );
   }
@@ -165,9 +164,9 @@ class _HostPageState extends State<HostPage> {
           audienceLatencyLevel: AudienceLatencyLevelType.audienceLatencyLevelUltraLowLatency,
         ),
       );
-      print("joinChannel success");
+      debugPrint("joinChannel success");
     } catch (e) {
-      print(e);
+      debugPrint(e.toString());
     }
   }
 

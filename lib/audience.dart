@@ -83,7 +83,7 @@ class _AudiencePageState extends State<AudiencePage> {
         });
       },
       onError: (err, msg) {
-        print(msg);
+        debugPrint(msg);
         switch (err) {
           case ErrorCodeType.errConnectionLost:
           case ErrorCodeType.errAborted:
@@ -93,7 +93,7 @@ class _AudiencePageState extends State<AudiencePage> {
         }
       },
       onConnectionStateChanged: (connection, state, reason) {
-        print("Connection State Changed: $state $reason");
+        debugPrint("Connection State Changed: $state $reason");
         if (state == ConnectionStateType.connectionStateConnecting) {
           setState(() {
             connecting = true;
@@ -123,22 +123,22 @@ class _AudiencePageState extends State<AudiencePage> {
         });
       },
       onUserJoined: (connection, remoteUid, elapsed) {
-        print("User $remoteUid joined");
+        debugPrint("User $remoteUid joined");
       },
       onUserStateChanged: (connection, remoteUid, state) {
-        print("User $remoteUid state changed: $state");
+        debugPrint("User $remoteUid state changed: $state");
       },
       onLocalUserRegistered: (uid, userAccount) {
-        print("Local user $uid registered");
+        debugPrint("Local user $uid registered");
         setState(() {
           isJoined = true;
         });
       },
       onAudioSubscribeStateChanged: (channel, uid, oldState, newState, elapseSinceLastState) {
-        print("Audio Subscribe State Changed: $uid $newState");
+        debugPrint("Audio Subscribe State Changed: $uid $newState");
       },
       onUserInfoUpdated: (uid, userInfo) {
-        print("User Info Updated: $uid");
+        debugPrint("User Info Updated: $uid");
       },
     );
   }
@@ -157,9 +157,9 @@ class _AudiencePageState extends State<AudiencePage> {
           audienceLatencyLevel: AudienceLatencyLevelType.audienceLatencyLevelUltraLowLatency,
         ),
       );
-      print("joinChannel success");
+      debugPrint("joinChannel success");
     } catch (e) {
-      print(e);
+      debugPrint(e.toString());
     }
   }
 

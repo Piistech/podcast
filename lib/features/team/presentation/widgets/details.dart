@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:podcast/features/team/presentation/bloc/team_bloc.dart';
 
 import '../../../../core/shared/shared.dart';
-import '../../../team/team.dart';
+import '../../team.dart';
 
 class TeamDetailsWidget extends StatelessWidget {
   const TeamDetailsWidget({

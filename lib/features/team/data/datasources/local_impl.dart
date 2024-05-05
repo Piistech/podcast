@@ -10,11 +10,11 @@ class TeamLocalDataSourceImpl implements TeamLocalDataSource {
   }
 
   @override
-  TeamModel findTeam({
-    required String fixtureGuid,
+  TeamModel find({
+    required String teamGuid,
   }) {
-    if (_cache.containsKey(fixtureGuid)) {
-      return _cache[fixtureGuid]!;
+    if (_cache.containsKey(teamGuid)) {
+      return _cache[teamGuid]!;
     }
 
     throw TeamNotFoundFailure();
@@ -23,8 +23,8 @@ class TeamLocalDataSourceImpl implements TeamLocalDataSource {
   @override
   void cache({
     required TeamModel team,
-    required String fixtureGuid,
+    required String teamGuid,
   }) {
-    _cache[fixtureGuid] = team;
+    _cache[teamGuid] = team;
   }
 }

@@ -10,3 +10,6 @@ export 'data/datasources/local_impl.dart';
 export 'data/repositories/repo_impl.dart';
 
 export 'presentation/bloc/team_bloc.dart';
+export 'presentation/widgets/name.dart';
+export 'presentation/widgets/title.dart';
+export 'presentation/widgets/details.dart';

@@ -1,8 +1,9 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/shared/shared.dart';
-import '../../../team/team.dart';
+import '../../team.dart';
 
 class TeamNameWidget extends StatefulWidget {
   final String teamGuid;
@@ -20,7 +21,7 @@ class _TeamNameWidgetState extends State<TeamNameWidget> {
   void initState() {
     super.initState();
     BlocProvider.of<TeamBloc>(context).add(
-      FetchTeam(fixtureGuid: widget.teamGuid),
+      FetchTeam(teamGuid: widget.teamGuid),
     );
   }
 

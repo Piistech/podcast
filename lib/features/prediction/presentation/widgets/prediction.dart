@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../prediction.dart';
-import 'after_prediction.dart';
-import 'before_prediction.dart';
 
 class PredictionWidget extends StatefulWidget {
   final String fixtureGuid;
@@ -35,10 +33,10 @@ class _PredictionWidgetState extends State<PredictionWidget> {
           return Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              BeforePrediction(fixtureGuid: state.prediction.winnerTeamId),
+              BeforeTossPrediction(teamGuid: state.prediction.winnerTeamId),
               const SizedBox(height: 16),
-              AfterPrediction(
-                fixtureGuid: state.prediction.winnerTeamIdAfterToss,
+              AfterTossPrediction(
+                teamGuid: state.prediction.winnerTeamIdAfterToss,
               ),
             ],
           );

@@ -4,26 +4,18 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/shared/shared.dart';
 import '../../../team/team.dart';
 
-class BeforePrediction extends StatefulWidget {
-  final String fixtureGuid;
-  const BeforePrediction({
+class AfterTossPrediction extends StatefulWidget {
+  final String teamGuid;
+  const AfterTossPrediction({
     super.key,
-    required this.fixtureGuid,
+    required this.teamGuid,
   });
 
   @override
-  State<BeforePrediction> createState() => _BeforePredictionState();
+  State<AfterTossPrediction> createState() => _AfterTossPredictionState();
 }
 
-class _BeforePredictionState extends State<BeforePrediction> {
-  @override
-  void initState() {
-    super.initState();
-    BlocProvider.of<TeamBloc>(context).add(
-      FetchTeam(fixtureGuid: widget.fixtureGuid),
-    );
-  }
-
+class _AfterTossPredictionState extends State<AfterTossPrediction> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -32,9 +24,9 @@ class _BeforePredictionState extends State<BeforePrediction> {
         borderRadius: BorderRadius.circular(8),
         gradient: LinearGradient(
           colors: [
-            Colors.orange.shade900,
-            Colors.orange.shade900,
-            Colors.orange.shade900,
+            Colors.blue.shade900,
+            Colors.blue.shade900,
+            Colors.blue.shade900,
             Colors.black,
           ],
           begin: Alignment.topLeft,
@@ -49,8 +41,8 @@ class _BeforePredictionState extends State<BeforePrediction> {
             Align(
               alignment: Alignment.center,
               child: Text(
-                'Match Prediction',
-                style: TextStyles.body(
+                'Match Prediction (After)',
+                style: TextStyles.title(
                   context: context,
                   color: context.backgroundColor,
                 ).copyWith(fontWeight: FontWeight.bold),
