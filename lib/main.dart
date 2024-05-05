@@ -25,8 +25,17 @@ class MainApp extends StatelessWidget {
       minTextAdapt: true,
       splitScreenMode: true,
       builder: (_, child) {
-        return MaterialApp.router(
-          routerConfig: router,
+        return BlocBuilder<ThemeBloc, ThemeState>(
+          builder: (_, state) {
+            final theme = state.scheme;
+            return MaterialApp.router(
+              routerConfig: router,
+              theme: AppConfig.theme(
+                context: context,
+                theme: theme,
+              ),
+            );
+          },
         );
       },
     );

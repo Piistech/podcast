@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-
+import '../../../../core/config/config.dart';
+import '../../../../core/shared/shared.dart';
+import '../../../team/team.dart';
 import '../../prediction.dart';
 
 class PredictionWidget extends StatefulWidget {
@@ -30,13 +30,21 @@ class _PredictionWidgetState extends State<PredictionWidget> {
         if (state is PredictionLoading) {
           return const Center(child: CircularProgressIndicator());
         } else if (state is PredictionDone) {
-          return Column(
-            mainAxisSize: MainAxisSize.min,
+          return ListView(
+            padding: EdgeInsets.zero,
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
             children: [
-              BeforeTossPrediction(teamGuid: state.prediction.winnerTeamId),
-              const SizedBox(height: 16),
-              AfterTossPrediction(
-                teamGuid: state.prediction.winnerTeamIdAfterToss,
+              BlocProvider(
+                create: (context) => sl<TeamBloc>(),
+                child: BeforeTossPrediction(teamGuid: state.prediction.winnerTeamId),
+              ),
+              SizedBox(height: context.verticalMargin15),
+              BlocProvider(
+                create: (context) => sl<TeamBloc>(),
+                child: AfterTossPrediction(
+                  teamGuid: state.prediction.winnerTeamIdAfterToss,
+                ),
               ),
             ],
           );

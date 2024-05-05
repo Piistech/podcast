@@ -26,67 +26,87 @@ class _AnalysisWidgetState extends State<AnalysisWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: BlocBuilder<AnalysisBloc, AnalysisState>(
-        builder: (context, state) {
-          if (state is AnalysisLoading) {
-            return const Center(child: CircularProgressIndicator());
-          } else if (state is AnalysisDone) {
-            return Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "Team Analysis (Last ${state.analysis.matchCount}% matches)",
-                  style: TextStyles.title(context: context, color: context.textColor),
-                ),
-                const SizedBox(height: 16),
-                Container(
-                  decoration: BoxDecoration(
-                    color: context.textColor.withOpacity(0.03),
-                    borderRadius: BorderRadius.circular(16),
+    return BlocBuilder<ThemeBloc, ThemeState>(
+      builder: (_, state) {
+        final theme = state.scheme;
+        return BlocBuilder<AnalysisBloc, AnalysisState>(
+          builder: (context, state) {
+            if (state is AnalysisLoading) {
+              return const Center(child: CircularProgressIndicator());
+            } else if (state is AnalysisDone) {
+              return ListView(
+                padding: EdgeInsets.zero,
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                children: [
+                  Text.rich(
+                    TextSpan(
+                      children: [
+                        TextSpan(
+                          text: "Team Analysis",
+                          style: context.textStyle20Medium(color: theme.textPrimary),
+                        ),
+                        WidgetSpan(child: SizedBox(width: context.horizontalMargin4)),
+                        TextSpan(
+                          text: "(Last ${state.analysis.matchCount} matches)",
+                          style: context.textStyle12Medium(color: theme.textPrimary),
+                        ),
+                      ],
+                    ),
                   ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
+                  SizedBox(height: context.verticalMargin16),
+                  Container(
+                    decoration: BoxDecoration(
+                      color: theme.backgroundSecondary,
+                      borderRadius: BorderRadius.circular(context.radius10),
+                    ),
+                    padding: EdgeInsets.symmetric(
+                      horizontal: context.horizontalMargin19,
+                      vertical: context.verticalMargin14,
+                    ),
+                    child: ListView(
+                      padding: EdgeInsets.zero,
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
                       children: [
                         Row(
-                          mainAxisSize: MainAxisSize.max,
+                          crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text(
-                              "Bat/Bowl\nPoints",
-                              style: TextStyles.caption(context: context, color: context.textColor)
-                                  .copyWith(fontWeight: FontWeight.bold),
+                            Expanded(
+                              flex: 1,
+                              child: Text(
+                                "Bat/Bowl Fronts",
+                                style: context.textStyle10Medium(color: theme.textPrimary).copyWith(height: 1.2),
+                              ),
                             ),
-                            BlocProvider(
-                              create: (context) => sl<TeamBloc>()
-                                ..add(
-                                  FetchTeam(
-                                    teamGuid: state.analysis.homeTeamId,
+                            Expanded(
+                              flex: 1,
+                              child: BlocProvider(
+                                create: (_) => sl<TeamBloc>()
+                                  ..add(
+                                    FetchTeam(
+                                      teamGuid: state.analysis.homeTeamId,
+                                    ),
                                   ),
-                                ),
-                              child: const TeamDetailsWidget(),
+                                child: const TeamShortNameAndFlagWidget(),
+                              ),
                             ),
                             BlocProvider(
-                              create: (context) => sl<TeamBloc>()
+                              create: (_) => sl<TeamBloc>()
                                 ..add(
                                   FetchTeam(
                                     teamGuid: state.analysis.awayTeamId,
                                   ),
                                 ),
-                              child: const TeamDetailsWidget(),
+                              child: const TeamShortNameAndFlagWidget(),
                             ),
                           ],
                         ),
-                        const SizedBox(height: 16),
+                        SizedBox(height: context.verticalMargin12),
                         ListView.separated(
                           separatorBuilder: (context, index) {
-                            return const SizedBox(
-                              height: 16,
-                            );
+                            return SizedBox(height: context.verticalMargin20);
                           },
                           itemCount: state.analysis.factors.length,
                           shrinkWrap: true,
@@ -94,56 +114,35 @@ class _AnalysisWidgetState extends State<AnalysisWidget> {
                           itemBuilder: (context, index) {
                             final factor = state.analysis.factors[index];
                             return Row(
-                              mainAxisSize: MainAxisSize.max,
+                              crossAxisAlignment: CrossAxisAlignment.center,
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text(
-                                  factor.label,
-                                  style: TextStyles.caption(context: context, color: context.textColor)
-                                      .copyWith(fontWeight: FontWeight.bold),
-                                ),
-                                SizedBox(
-                                  width: 48,
-                                  height: 8,
-                                  child: ListView.separated(
-                                    scrollDirection: Axis.horizontal,
-                                    separatorBuilder: (context, index) => const SizedBox(
-                                      width: 1,
+                                Expanded(
+                                  flex: 1,
+                                  child: Align(
+                                    alignment: Alignment.centerLeft,
+                                    child: Text(
+                                      factor.label,
+                                      style: context.textStyle10Medium(color: theme.textPrimary).copyWith(height: 1.2),
                                     ),
-                                    shrinkWrap: true,
-                                    itemCount: 10,
-                                    itemBuilder: (context, index) {
-                                      return Container(
-                                        height: 4,
-                                        width: 6,
-                                        decoration: BoxDecoration(
-                                          color: factor.homeTeamScore > index ? Colors.green : Colors.grey,
-                                          borderRadius: BorderRadius.circular(2),
-                                        ),
-                                      );
-                                    },
                                   ),
                                 ),
-                                SizedBox(
-                                  width: 48,
-                                  height: 8,
-                                  child: ListView.separated(
-                                    scrollDirection: Axis.horizontal,
-                                    separatorBuilder: (context, index) => const SizedBox(
-                                      width: 1,
+                                Expanded(
+                                  flex: 1,
+                                  child: Align(
+                                    alignment: Alignment.center,
+                                    child: AnalysisIndicator(
+                                      score: factor.homeTeamScore,
                                     ),
-                                    shrinkWrap: true,
-                                    itemCount: 10,
-                                    itemBuilder: (context, index) {
-                                      return Container(
-                                        height: 4,
-                                        width: 6,
-                                        decoration: BoxDecoration(
-                                          color: factor.awayTeamScore > index ? Colors.green : Colors.grey,
-                                          borderRadius: BorderRadius.circular(2),
-                                        ),
-                                      );
-                                    },
+                                  ),
+                                ),
+                                Expanded(
+                                  flex: 1,
+                                  child: Align(
+                                    alignment: Alignment.centerRight,
+                                    child: AnalysisIndicator(
+                                      score: factor.awayTeamScore,
+                                    ),
                                   ),
                                 ),
                               ],
@@ -153,14 +152,14 @@ class _AnalysisWidgetState extends State<AnalysisWidget> {
                       ],
                     ),
                   ),
-                ),
-              ],
-            );
-          } else {
-            return Container();
-          }
-        },
-      ),
+                ],
+              );
+            } else {
+              return Container();
+            }
+          },
+        );
+      },
     );
   }
 }
