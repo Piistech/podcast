@@ -24,8 +24,11 @@ class FixturesPage extends StatelessWidget {
               } else if (state is FixturesDone) {
                 return ListView.separated(
                   itemCount: state.fixtures.length,
-                  padding: const EdgeInsets.all(15.0),
-                  separatorBuilder: (_, __) => const SizedBox(height: 8),
+                  padding: EdgeInsets.symmetric(
+                    horizontal: context.horizontalMargin15,
+                    vertical: context.verticalMargin15,
+                  ),
+                  separatorBuilder: (_, __) => SizedBox(height: context.verticalMargin8),
                   itemBuilder: (_, index) {
                     final fixture = state.fixtures[index];
                     return FixtureItemWidget(fixture: fixture);

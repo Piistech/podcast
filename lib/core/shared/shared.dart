@@ -29,6 +29,8 @@ export 'package:http/http.dart';
 export 'package:hydrated_bloc/hydrated_bloc.dart';
 export 'package:internet_connection_checker/internet_connection_checker.dart';
 export 'package:path_provider/path_provider.dart';
+export 'package:google_fonts/google_fonts.dart';
+export 'package:flutter_screenutil/flutter_screenutil.dart';
 
 export 'enums.dart';
 export 'text_styles.dart';
