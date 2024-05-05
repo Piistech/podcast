@@ -33,9 +33,9 @@ extension BuildContextExtension on BuildContext {
     final snackBar = SnackBar(
       content: Text(
         message,
-        style: TextStyles.body(context: this, color: theme.background),
+        style: TextStyles.body(context: this, color: theme.textPrimary),
       ),
-      backgroundColor: theme.success,
+      backgroundColor: theme.positive,
     );
     return ScaffoldMessenger.of(this)
       ..hideCurrentSnackBar()
@@ -49,9 +49,9 @@ extension BuildContextExtension on BuildContext {
     final snackBar = SnackBar(
       content: Text(
         message,
-        style: TextStyles.body(context: this, color: theme.background),
+        style: TextStyles.body(context: this, color: theme.textPrimary),
       ),
-      backgroundColor: theme.error,
+      backgroundColor: theme.negative,
     );
     return ScaffoldMessenger.of(this)
       ..hideCurrentSnackBar()
@@ -65,7 +65,7 @@ extension BuildContextExtension on BuildContext {
     final snackBar = SnackBar(
       content: Text(
         message,
-        style: TextStyles.body(context: this, color: theme.background),
+        style: TextStyles.body(context: this, color: theme.backgroundPrimary),
       ),
       backgroundColor: theme.warning,
     );
@@ -75,7 +75,6 @@ extension BuildContextExtension on BuildContext {
   }
 
   ThemeBloc get themeBloc => read<ThemeBloc>();
-
 
   bool get isMobile {
     final size = MediaQuery.of(this).size;
