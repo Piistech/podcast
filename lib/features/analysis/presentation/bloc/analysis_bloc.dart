@@ -1,6 +1,3 @@
-import 'package:bloc/bloc.dart';
-import 'package:equatable/equatable.dart';
-
 import '../../../../core/shared/shared.dart';
 import '../../analysis.dart';
 

@@ -1,63 +1,66 @@
-import 'package:flutter/material.dart';
-
 import '../shared.dart';
 
 class ThemeScheme {
-  final MaterialColor accent;
-  final Color background;
-  final Color text;
-  final Color link;
-  final Color button;
-  final Color card;
-  final Color shadow;
-  final Color success;
-  final Color error;
+  final Color backgroundPrimary;
+  final Color backgroundSecondary;
+  final Color backgroundTertiary;
+  final Color textPrimary;
+  final Color textSecondary;
+  final Color textTossPrimary;
+  final Color positive;
+  final Color negative;
+  final Color live;
   final Color warning;
-  final Color tag;
-  final Color highlight;
-  final Color hint;
+  final Color scoreCardBottom;
+  final Color pink;
+  final Color white;
+  final Gradient gradient;
 
   ThemeScheme({
-    required this.accent,
-    required this.background,
-    required this.text,
-    required this.link,
-    required this.button,
-    required this.card,
-    required this.shadow,
-    required this.success,
-    required this.error,
+    required this.backgroundPrimary,
+    required this.backgroundSecondary,
+    required this.backgroundTertiary,
+    required this.textPrimary,
+    required this.textSecondary,
+    required this.positive,
+    required this.negative,
+    required this.live,
     required this.warning,
-    required this.tag,
-    required this.highlight,
-    required this.hint,
+    required this.textTossPrimary,
+    required this.scoreCardBottom,
+    required this.pink,
+    required this.white,
+    required this.gradient,
   });
 
   factory ThemeScheme.find({
     required ThemeType type,
   }) {
     final theme = ThemeScheme(
-      accent: type == ThemeType.light ? Colors.teal : Colors.teal,
-      background: type == ThemeType.light ? Colors.white : Colors.black87,
-      text: type == ThemeType.light ? Colors.black : Colors.white,
-      link: type == ThemeType.light ? Colors.teal.shade700 : Colors.blue,
-      button: type == ThemeType.light ? Colors.blue : Colors.blue,
-      card: type == ThemeType.light ? Colors.grey.shade100 : Colors.grey[800]!,
-      shadow:
-          type == ThemeType.light ? Colors.grey.shade200 : Colors.grey[800]!,
-      success: type == ThemeType.light
-          ? Colors.greenAccent.shade700
-          : Colors.grey[800]!,
-      error: type == ThemeType.light
-          ? Colors.redAccent.shade700
-          : Colors.grey[800]!,
-      warning: type == ThemeType.light
-          ? Colors.deepOrangeAccent.shade200
-          : Colors.grey[800]!,
-      tag: type == ThemeType.light ? Colors.red.shade100 : Colors.grey[800]!,
-      highlight:
-          type == ThemeType.light ? Colors.red.shade200 : Colors.grey[800]!,
-      hint: type == ThemeType.light ? Colors.grey : Colors.grey[800]!,
+      backgroundPrimary: const Color(0xFF0C131D),
+      backgroundSecondary: const Color(0xFF15212D),
+      backgroundTertiary: const Color(0xFF2C5370),
+      textPrimary: const Color(0xFFCCD0D3),
+      textSecondary: const Color(0xFF919496),
+      textTossPrimary: const Color(0xFFFFAF40),
+      positive: const Color(0xFF00FB64),
+      negative: const Color(0xFFFF2C2C),
+      live: const Color(0xFFFF2C2C),
+      warning: const Color(0xFF00FB64),
+      scoreCardBottom: const Color(0xFF00BAFF),
+      pink: const Color(0xFFC521FF),
+      white: const Color(0xFFFFFFFF),
+      gradient: const LinearGradient(
+        begin: Alignment.topCenter,
+        end: Alignment.bottomCenter,
+        stops: [0.04, 0.26, 0.68, 1.0],
+        colors: [
+          Color(0xFF0C131D),
+          Color(0xFF0C131D),
+          Color(0xFF0C131D),
+          Color(0xFF0C131D),
+        ],
+      ),
     );
 
     return theme;

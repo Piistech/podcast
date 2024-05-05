@@ -2,8 +2,8 @@ import 'package:equatable/equatable.dart';
 
 class FixtureEntity extends Equatable {
   final String guid;
-  final String matchName;
-  final String tournamentName;
+  final String matchTitle;
+  final String matchDescription;
   final DateTime startedAt;
   final String? result;
   final String homeTeamId;
@@ -13,8 +13,8 @@ class FixtureEntity extends Equatable {
 
   const FixtureEntity({
     required this.guid,
-    required this.matchName,
-    required this.tournamentName,
+    required this.matchTitle,
+    required this.matchDescription,
     required this.startedAt,
     required this.result,
     required this.homeTeamId,
@@ -26,8 +26,8 @@ class FixtureEntity extends Equatable {
   @override
   List<Object?> get props => [
         guid,
-        matchName,
-        tournamentName,
+        matchTitle,
+        matchDescription,
         startedAt,
         result,
         homeTeamId,

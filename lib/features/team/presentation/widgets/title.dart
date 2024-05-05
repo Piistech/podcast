@@ -1,7 +1,5 @@
-import 'package:flutter/material.dart';
-import 'package:podcast/features/fixture/fixture.dart';
-
 import '../../../../core/shared/shared.dart';
+import '../../../fixture/fixture.dart';
 import 'name.dart';
 
 class TeamTitle extends StatelessWidget {
@@ -33,7 +31,7 @@ class TeamTitle extends StatelessWidget {
           ),
           const SizedBox(width: 8),
           Text(
-            fixture.matchName,
+            fixture.matchTitle,
             style: TextStyles.caption(
               context: context,
               color: context.textColor,

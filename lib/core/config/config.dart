@@ -1,14 +1,5 @@
 library config;
 
-import 'dart:async';
-import 'dart:io';
-
-import 'package:flutter/material.dart';
-import 'package:get_it/get_it.dart';
-import 'package:http/http.dart';
-import 'package:hydrated_bloc/hydrated_bloc.dart';
-import 'package:internet_connection_checker/internet_connection_checker.dart';
-import 'package:path_provider/path_provider.dart';
 
 import '../../features/analysis/analysis.dart';
 import '../../features/commentary/commentary.dart';
@@ -22,13 +13,14 @@ part 'network_certificates.dart';
 
 class AppConfig {
   static FutureOr<void> init() async {
-    WidgetsFlutterBinding.ensureInitialized();
+    WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+    FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
 
     // Bypass the SSL certificate verification
     HttpOverrides.global = MyHttpOverrides();
 
     HydratedBloc.storage = await HydratedStorage.build(
-      storageDirectory:  await getApplicationCacheDirectory(),
+      storageDirectory: await getApplicationCacheDirectory(),
     );
 
     // Initialize the configurations
@@ -40,25 +32,15 @@ class AppConfig {
     required ThemeScheme theme,
   }) =>
       ThemeData(
-        brightness: Brightness.light,
-        canvasColor: theme.background,
-        shadowColor: theme.shadow,
-        indicatorColor: theme.accent,
-        splashColor: theme.tag,
-        highlightColor: theme.highlight,
+        brightness: Brightness.dark,
+        canvasColor: theme.backgroundPrimary,
         splashFactory: InkRipple.splashFactory,
-        dividerColor: theme.shadow,
-        dividerTheme: DividerThemeData(color: theme.shadow, space: 1, thickness: 1),
-        primaryColor: theme.accent,
-        progressIndicatorTheme: ProgressIndicatorThemeData(color: theme.accent),
         inputDecorationTheme: InputDecorationTheme(
           isDense: true,
           filled: true,
-          fillColor: theme.card,
-          labelStyle: TextStyles.body(context: context, color: theme.text),
+          fillColor: theme.backgroundSecondary,
+          labelStyle: TextStyles.body(context: context, color: theme.textPrimary),
           contentPadding: const EdgeInsets.all(16.0),
-          hintStyle: TextStyles.body(context: context, color: theme.hint),
-          errorStyle: TextStyles.caption(context: context, color: theme.error).copyWith(height: 0, fontSize: 0),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(8),
             borderSide: const BorderSide(color: Colors.black, width: .5),
@@ -77,11 +59,11 @@ class AppConfig {
           ),
           errorBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(8),
-            borderSide: BorderSide(color: theme.error, width: 1),
+            borderSide: BorderSide(color: theme.negative, width: 1),
           ),
           focusedErrorBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(8),
-            borderSide: BorderSide(color: theme.error, width: 3),
+            borderSide: BorderSide(color: theme.negative, width: 3),
           ),
         ),
         elevatedButtonTheme: ElevatedButtonThemeData(
@@ -91,33 +73,29 @@ class AppConfig {
               borderRadius: BorderRadius.circular(8),
             ),
             elevation: 1,
-            shadowColor: theme.shadow,
             padding: const EdgeInsets.all(16),
           ),
         ),
         textButtonTheme: TextButtonThemeData(
           style: TextButton.styleFrom(
-            foregroundColor: theme.accent,
             elevation: 3,
-            shadowColor: theme.shadow,
             backgroundColor: Colors.white,
             shape: const RoundedRectangleBorder(borderRadius: BorderRadius.zero),
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
           ),
         ),
-        textSelectionTheme: TextSelectionThemeData(cursorColor: theme.text),
-        iconTheme: IconThemeData(color: theme.text, size: 20),
+        textSelectionTheme: TextSelectionThemeData(cursorColor: theme.textPrimary),
+        iconTheme: IconThemeData(color: theme.textPrimary, size: 20),
         visualDensity: VisualDensity.adaptivePlatformDensity,
         appBarTheme: AppBarTheme(
-          iconTheme: const IconThemeData(color: Colors.black),
+          iconTheme: IconThemeData(color: theme.textPrimary),
           titleSpacing: 0,
-          actionsIconTheme: IconThemeData(color: theme.accent),
-          backgroundColor: theme.background,
-          surfaceTintColor: theme.background,
+          actionsIconTheme: IconThemeData(color: theme.textPrimary),
+          backgroundColor: theme.backgroundSecondary,
+          surfaceTintColor: theme.backgroundSecondary,
+          foregroundColor: theme.backgroundPrimary,
           elevation: 0,
         ),
-        colorScheme: ColorScheme.fromSwatch(
-          primarySwatch: theme.accent,
-        ).copyWith(background: theme.background),
+        colorScheme: ColorScheme.fromSeed(seedColor: theme.backgroundPrimary),
       );
 }

@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:podcast/core/config/config.dart';
 import 'package:podcast/features/analysis/presentation/widgets/analysis.dart';
 import 'package:podcast/features/prediction/presentation/widgets/prediction.dart';
@@ -24,16 +22,16 @@ class FixtureDetailsPage extends StatelessWidget {
       builder: (context, state) {
         final theme = state.scheme;
         return Scaffold(
-          backgroundColor: theme.background,
+          backgroundColor: theme.backgroundPrimary,
           appBar: AppBar(
             title: Text(
               "Details",
               style: TextStyles.title(
                 context: context,
-                color: theme.text,
+                color: theme.textPrimary,
               ),
             ),
-            backgroundColor: theme.background,
+            backgroundColor: theme.backgroundPrimary,
           ),
           body: BlocBuilder<FindFixtureByIdBloc, FindFixtureByIdState>(
             builder: (_, state) {

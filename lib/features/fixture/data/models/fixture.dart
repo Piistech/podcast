@@ -5,8 +5,8 @@ import '../../../../core/shared/shared.dart';
 class FixtureModel extends FixtureEntity {
   const FixtureModel({
     required super.guid,
-    required super.matchName,
-    required super.tournamentName,
+    required super.matchTitle,
+    required super.matchDescription,
     required super.startedAt,
     required super.result,
     required super.homeTeamId,
@@ -29,21 +29,21 @@ class FixtureModel extends FixtureEntity {
       );
 
       assert(
-        map.containsKey('matchName'),
-        "FixtureModel.parse: map doesn't contain key 'matchName'",
+        map.containsKey('matchTitle'),
+        "FixtureModel.parse: map doesn't contain key 'matchTitle'",
       );
       assert(
-        map['matchName'] is String,
-        "FixtureModel.parse: map['matchName'] is not a String",
+        map['matchTitle'] is String,
+        "FixtureModel.parse: map['matchTitle'] is not a String",
       );
 
       assert(
-        map.containsKey('tournamentName'),
-        "FixtureModel.parse: map doesn't contain key 'tournamentName'",
+        map.containsKey('matchDescription'),
+        "FixtureModel.parse: map doesn't contain key 'matchDescription'",
       );
       assert(
-        map['tournamentName'] is String,
-        "FixtureModel.parse: map['tournamentName'] is not a String",
+        map['matchDescription'] is String,
+        "FixtureModel.parse: map['matchDescription'] is not a String",
       );
 
       assert(
@@ -100,8 +100,8 @@ class FixtureModel extends FixtureEntity {
 
       return FixtureModel(
         guid: map['fixtureId'],
-        matchName: map['matchName'],
-        tournamentName: map['tournamentName'],
+        matchTitle: map['matchTitle'],
+        matchDescription: map['matchDescription'],
         startedAt: DateTime.parse(map['startDate']),
         result: map['result'],
         homeTeamId: map['homeTeamId'],
