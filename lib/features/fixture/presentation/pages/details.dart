@@ -24,16 +24,16 @@ class FixtureDetailsPage extends StatelessWidget {
       builder: (context, state) {
         final theme = state.scheme;
         return Scaffold(
-          backgroundColor: theme.background,
+          backgroundColor: theme.backgroundPrimary,
           appBar: AppBar(
             title: Text(
               "Details",
               style: TextStyles.title(
                 context: context,
-                color: theme.text,
+                color: theme.textPrimary,
               ),
             ),
-            backgroundColor: theme.background,
+            backgroundColor: theme.backgroundPrimary,
           ),
           body: BlocBuilder<FindFixtureByIdBloc, FindFixtureByIdState>(
             builder: (_, state) {
