@@ -80,56 +80,47 @@ class LivePage extends StatelessWidget {
                             ),
                           ),
                           Positioned(
-                            child: ShaderMask(
-                              shaderCallback: (Rect bounds) {
-                                return LinearGradient(
-                                  begin: Alignment.topCenter,
-                                  end: Alignment.bottomCenter,
-                                  colors: [
-                                    theme.backgroundPrimary.withOpacity(0.9),
-                                    theme.backgroundPrimary.withOpacity(.2),
-                                    theme.backgroundPrimary.withOpacity(.2),
-                                    theme.backgroundPrimary.withOpacity(.2),
-                                    theme.backgroundPrimary.withOpacity(.8),
-                                  ],
-                                ).createShader(bounds);
-                              },
-                              blendMode: BlendMode.srcATop,
-                              child: Stack(
-                                children: [
-                                  CachedNetworkImage(
-                                    height: context.height * .65,
-                                    imageUrl: fixture.logo,
-                                    fit: BoxFit.fill,
-                                    errorWidget: (context, url, error) => const Icon(Icons.error),
-                                    placeholder: (context, url) => const CircularProgressIndicator(),
-                                  ),
-                                  Positioned.directional(
-                                    bottom: 0,
-                                    start: 0,
-                                    end: 0,
-                                    textDirection: TextDirection.ltr,
-                                    child: Container(
-                                      width: context.width,
-                                      padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 8),
-                                      child: Column(
-                                        mainAxisSize: MainAxisSize.min,
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            fixture.matchTitle,
-                                            style: context.textStyle17Medium(color: theme.white),
-                                          ),
-                                          Text(
-                                            "T Score",
-                                            style: context.textStyle12Medium(color: theme.white),
-                                          ),
-                                        ],
-                                      ),
+                            child: Stack(
+                              children: [
+                                CachedNetworkImage(
+                                  height: context.height * .65,
+                                  imageUrl: fixture.logo,
+                                  fit: BoxFit.cover,
+                                  errorWidget: (context, url, error) => const Icon(Icons.error),
+                                  placeholder: (context, url) => const CircularProgressIndicator(),
+                                ),
+                                Positioned.fill(
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      gradient: theme.gradient,
                                     ),
                                   ),
-                                ],
-                              ),
+                                ),
+                                Positioned.directional(
+                                  bottom: 0,
+                                  start: 0,
+                                  end: 0,
+                                  textDirection: TextDirection.ltr,
+                                  child: Container(
+                                    width: context.width,
+                                    padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 8),
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          fixture.matchTitle,
+                                          style: context.textStyle17Medium(color: theme.textPrimary),
+                                        ),
+                                        Text(
+                                          "T Score",
+                                          style: context.textStyle14Medium(color: theme.textSecondary),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
                         ],
