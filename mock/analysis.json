@@ -1,34 +1,36 @@
 {
-    "success": true,
-    "error": null,
-    "result": {
-        "matchCount": 5,
-        "factors": [
-            {
-                "label": "Team Opening",
-                "homeTeamScore": 10,
-                "awayTeamScore": 10
-            },
-            {
-                "label": "Middle Order",
-                "homeTeamScore": 5,
-                "awayTeamScore": 5
-            },
-            {
-                "label": "Batting Depth",
-                "homeTeamScore": 1,
-                "awayTeamScore": 5
-            },
-            {
-                "label": "Pace Bowling",
-                "homeTeamScore": 9,
-                "awayTeamScore": 9
-            },
-            {
-                "label": "Spin Bowling",
-                "homeTeamScore": 2,
-                "awayTeamScore": 5
-            }
-        ]
-    }
+  "success": true,
+  "error": null,
+  "result": {
+    "matchCount": 6,
+    "homeTeamId": "c4eaacd5-6e17-44ee-a82b-9cef84f9f7c3",
+    "awayTeamId": "b4566820-b923-4045-aac6-4970690ef101",
+    "factors": [
+      {
+        "label": "Team Opening",
+        "homeTeamScore": 10,
+        "awayTeamScore": 10
+      },
+      {
+        "label": "Middle Order",
+        "homeTeamScore": 5,
+        "awayTeamScore": 5
+      },
+      {
+        "label": "Batting Depth",
+        "homeTeamScore": 1,
+        "awayTeamScore": 5
+      },
+      {
+        "label": "Pace Bowling",
+        "homeTeamScore": 9,
+        "awayTeamScore": 9
+      },
+      {
+        "label": "Spin Bowling",
+        "homeTeamScore": 2,
+        "awayTeamScore": 5
+      }
+    ]
+  }
 }

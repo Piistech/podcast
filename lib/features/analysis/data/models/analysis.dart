@@ -5,6 +5,8 @@ class AnalysisModel extends AnalysisEntity {
   const AnalysisModel({
     required super.matchCount,
     required super.factors,
+    required super.homeTeamId,
+    required super.awayTeamId,
   });
 
   factory AnalysisModel.parse({
@@ -18,6 +20,22 @@ class AnalysisModel extends AnalysisEntity {
       assert(
         map['matchCount'] is int,
         "AnalysisModel.parse: map['matchCount'] is not an int",
+      );
+      assert(
+        map.containsKey('homeTeamId'),
+        "AnalysisModel.parse: map doesn't contain key 'homeTeamId'",
+      );
+      assert(
+        map['homeTeamId'] is String,
+        "AnalysisModel.parse: map['matchCount'] is not an homeTeamId",
+      );
+      assert(
+        map.containsKey('awayTeamId'),
+        "AnalysisModel.parse: map doesn't contain key 'awayTeamId'",
+      );
+      assert(
+        map['awayTeamId'] is String,
+        "AnalysisModel.parse: map['matchCount'] is not an awayTeamId",
       );
 
       assert(
@@ -36,6 +54,8 @@ class AnalysisModel extends AnalysisEntity {
               (e) => AnalysisFactorModel.parse(map: e),
             )
             .toList(),
+        homeTeamId: map['homeTeamId'],
+        awayTeamId: map['awayTeamId'],
       );
     } catch (e, stackTrace) {
       throw AnalysisModelParsingFailure(
