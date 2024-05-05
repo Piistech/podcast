@@ -25,13 +25,16 @@ final router = GoRouter(
         return MultiBlocProvider(
           providers: [
             BlocProvider(
-              create: (context) => sl<FindFixtureByIdBloc>()..add(FindFixtureById(guid: guid)),
+              create: (context) =>
+                  sl<FindFixtureByIdBloc>()..add(FindFixtureById(guid: guid)),
             ),
             BlocProvider(
-              create: (context) => sl<AnalysisBloc>()..add(FetchAnalysis(fixtureGuid: guid)),
+              create: (context) =>
+                  sl<AnalysisBloc>()..add(FetchAnalysis(fixtureGuid: guid)),
             ),
             BlocProvider(
-              create: (context) => sl<PredictionBloc>()..add(FetchPrediction(fixtureGuid: guid)),
+              create: (context) =>
+                  sl<PredictionBloc>()..add(FetchPrediction(fixtureGuid: guid)),
             ),
           ],
           child: FixtureDetailsPage(
