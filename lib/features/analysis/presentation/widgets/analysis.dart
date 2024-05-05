@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:podcast/core/shared/shared.dart';
 
+import '../../../../core/config/config.dart';
+import '../../../team/team.dart';
 import '../../analysis.dart';
+import 'team_details.dart';
 
 class AnalysisWidget extends StatefulWidget {
   final String fixtureGuid;
@@ -38,9 +41,8 @@ class _AnalysisWidgetState extends State<AnalysisWidget> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "Team Alanysis (Last ${state.analysis.matchCount}% matches)",
-                  style: TextStyles.title(
-                      context: context, color: context.textColor),
+                  "Team Analysis (Last ${state.analysis.matchCount}% matches)",
+                  style: TextStyles.title(context: context, color: context.textColor),
                 ),
                 const SizedBox(height: 16),
                 Container(
@@ -59,25 +61,27 @@ class _AnalysisWidgetState extends State<AnalysisWidget> {
                           children: [
                             Text(
                               "Bat/Bowl\nPoints",
-                              style: TextStyles.caption(
-                                      context: context,
-                                      color: context.textColor)
+                              style: TextStyles.caption(context: context, color: context.textColor)
                                   .copyWith(fontWeight: FontWeight.bold),
                             ),
-                            Text(
-                              "Ban",
-                              style: TextStyles.caption(
-                                      context: context,
-                                      color: context.textColor)
-                                  .copyWith(fontWeight: FontWeight.bold),
+                            BlocProvider(
+                              create: (context) => sl<TeamBloc>()
+                                ..add(
+                                  FetchTeam(
+                                    fixtureGuid: widget.fixtureGuid,
+                                  ),
+                                ),
+                              child: const TeamDetailsWidget(),
                             ),
-                            Text(
-                              "Ind",
-                              style: TextStyles.caption(
-                                      context: context,
-                                      color: context.textColor)
-                                  .copyWith(fontWeight: FontWeight.bold),
-                            )
+                            BlocProvider(
+                              create: (context) => sl<TeamBloc>()
+                                ..add(
+                                  FetchTeam(
+                                    fixtureGuid: widget.fixtureGuid,
+                                  ),
+                                ),
+                              child: const TeamDetailsWidget(),
+                            ),
                           ],
                         ),
                         const SizedBox(height: 16),
@@ -98,9 +102,7 @@ class _AnalysisWidgetState extends State<AnalysisWidget> {
                               children: [
                                 Text(
                                   factor.label,
-                                  style: TextStyles.caption(
-                                          context: context,
-                                          color: context.textColor)
+                                  style: TextStyles.caption(context: context, color: context.textColor)
                                       .copyWith(fontWeight: FontWeight.bold),
                                 ),
                                 SizedBox(
@@ -108,8 +110,7 @@ class _AnalysisWidgetState extends State<AnalysisWidget> {
                                   height: 8,
                                   child: ListView.separated(
                                     scrollDirection: Axis.horizontal,
-                                    separatorBuilder: (context, index) =>
-                                        const SizedBox(
+                                    separatorBuilder: (context, index) => const SizedBox(
                                       width: 1,
                                     ),
                                     shrinkWrap: true,
@@ -119,11 +120,8 @@ class _AnalysisWidgetState extends State<AnalysisWidget> {
                                         height: 4,
                                         width: 6,
                                         decoration: BoxDecoration(
-                                          color: factor.homeTeamScore > index
-                                              ? Colors.green
-                                              : Colors.grey,
-                                          borderRadius:
-                                              BorderRadius.circular(2),
+                                          color: factor.homeTeamScore > index ? Colors.green : Colors.grey,
+                                          borderRadius: BorderRadius.circular(2),
                                         ),
                                       );
                                     },
@@ -134,8 +132,7 @@ class _AnalysisWidgetState extends State<AnalysisWidget> {
                                   height: 8,
                                   child: ListView.separated(
                                     scrollDirection: Axis.horizontal,
-                                    separatorBuilder: (context, index) =>
-                                        const SizedBox(
+                                    separatorBuilder: (context, index) => const SizedBox(
                                       width: 1,
                                     ),
                                     shrinkWrap: true,
@@ -145,11 +142,8 @@ class _AnalysisWidgetState extends State<AnalysisWidget> {
                                         height: 4,
                                         width: 6,
                                         decoration: BoxDecoration(
-                                          color: factor.awayTeamScore > index
-                                              ? Colors.green
-                                              : Colors.grey,
-                                          borderRadius:
-                                              BorderRadius.circular(2),
+                                          color: factor.awayTeamScore > index ? Colors.green : Colors.grey,
+                                          borderRadius: BorderRadius.circular(2),
                                         ),
                                       );
                                     },
