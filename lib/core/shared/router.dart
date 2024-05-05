@@ -1,13 +1,10 @@
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
-import 'package:podcast/features/analysis/analysis.dart';
-import 'package:podcast/features/analysis/presentation/bloc/analysis_bloc.dart';
-import 'package:podcast/features/commentary/commentary.dart';
-import 'package:podcast/features/prediction/prediction.dart';
-import 'package:podcast/features/prediction/presentation/bloc/prediction_bloc.dart';
-
-import '../../features/fixture/fixture.dart';
 import '../config/config.dart';
+import 'shared.dart';
+
+import '../../features/analysis/analysis.dart';
+import '../../features/commentary/commentary.dart';
+import '../../features/fixture/fixture.dart';
+import '../../features/prediction/prediction.dart';
 
 final router = GoRouter(
   initialLocation: FixturesPage.path,
