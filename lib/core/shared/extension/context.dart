@@ -80,7 +80,6 @@ extension BuildContextExtension on BuildContext {
           color: color,
         ),
       );
-
   TextStyle textStyle17Medium({required Color color}) => GoogleFonts.rubik(
         textStyle: TextStyle(
           fontSize: 17.sp,
@@ -92,6 +91,13 @@ extension BuildContextExtension on BuildContext {
   TextStyle textStyle12Medium({required Color color}) => GoogleFonts.rubik(
         textStyle: TextStyle(
           fontSize: 12.sp,
+          fontWeight: FontWeight.w600,
+          color: color,
+        ),
+      );
+  TextStyle textStyle14Medium({required Color color}) => GoogleFonts.roboto(
+        textStyle: TextStyle(
+          fontSize: 14.sp,
           fontWeight: FontWeight.w600,
           color: color,
         ),
@@ -126,6 +132,7 @@ extension BuildContextExtension on BuildContext {
   double get horizontalMargin15 => 15.w;
   double get horizontalMargin19 => 19.w;
   double get horizontalMargin30 => 30.w;
+  double get horizontalMargin16 => 16.w;
 
   double get verticalMargin4 => 4.h;
   double get verticalMargin6 => 6.h;

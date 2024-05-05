@@ -1,4 +1,5 @@
 import '../../../../../core/shared/shared.dart';
+import '../../../../commentary/presentation/pages/live.dart';
 import '../../../fixture.dart';
 
 class FixtureItemWidget extends StatelessWidget {
@@ -82,22 +83,30 @@ class FixtureItemWidget extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Row(
-                      children: [
-                        CircleAvatar(
-                          radius: context.radius12,
-                          backgroundColor: theme.white,
-                          child: Icon(
-                            Icons.play_arrow_rounded,
-                            color: theme.backgroundPrimary,
+                    InkWell(
+                      onTap: () {
+                        context.pushNamed(
+                          LivePage.name,
+                          pathParameters: {'fixtureGuid': fixture.guid},
+                        );
+                      },
+                      child: Row(
+                        children: [
+                          CircleAvatar(
+                            radius: context.radius12,
+                            backgroundColor: theme.white,
+                            child: Icon(
+                              Icons.play_arrow_rounded,
+                              color: theme.backgroundPrimary,
+                            ),
                           ),
-                        ),
-                        SizedBox(width: context.horizontalMargin4),
-                        Text(
-                          "Play Now",
-                          style: context.textStyle12Medium(color: theme.textPrimary).copyWith(letterSpacing: -0.04),
-                        ),
-                      ],
+                          SizedBox(width: context.horizontalMargin4),
+                          Text(
+                            "Play Now",
+                            style: context.textStyle12Medium(color: theme.textPrimary).copyWith(letterSpacing: -0.04),
+                          ),
+                        ],
+                      ),
                     ),
                     Text(
                       fixture.startDate,
