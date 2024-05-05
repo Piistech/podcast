@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:podcast/features/commentary/commentary.dart';
 
 import '../../../../core/config/config.dart';
 import '../../../../core/shared/shared.dart';
@@ -67,16 +68,14 @@ class FixturesPage extends StatelessWidget {
                                       fit: BoxFit.cover,
                                       width: 64,
                                       height: 64,
-                                      placeholder: (context, url) =>
-                                          const SizedBox(
+                                      placeholder: (context, url) => const SizedBox(
                                         width: 64,
                                         height: 64,
                                         child: Center(
                                           child: CircularProgressIndicator(),
                                         ),
                                       ),
-                                      errorWidget: (context, url, error) =>
-                                          const SizedBox(
+                                      errorWidget: (context, url, error) => const SizedBox(
                                         width: 64,
                                         height: 64,
                                         child: Icon(Icons.error),
@@ -90,8 +89,7 @@ class FixturesPage extends StatelessWidget {
                                     create: (context) => sl<TeamBloc>(),
                                     child: Column(
                                       mainAxisSize: MainAxisSize.min,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
+                                      crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
                                         TeamTitle(
                                           fixture: fixture,
@@ -114,39 +112,44 @@ class FixturesPage extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Container(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 8, vertical: 8),
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(8),
-                                    color: theme.text.withAlpha(400),
+                                InkWell(
+                                  onTap: () {
+                                    context.pushNamed(
+                                      LivePage.name,
+                                      pathParameters: {
+                                        'fixtureGuid': fixture.guid,
+                                      },
+                                    );
+                                  },
+                                  child: Container(
+                                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(8),
+                                      color: theme.text.withAlpha(400),
+                                    ),
+                                    child: Row(
+                                      children: [
+                                        Icon(
+                                          Icons.play_circle_outline_rounded,
+                                          size: 18,
+                                          color: theme.background,
+                                        ),
+                                        const SizedBox(width: 4),
+                                        Text(
+                                          "Play Now",
+                                          style: TextStyles.caption(context: context, color: theme.background)
+                                              .copyWith(fontWeight: FontWeight.bold),
+                                        ),
+                                      ],
+                                    )
+                                        .animate(
+                                          onPlay: (controller) => controller.repeat(),
+                                        )
+                                        .shimmer(
+                                          duration: 2000.ms,
+                                          color: theme.text,
+                                        ),
                                   ),
-                                  child: Row(
-                                    children: [
-                                      Icon(
-                                        Icons.play_circle_outline_rounded,
-                                        size: 18,
-                                        color: theme.background,
-                                      ),
-                                      const SizedBox(width: 4),
-                                      Text(
-                                        "Play Now",
-                                        style: TextStyles.caption(
-                                                context: context,
-                                                color: theme.background)
-                                            .copyWith(
-                                                fontWeight: FontWeight.bold),
-                                      ),
-                                    ],
-                                  )
-                                      .animate(
-                                        onPlay: (controller) =>
-                                            controller.repeat(),
-                                      )
-                                      .shimmer(
-                                        duration: 2000.ms,
-                                        color: theme.text,
-                                      ),
                                 ),
                                 Text(
                                   fixture.startDate,
@@ -161,8 +164,7 @@ class FixturesPage extends StatelessWidget {
                             Align(
                               alignment: Alignment.centerRight,
                               child: Container(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 8, vertical: 8),
+                                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(8),
                                   color: theme.text.withAlpha(400),
