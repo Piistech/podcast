@@ -104,6 +104,7 @@ extension BuildContextExtension on BuildContext {
         ),
       );
 
+  double get radius5 => 5.r;
   double get radius8 => 8.r;
   double get radius12 => 12.r;
 

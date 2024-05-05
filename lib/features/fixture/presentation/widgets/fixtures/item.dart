@@ -85,7 +85,7 @@ class FixtureItemWidget extends StatelessWidget {
                     Row(
                       children: [
                         CircleAvatar(
-                          radius: 12.r,
+                          radius: context.radius12,
                           backgroundColor: theme.white,
                           child: Icon(
                             Icons.play_arrow_rounded,
@@ -111,7 +111,7 @@ class FixtureItemWidget extends StatelessWidget {
                   child: Container(
                     padding: EdgeInsets.symmetric(horizontal: context.horizontalMargin8, vertical: context.verticalMargin4),
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8),
+                      borderRadius: BorderRadius.circular(context.radius5),
                       color: theme.backgroundTertiary,
                     ),
                     child: Text(
