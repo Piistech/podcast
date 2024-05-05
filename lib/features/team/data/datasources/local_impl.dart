@@ -10,7 +10,7 @@ class TeamLocalDataSourceImpl implements TeamLocalDataSource {
   }
 
   @override
-  TeamModel findTeam({
+  TeamModel find({
     required String teamGuid,
   }) {
     if (_cache.containsKey(teamGuid)) {

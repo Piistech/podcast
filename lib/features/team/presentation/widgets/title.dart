@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:podcast/features/fixture/fixture.dart';
 
 import '../../../../core/shared/shared.dart';
-import 'team_name.dart';
+import 'name.dart';
 
 class TeamTitle extends StatelessWidget {
   final FixtureEntity fixture;

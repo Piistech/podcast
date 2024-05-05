@@ -19,7 +19,7 @@ class TeamRepositoryImpl extends TeamRepository {
     required String teamGuid,
   }) async {
     try {
-      final TeamModel team = local.findTeam(
+      final TeamModel team = local.find(
         teamGuid: teamGuid,
       );
 

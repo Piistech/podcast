@@ -14,3 +14,5 @@ export 'data/datasources/local_impl.dart';
 
 export 'presentation/bloc/find_analysis_by_id_bloc.dart';
 export 'presentation/bloc/analysis_bloc.dart';
+
+export 'presentation/widgets/analysis.dart';

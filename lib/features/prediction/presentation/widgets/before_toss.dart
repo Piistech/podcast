@@ -4,18 +4,18 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/shared/shared.dart';
 import '../../../team/team.dart';
 
-class BeforePrediction extends StatefulWidget {
+class BeforeTossPrediction extends StatefulWidget {
   final String teamGuid;
-  const BeforePrediction({
+  const BeforeTossPrediction({
     super.key,
     required this.teamGuid,
   });
 
   @override
-  State<BeforePrediction> createState() => _BeforePredictionState();
+  State<BeforeTossPrediction> createState() => _BeforeTossPredictionState();
 }
 
-class _BeforePredictionState extends State<BeforePrediction> {
+class _BeforeTossPredictionState extends State<BeforeTossPrediction> {
   @override
   void initState() {
     super.initState();

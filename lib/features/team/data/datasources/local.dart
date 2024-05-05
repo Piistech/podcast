@@ -1,7 +1,7 @@
 import 'package:podcast/features/team/team.dart';
 
 abstract class TeamLocalDataSource {
-  TeamModel findTeam({
+  TeamModel find({
     required String teamGuid,
   });
   void cache({

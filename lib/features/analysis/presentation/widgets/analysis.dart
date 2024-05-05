@@ -5,7 +5,7 @@ import 'package:podcast/core/shared/shared.dart';
 import '../../../../core/config/config.dart';
 import '../../../team/team.dart';
 import '../../analysis.dart';
-import 'team_details.dart';
+import '../../../team/presentation/widgets/details.dart';
 
 class AnalysisWidget extends StatefulWidget {
   final String fixtureGuid;
