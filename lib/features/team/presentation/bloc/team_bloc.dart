@@ -14,7 +14,7 @@ class TeamBloc extends Bloc<TeamEvent, TeamState> {
   }) : super(TeamInitial()) {
     on<FetchTeam>((event, emit) async {
       emit(const TeamLoading());
-      final result = await useCase(fixtureGuid: event.fixtureGuid);
+      final result = await useCase(teamGuid: event.teamGuid);
       result.fold(
         (failure) => emit(TeamError(failure: failure)),
         (team) => emit(TeamDone(team: team)),

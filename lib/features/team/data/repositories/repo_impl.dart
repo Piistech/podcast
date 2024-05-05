@@ -16,11 +16,11 @@ class TeamRepositoryImpl extends TeamRepository {
 
   @override
   Future<Either<Failure, TeamEntity>> fetch({
-    required String fixtureGuid,
+    required String teamGuid,
   }) async {
     try {
       final TeamModel team = local.findTeam(
-        fixtureGuid: fixtureGuid,
+        teamGuid: teamGuid,
       );
 
       return Right(team);
@@ -28,11 +28,11 @@ class TeamRepositoryImpl extends TeamRepository {
       if (await network.online) {
         try {
           final TeamModel team = await remote.fetch(
-            fixtureGuid: fixtureGuid,
+            teamGuid: teamGuid,
           );
           local.cache(
             team: team,
-            fixtureGuid: fixtureGuid,
+            teamGuid: teamGuid,
           );
           return Right(team);
         } on Failure catch (e) {

@@ -5,10 +5,10 @@ import '../../../../core/shared/shared.dart';
 import '../../../team/team.dart';
 
 class BeforePrediction extends StatefulWidget {
-  final String fixtureGuid;
+  final String teamGuid;
   const BeforePrediction({
     super.key,
-    required this.fixtureGuid,
+    required this.teamGuid,
   });
 
   @override
@@ -20,7 +20,7 @@ class _BeforePredictionState extends State<BeforePrediction> {
   void initState() {
     super.initState();
     BlocProvider.of<TeamBloc>(context).add(
-      FetchTeam(fixtureGuid: widget.fixtureGuid),
+      FetchTeam(teamGuid: widget.teamGuid),
     );
   }
 

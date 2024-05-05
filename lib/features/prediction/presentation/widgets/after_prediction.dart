@@ -5,10 +5,10 @@ import '../../../../core/shared/shared.dart';
 import '../../../team/team.dart';
 
 class AfterPrediction extends StatefulWidget {
-  final String fixtureGuid;
+  final String teamGuid;
   const AfterPrediction({
     super.key,
-    required this.fixtureGuid,
+    required this.teamGuid,
   });
 
   @override

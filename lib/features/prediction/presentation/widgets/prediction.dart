@@ -35,10 +35,10 @@ class _PredictionWidgetState extends State<PredictionWidget> {
           return Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              BeforePrediction(fixtureGuid: state.prediction.winnerTeamId),
+              BeforePrediction(teamGuid: state.prediction.winnerTeamId),
               const SizedBox(height: 16),
               AfterPrediction(
-                fixtureGuid: state.prediction.winnerTeamIdAfterToss,
+                teamGuid: state.prediction.winnerTeamIdAfterToss,
               ),
             ],
           );

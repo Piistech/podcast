@@ -20,7 +20,7 @@ class _TeamNameWidgetState extends State<TeamNameWidget> {
   void initState() {
     super.initState();
     BlocProvider.of<TeamBloc>(context).add(
-      FetchTeam(fixtureGuid: widget.teamGuid),
+      FetchTeam(teamGuid: widget.teamGuid),
     );
   }
 

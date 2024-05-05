@@ -68,7 +68,7 @@ class _AnalysisWidgetState extends State<AnalysisWidget> {
                               create: (context) => sl<TeamBloc>()
                                 ..add(
                                   FetchTeam(
-                                    fixtureGuid: widget.fixtureGuid,
+                                    teamGuid: state.analysis.homeTeamId,
                                   ),
                                 ),
                               child: const TeamDetailsWidget(),
@@ -77,7 +77,7 @@ class _AnalysisWidgetState extends State<AnalysisWidget> {
                               create: (context) => sl<TeamBloc>()
                                 ..add(
                                   FetchTeam(
-                                    fixtureGuid: widget.fixtureGuid,
+                                    teamGuid: state.analysis.awayTeamId,
                                   ),
                                 ),
                               child: const TeamDetailsWidget(),
