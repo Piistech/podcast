@@ -1,5 +1,7 @@
 import 'package:podcast/core/shared/shared.dart';
-import 'package:podcast/features/fixture/fixture.dart';
+
+import '../../../../core/config/config.dart';
+import '../../commentary.dart';
 
 class LivePage extends StatelessWidget {
   static const String path = '/live/:fixtureGuid';
@@ -46,37 +48,14 @@ class LivePage extends StatelessWidget {
                             bottom: 8,
                             left: 0,
                             right: 0,
-                            child: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Container(
-                                  margin: EdgeInsets.symmetric(horizontal: context.horizontalMargin12),
-                                  child: LinearProgressIndicator(
-                                    backgroundColor: theme.backgroundSecondary,
-                                    valueColor: AlwaysStoppedAnimation(theme.textPrimary),
-                                    value: 0.8,
-                                    color: theme.textSecondary,
-                                    borderRadius: BorderRadius.circular(context.radius12),
-                                  ),
+                            child: BlocProvider(
+                              create: (context) => sl<CommentaryBloc>()
+                                ..add(
+                                  FetchCommentary(fixtureGuid: fixture.guid),
                                 ),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                  children: [
-                                    IconButton(
-                                      onPressed: () {},
-                                      icon: Icon(Icons.skip_previous_rounded, color: theme.textPrimary),
-                                    ),
-                                    IconButton(
-                                      onPressed: () {},
-                                      icon: Icon(Icons.play_circle_fill_rounded, size: 48, color: theme.textPrimary),
-                                    ),
-                                    IconButton(
-                                      onPressed: () {},
-                                      icon: Icon(Icons.skip_next_rounded, color: theme.textPrimary),
-                                    ),
-                                  ],
-                                ),
-                              ],
+                              child: RadioPlayer(
+                                fixtureGuid: fixture.guid,
+                              ),
                             ),
                           ),
                           Positioned(
