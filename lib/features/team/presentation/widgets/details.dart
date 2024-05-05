@@ -8,39 +8,44 @@ class TeamDetailsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<TeamBloc, TeamState>(
+    return BlocBuilder<ThemeBloc, ThemeState>(
       builder: (context, state) {
-        if (state is TeamLoading) {
-          return const Center(child: CircularProgressIndicator());
-        } else if (state is TeamDone) {
-          return Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text(
-                state.team.name.substring(0, 3),
-                style: TextStyles.caption(context: context, color: context.textColor).copyWith(fontWeight: FontWeight.bold),
-              ),
-              const SizedBox(width: 4),
-              CachedNetworkImage(
-                imageUrl: state.team.flag,
-                width: 24,
-                height: 24,
-                imageBuilder: (context, imageProvider) => Container(
-                  decoration: BoxDecoration(
-                    shape: BoxShape.rectangle,
-                    borderRadius: BorderRadius.circular(8),
-                    image: DecorationImage(
-                      image: imageProvider,
-                      fit: BoxFit.contain,
-                    ),
+        final theme = state.scheme;
+        return BlocBuilder<TeamBloc, TeamState>(
+          builder: (context, state) {
+            if (state is TeamLoading) {
+              return const Center(child: CircularProgressIndicator());
+            } else if (state is TeamDone) {
+              return Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    state.team.name.substring(0, 3),
+                    style: context.textStyle17Medium(color: theme.textPrimary),
                   ),
-                ),
-              )
-            ],
-          );
-        } else {
-          return const SizedBox();
-        }
+                  const SizedBox(width: 4),
+                  CachedNetworkImage(
+                    imageUrl: state.team.flag,
+                    width: 24,
+                    height: 24,
+                    imageBuilder: (context, imageProvider) => Container(
+                      decoration: BoxDecoration(
+                        shape: BoxShape.rectangle,
+                        borderRadius: BorderRadius.circular(8),
+                        image: DecorationImage(
+                          image: imageProvider,
+                          fit: BoxFit.contain,
+                        ),
+                      ),
+                    ),
+                  )
+                ],
+              );
+            } else {
+              return const SizedBox();
+            }
+          },
+        );
       },
     );
   }

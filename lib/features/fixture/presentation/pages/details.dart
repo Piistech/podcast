@@ -1,4 +1,5 @@
 import 'package:podcast/core/config/config.dart';
+import 'package:podcast/features/analysis/analysis.dart';
 import 'package:podcast/features/analysis/presentation/widgets/analysis.dart';
 import 'package:podcast/features/prediction/presentation/widgets/prediction.dart';
 import 'package:podcast/features/team/team.dart';
@@ -24,14 +25,25 @@ class FixtureDetailsPage extends StatelessWidget {
         return Scaffold(
           backgroundColor: theme.backgroundPrimary,
           appBar: AppBar(
-            title: Text(
-              "Details",
-              style: TextStyles.title(
-                context: context,
-                color: theme.textPrimary,
-              ),
+            automaticallyImplyLeading: true,
+            backgroundColor: theme.backgroundSecondary,
+            iconTheme: IconThemeData(color: theme.textPrimary),
+            title: BlocBuilder<FindFixtureByIdBloc, FindFixtureByIdState>(
+              builder: (context, state) {
+                if (state is FindFixtureByIdDone) {
+                  final fixture = state.fixture;
+                  return Text(
+                    fixture.matchTitle,
+                    style: context.textStyle12Medium(color: theme.textPrimary),
+                  );
+                } else {
+                  return Text(
+                    "Match Details",
+                    style: context.textStyle17Medium(color: theme.textPrimary),
+                  );
+                }
+              },
             ),
-            backgroundColor: theme.backgroundPrimary,
           ),
           body: BlocBuilder<FindFixtureByIdBloc, FindFixtureByIdState>(
             builder: (_, state) {

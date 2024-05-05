@@ -56,8 +56,8 @@ class ThemeScheme {
         stops: [0.04, 0.26, 0.68, 1.0],
         colors: [
           Color(0xFF0C131D),
-          Color(0xFF0C131D),
-          Color(0xFF0C131D),
+          Colors.transparent,
+          Colors.transparent,
           Color(0xFF0C131D),
         ],
       ),
