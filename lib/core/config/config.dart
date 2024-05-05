@@ -4,6 +4,7 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get_it/get_it.dart';
 import 'package:http/http.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
@@ -22,13 +23,14 @@ part 'network_certificates.dart';
 
 class AppConfig {
   static FutureOr<void> init() async {
-    WidgetsFlutterBinding.ensureInitialized();
+    WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+    FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
 
     // Bypass the SSL certificate verification
     HttpOverrides.global = MyHttpOverrides();
 
     HydratedBloc.storage = await HydratedStorage.build(
-      storageDirectory:  await getApplicationCacheDirectory(),
+      storageDirectory: await getApplicationCacheDirectory(),
     );
 
     // Initialize the configurations
