@@ -46,7 +46,7 @@ class ThemeScheme {
       positive: const Color(0xFF00FB64),
       negative: const Color(0xFFFF2C2C),
       live: const Color(0xFFFF2C2C),
-      warning: const Color(0xFF00FB64),
+      warning: const Color(0xFFFDDD00),
       scoreCardBottom: const Color(0xFF00BAFF),
       pink: const Color(0xFFC521FF),
       white: const Color(0xFFFFFFFF),

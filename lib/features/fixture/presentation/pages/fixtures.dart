@@ -11,12 +11,8 @@ class FixturesPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<ThemeBloc, ThemeState>(
       builder: (context, state) {
-        final theme = state.scheme;
         return Scaffold(
-          backgroundColor: theme.backgroundPrimary,
-          appBar: AppBar(
-            backgroundColor: theme.backgroundSecondary,
-          ),
+          appBar: AppBar(),
           body: BlocBuilder<FixturesBloc, FixturesState>(
             builder: (_, state) {
               if (state is FixturesLoading) {

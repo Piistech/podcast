@@ -11,5 +11,7 @@ export 'data/repositories/repo_impl.dart';
 
 export 'presentation/bloc/team_bloc.dart';
 export 'presentation/widgets/name.dart';
-export 'presentation/widgets/title.dart';
+export 'presentation/widgets/full_name.dart';
 export 'presentation/widgets/details.dart';
+export 'presentation/widgets/info_builder.dart';
+export 'presentation/widgets/short_name_and_flag.dart';

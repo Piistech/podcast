@@ -1,8 +1,8 @@
 import '../../../../core/shared/shared.dart';
 import '../../team.dart';
 
-class TeamNameWidget extends StatelessWidget {
-  const TeamNameWidget({
+class TeamFullNameWidget extends StatelessWidget {
+  const TeamFullNameWidget({
     super.key,
   });
 
@@ -14,7 +14,7 @@ class TeamNameWidget extends StatelessWidget {
 
         return TeamInfoWidget(
           builder: (team) => Text(
-            team.name,
+            team.name.toUpperCase(),
             style: context.textStyle17Medium(color: theme.textPrimary).copyWith(height: 1.2),
           ),
         );

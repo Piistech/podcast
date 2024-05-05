@@ -34,6 +34,7 @@ class AppConfig {
       ThemeData(
         brightness: Brightness.dark,
         canvasColor: theme.backgroundPrimary,
+        scaffoldBackgroundColor: theme.backgroundPrimary,
         splashFactory: InkRipple.splashFactory,
         inputDecorationTheme: InputDecorationTheme(
           isDense: true,
@@ -96,6 +97,9 @@ class AppConfig {
           foregroundColor: theme.backgroundPrimary,
           elevation: 0,
         ),
-        colorScheme: ColorScheme.fromSeed(seedColor: theme.backgroundPrimary),
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: theme.backgroundPrimary,
+          brightness: Brightness.dark,
+        ),
       );
 }

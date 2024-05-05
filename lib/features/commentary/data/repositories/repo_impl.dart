@@ -1,5 +1,6 @@
 import 'package:either_dart/either.dart';
 
+import '../../../../core/config/config.dart';
 import '../../../../core/shared/shared.dart';
 import '../../commentary.dart';
 
@@ -25,6 +26,9 @@ class CommentaryRepositoryImpl implements CommentaryRepository {
       if (await network.online) {
         try {
           final CommentaryModel commentary = await remote.fetch(fixtureGuid: fixtureGuid);
+
+          await sl<RtcEngine>().initialize(RtcEngineContext(appId: commentary.appId));
+          
           local.cache(
             fixtureGuid: fixtureGuid,
             commentary: commentary,
