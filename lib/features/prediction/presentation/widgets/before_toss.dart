@@ -27,15 +27,15 @@ class _BeforeTossPredictionState extends State<BeforeTossPrediction> {
       margin: const EdgeInsets.symmetric(horizontal: 8),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),
-        gradient: LinearGradient(
-          colors: [
-            Colors.orange.shade900,
-            Colors.orange.shade900,
-            Colors.orange.shade900,
-            Colors.black,
+        gradient: const LinearGradient(
+          stops: [
+            0.1,
+            .9,
           ],
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
+          colors: [
+            Color(0xFF9C5B00),
+            Color(0xFF482A00),
+          ],
         ),
       ),
       child: Padding(

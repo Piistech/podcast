@@ -19,15 +19,12 @@ class _AfterTossPredictionState extends State<AfterTossPrediction> {
       margin: const EdgeInsets.symmetric(horizontal: 8),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),
-        gradient: LinearGradient(
+        gradient: const LinearGradient(
+          stops: [0.1, .9],
           colors: [
-            Colors.blue.shade900,
-            Colors.blue.shade900,
-            Colors.blue.shade900,
-            Colors.black,
+            Color(0xFF1F3344),
+            Color(0xFF00448C),
           ],
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
         ),
       ),
       child: Padding(
