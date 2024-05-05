@@ -23,7 +23,9 @@ class FixturesPage extends StatelessWidget {
         final theme = state.scheme;
         return Scaffold(
           backgroundColor: theme.backgroundPrimary,
-          appBar: AppBar(),
+          appBar: AppBar(
+            backgroundColor: theme.backgroundSecondary,
+          ),
           body: BlocBuilder<FixturesBloc, FixturesState>(
             builder: (_, state) {
               if (state is FixturesLoading) {
@@ -31,14 +33,14 @@ class FixturesPage extends StatelessWidget {
               } else if (state is FixturesDone) {
                 return ListView.separated(
                   itemCount: state.fixtures.length,
-                  padding: const EdgeInsets.all(8.0),
-                  separatorBuilder: (_, __) => const Divider(),
+                  padding: const EdgeInsets.all(15.0),
+                  separatorBuilder: (_, __) => const SizedBox(height: 8),
                   itemBuilder: (_, index) {
                     final fixture = state.fixtures[index];
                     return Container(
-                      padding: const EdgeInsets.all(8),
+                      padding: const EdgeInsets.all(12),
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(8),
+                        borderRadius: BorderRadius.circular(12),
                         color: theme.backgroundSecondary,
                       ),
                       child: InkWell(

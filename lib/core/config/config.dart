@@ -42,9 +42,8 @@ class AppConfig {
     required ThemeScheme theme,
   }) =>
       ThemeData(
-        brightness: Brightness.light,
+        brightness: Brightness.dark,
         canvasColor: theme.backgroundPrimary,
-        scaffoldBackgroundColor: theme.backgroundPrimary,
         splashFactory: InkRipple.splashFactory,
         inputDecorationTheme: InputDecorationTheme(
           isDense: true,
@@ -104,6 +103,7 @@ class AppConfig {
           actionsIconTheme: IconThemeData(color: theme.textPrimary),
           backgroundColor: theme.backgroundSecondary,
           surfaceTintColor: theme.backgroundSecondary,
+          foregroundColor: theme.backgroundPrimary,
           elevation: 0,
         ),
         colorScheme: ColorScheme.fromSeed(seedColor: theme.backgroundPrimary),
