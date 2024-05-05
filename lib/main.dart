@@ -1,7 +1,3 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_native_splash/flutter_native_splash.dart';
-
 import 'core/config/config.dart';
 import 'core/shared/shared.dart';
 
@@ -24,8 +20,15 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     FlutterNativeSplash.remove();
-    return MaterialApp.router(
-      routerConfig: router,
+    return ScreenUtilInit(
+      designSize: const Size(360, 800),
+      minTextAdapt: true,
+      splitScreenMode: true,
+      builder: (_, child) {
+        return MaterialApp.router(
+          routerConfig: router,
+        );
+      },
     );
   }
 }

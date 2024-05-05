@@ -1,8 +1,3 @@
-import 'dart:io';
-
-import 'package:flutter/services.dart';
-import 'package:http/http.dart';
-
 import '../../../../core/shared/shared.dart';
 import '../../fixture.dart';
 
@@ -38,7 +33,7 @@ class FixtureRemoteDataSourceImpl extends FixtureRemoteDataSource {
       final List<FixtureModel?> fixtures = result.result!.map(
         (map) {
           try {
-           return FixtureModel.parse(
+            return FixtureModel.parse(
               map: Map<String, dynamic>.from(map),
             );
           } catch (e) {

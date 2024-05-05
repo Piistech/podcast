@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:podcast/core/config/config.dart';
 import 'package:podcast/features/analysis/presentation/widgets/analysis.dart';
 import 'package:podcast/features/prediction/presentation/widgets/prediction.dart';
