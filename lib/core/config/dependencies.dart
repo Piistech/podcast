@@ -20,6 +20,7 @@ Future<void> get _core async {
   );
 
   sl.registerLazySingleton(() => Client());
+  sl.registerLazySingleton<RtcEngine>(() => createAgoraRtcEngine());
   sl.registerLazySingleton(() => InternetConnectionChecker());
   sl.registerLazySingleton(
     () => List<AddressCheckOptions>.unmodifiable(

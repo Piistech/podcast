@@ -1,3 +1,4 @@
+import '../../../../core/config/config.dart';
 import '../../../../core/shared/shared.dart';
 import '../../commentary.dart';
 
@@ -35,7 +36,9 @@ class CommentaryRemoteDataSourceImpl extends CommentaryRemoteDataSource {
       final CommentaryModel commentary = CommentaryModel.parse(
         map: Map<String, dynamic>.from(result.result!),
       );
-
+      await sl<RtcEngine>().initialize(
+        RtcEngineContext(appId: commentary.appId),
+      );
       return commentary;
     } else {
       throw RemoteFailure(message: result.error!);
