@@ -20,7 +20,7 @@ class RadioPlayer extends StatelessWidget {
                 child: CircularProgressIndicator(),
               );
             } else if (state is CommentaryDone) {
-              final commentary = state.commentary;
+              //final commentary = state.commentary;
               return Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [

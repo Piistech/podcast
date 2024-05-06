@@ -1,7 +1,8 @@
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_svg/svg.dart';
 
 import '../../../../core/shared/shared.dart';
-import '../../../commentary/commentary.dart';
 import '../../fixture.dart';
 
 class FixturesPage extends StatefulWidget {
@@ -42,8 +43,7 @@ class _FixturesPageState extends State<FixturesPage> {
                     horizontal: context.horizontalMargin15,
                     vertical: context.verticalMargin15,
                   ),
-                  separatorBuilder: (_, __) =>
-                      SizedBox(height: context.verticalMargin8),
+                  separatorBuilder: (_, __) => SizedBox(height: context.verticalMargin8),
                   itemBuilder: (_, index) {
                     final fixture = state.fixtures[index];
                     return FixtureItemWidget(fixture: fixture);
@@ -70,38 +70,73 @@ class _FixturesPageState extends State<FixturesPage> {
                       currentIndex = index;
                     });
                     if (index == 1) {
-                      context.pushNamed(
-                        LivePage.name,
-                        pathParameters: {
-                          'fixtureGuid': state.fixtures[index].guid,
-                        },
-                      );
+                      // context.pushNamed(
+                      //   LivePage.name,
+                      //   pathParameters: {
+                      //     'fixtureGuid': state.fixtures[index].guid,
+                      //   },
+                      // );
                     }
                   },
                   items: [
                     BottomNavyBarItem(
-                      textAlign: TextAlign.center,
-                      icon: const Center(child: Icon(Icons.home_rounded)),
-                      title: const Center(child: Text('Home')),
+                      icon: Padding(
+                        padding: EdgeInsets.only(left: context.horizontalMargin8, bottom: context.verticalMargin4),
+                        child: SvgPicture.asset(
+                          matchTextDirection: true,
+                          alignment: Alignment.center,
+                          'images/icons/home.svg',
+                        ),
+                      ),
+                      title: Text(
+                        'Home',
+                        style: context.textStyle14Medium(color: theme.textPrimary),
+                      ),
+                      activeColor: theme.textPrimary,
+                      inactiveColor: theme.textSecondary,
+                    ),
+                    BottomNavyBarItem(
+                      icon: Padding(
+                        padding: EdgeInsets.only(left: context.horizontalMargin8),
+                        child: SvgPicture.asset(
+                          'images/icons/live.svg',
+                        ),
+                      ),
+                      title: Text(
+                        textAlign: TextAlign.center,
+                        'Live Radio',
+                        style: context.textStyle14Medium(color: theme.textPrimary),
+                      ),
                       activeColor: theme.textPrimary,
                     ),
                     BottomNavyBarItem(
-                      textAlign: TextAlign.center,
-                      icon: const Icon(Icons.cast_connected_outlined),
-                      title: const Text('Live Radio'),
+                      icon: Padding(
+                        padding: EdgeInsets.only(left: context.horizontalMargin8),
+                        child: SvgPicture.asset(
+                          'images/icons/podcast.svg',
+                        ),
+                      ),
+                      title: Text(
+                        textAlign: TextAlign.center,
+                        'Podcast',
+                        style: context.textStyle14Medium(color: theme.textPrimary),
+                      ),
                       activeColor: theme.textPrimary,
+                      inactiveColor: theme.textSecondary,
                     ),
                     BottomNavyBarItem(
-                      textAlign: TextAlign.center,
-                      icon: const Icon(Icons.podcasts_rounded),
-                      title: const Text('Podcast'),
+                      icon: Padding(
+                        padding: EdgeInsets.only(left: context.horizontalMargin8),
+                        child: SvgPicture.asset(
+                          'images/icons/more.svg',
+                        ),
+                      ),
+                      title: Text(
+                        'More',
+                        style: context.textStyle14Medium(color: theme.textPrimary),
+                      ),
                       activeColor: theme.textPrimary,
-                    ),
-                    BottomNavyBarItem(
-                      textAlign: TextAlign.center,
-                      icon: const Icon(Icons.list_alt_rounded),
-                      title: const Text('More'),
-                      activeColor: theme.textPrimary,
+                      inactiveColor: theme.textSecondary,
                     ),
                   ],
                 );
