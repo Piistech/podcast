@@ -18,12 +18,6 @@ class LivePage extends StatelessWidget {
             automaticallyImplyLeading: true,
             backgroundColor: theme.backgroundSecondary,
             iconTheme: IconThemeData(color: theme.textPrimary),
-            actions: [
-              IconButton(
-                onPressed: () {},
-                icon: const Icon(Icons.favorite_outline),
-              ),
-            ],
           ),
           body: BlocBuilder<FindFixtureByIdBloc, FindFixtureByIdState>(
             builder: (context, state) {
@@ -75,7 +69,10 @@ class LivePage extends StatelessWidget {
                                   textDirection: TextDirection.ltr,
                                   child: Container(
                                     width: context.width,
-                                    padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 8),
+                                    padding: EdgeInsets.symmetric(
+                                      horizontal: context.horizontalMargin16,
+                                      vertical: context.verticalMargin8,
+                                    ),
                                     child: Row(
                                       children: [
                                         Expanded(
@@ -145,7 +142,7 @@ class LivePage extends StatelessWidget {
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: context.horizontalMargin16),
                       child: Text(
-                        "Welcome to the highly anticipated Bangladesh vs Sri Lanka cricket match! It's a beautiful day for cricket and the stadium is packed with enthusiastic fans from both",
+                        "Welcome to the highly anticipated Bangladesh vs Sri Lanka cricket match! It's a beautiful day for cricket and the stadium is packed with enthusiastic fans from both.Welcome to the highly anticipated Bangladesh vs Sri Lanka cricket match! It's a beautiful day for cricket and the stadium is packed with enthusiastic fans from both",
                         style: context.textStyle12Medium(color: theme.textSecondary),
                       ),
                     )
