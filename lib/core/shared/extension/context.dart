@@ -20,8 +20,12 @@ extension BuildContextExtension on BuildContext {
   double get bottomInset => MediaQuery.of(this).padding.bottom;
 
   double get smallestSide => MediaQuery.of(this).size.shortestSide;
+
   double get width => MediaQuery.of(this).size.width;
+
   double get height => MediaQuery.of(this).size.height;
+  double get liveContainerHeight => MediaQuery.of(this).size.height* .78;
+  double get liveImageHeight => MediaQuery.of(this).size.height* .65;
 
   ScaffoldMessengerState successNotification({
     required String message,
@@ -149,4 +153,5 @@ extension BuildContextExtension on BuildContext {
   double get verticalMargin25 => 25.h;
 
   double get flagHeight20 => 20.h;
+  double get navBarHeight => 54.h;
 }

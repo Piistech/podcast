@@ -14,7 +14,7 @@ class _HostPageState extends State<HostPage> {
   String appId = "5e28584de45545a09bdda7983a85cff6";
   static const String channelName = 'ban-vs-ind-match-1-t20wc2024';
   static const String channelToken =
-      '007eJxTYDAO7n+3py9ejH2NwQvXczcP8fs/ibFS/F/HuWOW4ae92bkKDKapRhamFiYpqSampiamiQaWSSkpieaWFsaJFqbJaWlmFyYYpDUEMjJs09RhYmRgZGABYhCfCUwyg0kWMCnDkJSYp1tWrJuZl6Kbm1iSnKFrqFtiZFCebGRgZMLAAAAjcCkS';
+      '007eJxTYPjDk1N11Pz9qsfsM5mj50bmeD292rVof4Fe3sdGB4lnLxwVGExTjSxMLUxSUk1MTU1MEw0sk1JSEs0tLYwTLUyT09LMsuss0hoCGRl8JMOZGRkYGViAGMRnApPMYJIFTMowJCXm6ZYV62bmpejmJpYkZ+ga6pYYGZQnGxkYmTAwAABcYykr';
   bool isJoined = false; // Indicates if the local user has joined the channel
   RtcEngine? agoraEngine; // Agora engine instance
 

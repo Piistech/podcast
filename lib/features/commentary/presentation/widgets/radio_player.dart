@@ -53,7 +53,7 @@ class RadioPlayer extends StatelessWidget {
                         icon: Icon(
                           Icons.skip_previous_rounded,
                           color: theme.textPrimary,
-                          size: 18.w,
+                          size: 30.w,
                         ),
                       ),
                       BlocBuilder<PlayCommentaryBloc, PlayCommentaryState>(
@@ -88,7 +88,7 @@ class RadioPlayer extends StatelessWidget {
                                   icon: Icon(
                                     isPlaying ? Icons.stop_circle_rounded : Icons.play_circle_fill_rounded,
                                     size: 40.w,
-                                    color: isPlaying ? theme.live : theme.textSecondary,
+                                    color: isPlaying ? theme.live : theme.playButton,
                                   ),
                                 );
                               },
@@ -101,7 +101,7 @@ class RadioPlayer extends StatelessWidget {
                         icon: Icon(
                           Icons.skip_next_rounded,
                           color: theme.textPrimary,
-                          size: 18.w,
+                          size: 30.w,
                         ),
                       ),
                     ],
