@@ -35,5 +35,7 @@ export 'package:flutter_screenutil/flutter_screenutil.dart';
 export 'package:agora_rtc_engine/agora_rtc_engine.dart';
 export 'package:lottie/lottie.dart' hide FrameRate;
 
+export 'package:flutter_svg/svg.dart';
+
 export 'enums.dart';
 export 'text_styles.dart';

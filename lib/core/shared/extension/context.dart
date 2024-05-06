@@ -24,8 +24,8 @@ extension BuildContextExtension on BuildContext {
   double get width => MediaQuery.of(this).size.width;
 
   double get height => MediaQuery.of(this).size.height;
-  double get liveContainerHeight => MediaQuery.of(this).size.height* .78;
-  double get liveImageHeight => MediaQuery.of(this).size.height* .65;
+  double get liveContainerHeight => MediaQuery.of(this).size.height * .78;
+  double get liveImageHeight => MediaQuery.of(this).size.height * .65;
 
   ScaffoldMessengerState successNotification({
     required String message,
@@ -91,6 +91,13 @@ extension BuildContextExtension on BuildContext {
           color: color,
         ),
       );
+  TextStyle textStyle17Regular({required Color color}) => GoogleFonts.rubik(
+        textStyle: TextStyle(
+          fontSize: 17.sp,
+          fontWeight: FontWeight.w400,
+          color: color,
+        ),
+      );
 
   TextStyle textStyle12Medium({required Color color}) => GoogleFonts.rubik(
         textStyle: TextStyle(
@@ -122,6 +129,7 @@ extension BuildContextExtension on BuildContext {
         ),
       );
 
+  double get radius2 => 2.r;
   double get radius4 => 4.r;
   double get radius5 => 5.r;
   double get radius8 => 8.r;
@@ -130,6 +138,7 @@ extension BuildContextExtension on BuildContext {
   double get radius52 => 52.r;
 
   double get horizontalMargin1 => 1.w;
+  double get horizontalMargin2 => 2.w;
   double get horizontalMargin4 => 4.w;
   double get horizontalMargin6 => 6.w;
   double get horizontalMargin8 => 8.w;
@@ -138,6 +147,7 @@ extension BuildContextExtension on BuildContext {
   double get horizontalMargin15 => 15.w;
   double get horizontalMargin16 => 16.w;
   double get horizontalMargin19 => 19.w;
+  double get horizontalMargin20 => 20.w;
   double get horizontalMargin30 => 30.w;
 
   double get verticalMargin4 => 4.h;
@@ -145,6 +155,7 @@ extension BuildContextExtension on BuildContext {
   double get verticalMargin6 => 6.h;
   double get verticalMargin8 => 8.h;
   double get verticalMargin10 => 10.h;
+  double get verticalMargin11 => 11.h;
   double get verticalMargin12 => 12.h;
   double get verticalMargin14 => 14.h;
   double get verticalMargin15 => 15.h;

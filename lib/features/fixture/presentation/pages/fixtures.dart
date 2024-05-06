@@ -1,7 +1,4 @@
 import '../../../../core/config/config.dart';
-import 'package:bottom_navy_bar/bottom_navy_bar.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:flutter_svg/svg.dart';
 
 import '../../../../core/shared/shared.dart';
 import '../../../commentary/commentary.dart';
@@ -54,139 +51,165 @@ class _FixturesPageState extends State<FixturesPage> {
               }
             },
           ),
-          bottomNavigationBar: BlocBuilder<FixturesBloc, FixturesState>(
-            builder: (context, state) {
-              if (state is FixturesDone) {
-                return BottomNavyBar(
-                  selectedIndex: currentIndex,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  itemCornerRadius: context.radius8,
-                  backgroundColor: theme.backgroundTertiary,
-                  showElevation: false,
-                  containerHeight: context.navBarHeight,
-                  onItemSelected: (index) {
-                    setState(() {
-                      currentIndex = index;
-                    });
-                    if (index == 1) {
-                      // context.pushNamed(
-                      //   LivePage.name,
-                      //   pathParameters: {
-                      //     'fixtureGuid': state.fixtures[index].guid,
-                      //   },
-                      // );
-                    }
-                  },
-                  items: [
-                    BottomNavyBarItem(
-                      icon: Padding(
-                        padding: EdgeInsets.only(left: context.horizontalMargin8, bottom: context.verticalMargin4),
-                        child: SvgPicture.asset(
-                          matchTextDirection: true,
-                          alignment: Alignment.center,
-                          'images/icons/home.svg',
-                          colorFilter: ColorFilter.mode(
-                              currentIndex == 0 ? theme.backgroundPrimary : theme.textPrimary, BlendMode.srcIn),
+          bottomNavigationBar: PhysicalModel(
+            color: theme.backgroundTertiary,
+            child: Container(
+              padding: EdgeInsets.symmetric(
+                horizontal: context.horizontalMargin15,
+                vertical: context.verticalMargin11,
+              ).copyWith(bottom: (context.bottomInset / 2) + context.verticalMargin11),
+              width: double.maxFinite,
+              height: 54.h + (context.bottomInset / 2),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  currentIndex == 0
+                      ? SelectedNavItem(
+                          icon: "images/icons/home.svg",
+                          title: "Home",
+                          index: 0,
+                          previous: currentIndex,
+                        )
+                      : UnselectedNavItem(
+                          icon: "images/icons/home.svg",
+                          onTap: () {
+                            setState(() => currentIndex = 0);
+                          },
                         ),
-                      ),
-                      title: Text(
-                        'Home',
-                        style: context.textStyle14Medium(color: theme.backgroundPrimary),
-                      ),
-                      activeColor: theme.textPrimary,
-                      inactiveColor: theme.textSecondary,
-                    ),
-                    BottomNavyBarItem(
-                      icon: Padding(
-                        padding: EdgeInsets.only(left: context.horizontalMargin8),
-                        child: SvgPicture.asset(
-                          'images/icons/live.svg',
-                          colorFilter: ColorFilter.mode(
-                              currentIndex == 1 ? theme.backgroundPrimary : theme.textPrimary, BlendMode.srcIn),
+                  currentIndex == 1
+                      ? SelectedNavItem(
+                          icon: "images/icons/live.svg",
+                          title: "Live Radio",
+                          index: 1,
+                          previous: currentIndex,
+                        )
+                      : UnselectedNavItem(
+                          icon: "images/icons/live.svg",
+                          onTap: () {
+                            setState(() => currentIndex = 1);
+                          },
                         ),
-                      ),
-                      title: Text(
-                        textAlign: TextAlign.center,
-                        'Live Radio',
-                        style: context.textStyle14Medium(color: theme.backgroundPrimary),
-                      ),
-                      activeColor: theme.textPrimary,
-                      inactiveColor: theme.textPrimary,
-                    ),
-                    BottomNavyBarItem(
-                      icon: Padding(
-                        padding: EdgeInsets.only(left: context.horizontalMargin8),
-                        child: SvgPicture.asset(
-                          'images/icons/podcast.svg',
-                          colorFilter: ColorFilter.mode(
-                              currentIndex == 2 ? theme.backgroundPrimary : theme.textPrimary, BlendMode.srcIn),
+                  currentIndex == 2
+                      ? SelectedNavItem(
+                          icon: "images/icons/podcast.svg",
+                          title: "Podcast",
+                          index: 2,
+                          previous: currentIndex,
+                        )
+                      : UnselectedNavItem(
+                          icon: "images/icons/podcast.svg",
+                          onTap: () {
+                            setState(() => currentIndex = 2);
+                          },
                         ),
-                      ),
-                      title: Text(
-                        textAlign: TextAlign.center,
-                        'Podcast',
-                        style: context.textStyle14Medium(color: theme.backgroundPrimary),
-                      ),
-                      activeColor: theme.textPrimary,
-                      inactiveColor: theme.textSecondary,
-                    ),
-                    BottomNavyBarItem(
-                      icon: Padding(
-                        padding: EdgeInsets.only(left: context.horizontalMargin8),
-                        child: SvgPicture.asset(
-                          'images/icons/more.svg',
-                          colorFilter: ColorFilter.mode(
-                              currentIndex == 3 ? theme.backgroundPrimary : theme.textPrimary, BlendMode.srcIn),
+                  currentIndex == 3
+                      ? SelectedNavItem(
+                          icon: "images/icons/more.svg",
+                          title: "More",
+                          index: 3,
+                          previous: currentIndex,
+                        )
+                      : UnselectedNavItem(
+                          icon: "images/icons/more.svg",
+                          onTap: () {
+                            setState(() => currentIndex = 3);
+                          },
                         ),
-                      ),
-                      title: Text(
-                        'More',
-                        style: context.textStyle14Medium(color: theme.backgroundPrimary),
-                      ),
-                      activeColor: theme.textPrimary,
-                      inactiveColor: theme.textSecondary,
-                    ),
-                  ],
-                );
-              } else {
-                return BottomNavyBar(
-                  selectedIndex: currentIndex,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  itemCornerRadius: 8,
-                  backgroundColor: theme.backgroundTertiary,
-                  showElevation: false,
-                  // use this to remove appBar's elevation
-                  onItemSelected: (index) {
-                    setState(() {
-                      currentIndex = index;
-                    });
-                  },
-                  items: [
-                    BottomNavyBarItem(
-                      icon: const Icon(Icons.apps),
-                      title: const Text('Home'),
-                      activeColor: theme.textPrimary,
-                    ),
-                    BottomNavyBarItem(
-                      icon: const Icon(Icons.cast_connected_outlined),
-                      title: const Text('Live Radio'),
-                      activeColor: theme.textPrimary,
-                    ),
-                    BottomNavyBarItem(
-                      icon: const Icon(Icons.podcasts_rounded),
-                      title: const Text('Podcast'),
-                      activeColor: theme.textPrimary,
-                    ),
-                    BottomNavyBarItem(
-                      icon: const Icon(Icons.list_alt_rounded),
-                      title: const Text('More'),
-                      activeColor: theme.textPrimary,
-                    ),
-                  ],
-                );
-              }
-            },
+                ],
+              ),
+            ),
           ),
+        );
+      },
+    );
+  }
+}
+
+class SelectedNavItem extends StatelessWidget {
+  final String icon;
+  final String title;
+  final int index;
+  final int previous;
+
+  const SelectedNavItem({
+    super.key,
+    required this.icon,
+    required this.title,
+    required this.index,
+    required this.previous,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<ThemeBloc, ThemeState>(
+      builder: (context, state) {
+        final theme = state.scheme;
+        return Container(
+          padding: EdgeInsets.symmetric(
+            horizontal: context.horizontalMargin6,
+            vertical: context.verticalMargin6,
+          ),
+          decoration: BoxDecoration(
+            color: theme.textPrimary,
+            borderRadius: BorderRadius.circular(context.radius4),
+          ),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              SvgPicture.asset(
+                icon,
+                colorFilter: ColorFilter.mode(
+                  theme.backgroundPrimary,
+                  BlendMode.srcIn,
+                ),
+                width: 20.w,
+                height: 20.h,
+              ),
+              SizedBox(width: context.horizontalMargin2),
+              Text(
+                title,
+                style: context.textStyle17Regular(color: theme.backgroundPrimary).copyWith(height: 1.2),
+              ),
+            ],
+          ),
+        ).animate()
+          ..fade(
+            duration: const Duration(milliseconds: 300),
+          );
+      },
+    );
+  }
+}
+
+class UnselectedNavItem extends StatelessWidget {
+  final String icon;
+  final VoidCallback onTap;
+
+  const UnselectedNavItem({
+    super.key,
+    required this.icon,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<ThemeBloc, ThemeState>(
+      builder: (context, state) {
+        final theme = state.scheme;
+        return InkWell(
+          onTap: onTap,
+          child: SvgPicture.asset(
+            icon,
+            colorFilter: ColorFilter.mode(
+              theme.textPrimary,
+              BlendMode.srcIn,
+            ),
+            width: 24.w,
+            height: 24.h,
+          ).animate()
+            ..moveX(
+              duration: const Duration(milliseconds: 300),
+            ),
         );
       },
     );
