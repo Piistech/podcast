@@ -13,7 +13,4 @@ class FetchCommentary extends CommentaryEvent {
     required this.fixtureGuid,
   });
 }
-class PlayCommentary extends CommentaryEvent {
-  
-}
 

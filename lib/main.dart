@@ -1,5 +1,6 @@
 import 'core/config/config.dart';
 import 'core/shared/shared.dart';
+import 'features/commentary/commentary.dart';
 
 void main() async {
   await AppConfig.init();
@@ -7,7 +8,9 @@ void main() async {
   runApp(
     MultiBlocProvider(
       providers: [
-        BlocProvider(create: (_) => ThemeBloc()),
+        BlocProvider(create: (_) => sl<ThemeBloc>()),
+        BlocProvider(create: (_) => sl<LiveCommentaryStatusBloc>()),
+        BlocProvider(create: (_) => sl<CurrentlyPlayingCommentaryBloc>()),
       ],
       child: const MainApp(),
     ),
