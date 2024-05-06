@@ -17,13 +17,6 @@ class FixturesPage extends StatefulWidget {
 
 class _FixturesPageState extends State<FixturesPage> {
   int currentIndex = 0;
-  late PageController pageController;
-
-  @override
-  void initState() {
-    super.initState();
-    pageController = PageController(initialPage: 0);
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -62,9 +55,10 @@ class _FixturesPageState extends State<FixturesPage> {
                 return BottomNavyBar(
                   selectedIndex: currentIndex,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  itemCornerRadius: 8,
+                  itemCornerRadius: context.radius8,
                   backgroundColor: theme.backgroundTertiary,
                   showElevation: false,
+                  containerHeight: context.navBarHeight,
                   onItemSelected: (index) {
                     setState(() {
                       currentIndex = index;
@@ -86,11 +80,13 @@ class _FixturesPageState extends State<FixturesPage> {
                           matchTextDirection: true,
                           alignment: Alignment.center,
                           'images/icons/home.svg',
+                          colorFilter: ColorFilter.mode(
+                              currentIndex == 0 ? theme.backgroundPrimary : theme.textPrimary, BlendMode.srcIn),
                         ),
                       ),
                       title: Text(
                         'Home',
-                        style: context.textStyle14Medium(color: theme.textPrimary),
+                        style: context.textStyle14Medium(color: theme.backgroundPrimary),
                       ),
                       activeColor: theme.textPrimary,
                       inactiveColor: theme.textSecondary,
@@ -100,26 +96,31 @@ class _FixturesPageState extends State<FixturesPage> {
                         padding: EdgeInsets.only(left: context.horizontalMargin8),
                         child: SvgPicture.asset(
                           'images/icons/live.svg',
+                          colorFilter: ColorFilter.mode(
+                              currentIndex == 1 ? theme.backgroundPrimary : theme.textPrimary, BlendMode.srcIn),
                         ),
                       ),
                       title: Text(
                         textAlign: TextAlign.center,
                         'Live Radio',
-                        style: context.textStyle14Medium(color: theme.textPrimary),
+                        style: context.textStyle14Medium(color: theme.backgroundPrimary),
                       ),
                       activeColor: theme.textPrimary,
+                      inactiveColor: theme.textPrimary,
                     ),
                     BottomNavyBarItem(
                       icon: Padding(
                         padding: EdgeInsets.only(left: context.horizontalMargin8),
                         child: SvgPicture.asset(
                           'images/icons/podcast.svg',
+                          colorFilter: ColorFilter.mode(
+                              currentIndex == 2 ? theme.backgroundPrimary : theme.textPrimary, BlendMode.srcIn),
                         ),
                       ),
                       title: Text(
                         textAlign: TextAlign.center,
                         'Podcast',
-                        style: context.textStyle14Medium(color: theme.textPrimary),
+                        style: context.textStyle14Medium(color: theme.backgroundPrimary),
                       ),
                       activeColor: theme.textPrimary,
                       inactiveColor: theme.textSecondary,
@@ -129,11 +130,13 @@ class _FixturesPageState extends State<FixturesPage> {
                         padding: EdgeInsets.only(left: context.horizontalMargin8),
                         child: SvgPicture.asset(
                           'images/icons/more.svg',
+                          colorFilter: ColorFilter.mode(
+                              currentIndex == 3 ? theme.backgroundPrimary : theme.textPrimary, BlendMode.srcIn),
                         ),
                       ),
                       title: Text(
                         'More',
-                        style: context.textStyle14Medium(color: theme.textPrimary),
+                        style: context.textStyle14Medium(color: theme.backgroundPrimary),
                       ),
                       activeColor: theme.textPrimary,
                       inactiveColor: theme.textSecondary,

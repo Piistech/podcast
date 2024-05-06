@@ -14,6 +14,7 @@ class ThemeScheme {
   final Color scoreCardBottom;
   final Color pink;
   final Color white;
+  final Color playButton;
   final Gradient gradient;
 
   ThemeScheme({
@@ -31,6 +32,7 @@ class ThemeScheme {
     required this.pink,
     required this.white,
     required this.gradient,
+    required this.playButton,
   });
 
   factory ThemeScheme.find({
@@ -49,6 +51,7 @@ class ThemeScheme {
       warning: const Color(0xFFFDDD00),
       scoreCardBottom: const Color(0xFF00BAFF),
       pink: const Color(0xFFC521FF),
+      playButton: const Color(0xFFD9D9D9),
       white: const Color(0xFFFFFFFF),
       gradient: const LinearGradient(
         begin: Alignment.topCenter,
