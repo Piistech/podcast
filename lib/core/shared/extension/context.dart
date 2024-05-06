@@ -118,6 +118,7 @@ extension BuildContextExtension on BuildContext {
         ),
       );
 
+  double get radius4 => 4.r;
   double get radius5 => 5.r;
   double get radius8 => 8.r;
   double get radius10 => 10.r;
@@ -128,13 +129,15 @@ extension BuildContextExtension on BuildContext {
   double get horizontalMargin4 => 4.w;
   double get horizontalMargin6 => 6.w;
   double get horizontalMargin8 => 8.w;
+  double get horizontalMargin10 => 10.w;
   double get horizontalMargin12 => 12.w;
   double get horizontalMargin15 => 15.w;
+  double get horizontalMargin16 => 16.w;
   double get horizontalMargin19 => 19.w;
   double get horizontalMargin30 => 30.w;
-  double get horizontalMargin16 => 16.w;
 
   double get verticalMargin4 => 4.h;
+  double get verticalMargin5 => 5.h;
   double get verticalMargin6 => 6.h;
   double get verticalMargin8 => 8.h;
   double get verticalMargin10 => 10.h;

@@ -20,7 +20,6 @@ export 'package:flutter_bloc/flutter_bloc.dart';
 export 'package:go_router/go_router.dart';
 export 'package:equatable/equatable.dart';
 export 'package:flutter_native_splash/flutter_native_splash.dart';
-export 'package:percent_indicator/linear_percent_indicator.dart';
 
 export 'dart:async';
 export 'dart:io';
@@ -34,6 +33,7 @@ export 'package:path_provider/path_provider.dart';
 export 'package:google_fonts/google_fonts.dart';
 export 'package:flutter_screenutil/flutter_screenutil.dart';
 export 'package:agora_rtc_engine/agora_rtc_engine.dart';
+export 'package:lottie/lottie.dart' hide FrameRate;
 
 export 'enums.dart';
 export 'text_styles.dart';

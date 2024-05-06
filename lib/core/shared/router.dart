@@ -41,27 +41,40 @@ final router = GoRouter(
       },
     ),
     GoRoute(
-        path: LivePage.path,
-        name: LivePage.name,
-        builder: (context, state) {
-          final String fixtureGuid = state.pathParameters['fixtureGuid']!;
-          return MultiBlocProvider(
-            providers: [
-              BlocProvider(
-                create: (context) => sl<CommentaryBloc>()
-                  ..add(
-                    FetchCommentary(fixtureGuid: fixtureGuid),
-                  ),
-              ),
-              BlocProvider(
-                create: (context) => sl<FindFixtureByIdBloc>()
-                  ..add(
-                    FindFixtureById(guid: fixtureGuid),
-                  ),
-              ),
-            ],
-            child: const LivePage(),
-          );
-        }),
+      path: LivePage.path,
+      name: LivePage.name,
+      builder: (context, state) {
+        final String fixtureGuid = state.pathParameters['fixtureGuid']!;
+        return MultiBlocProvider(
+          providers: [
+            BlocProvider.value(
+              value: context.read<CurrentlyPlayingCommentaryBloc>()
+                ..add(
+                  CheckCurrentlyPlayingCommentary(),
+                ),
+            ),
+            BlocProvider(
+              create: (context) => sl<CommentaryBloc>()
+                ..add(
+                  FetchCommentary(fixtureGuid: fixtureGuid),
+                ),
+            ),
+            BlocProvider(
+              create: (context) => sl<FindFixtureByIdBloc>()
+                ..add(
+                  FindFixtureById(guid: fixtureGuid),
+                ),
+            ),
+            BlocProvider(
+              create: (context) => sl<PlayCommentaryBloc>(),
+            ),
+            BlocProvider(
+              create: (context) => sl<StopCommentaryBloc>(),
+            ),
+          ],
+          child: const LivePage(),
+        );
+      },
+    ),
   ],
 );

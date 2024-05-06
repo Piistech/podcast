@@ -85,3 +85,9 @@ class AnalysisFactorModelParsingFailure extends Failure {
 class AnalysisNotFoundFailure extends Failure {
   AnalysisNotFoundFailure() : super(message: 'Analysis not found.');
 }
+
+class LiveCommentaryPlayingFailure extends Failure {
+  LiveCommentaryPlayingFailure({
+    required super.message,
+  });
+}
