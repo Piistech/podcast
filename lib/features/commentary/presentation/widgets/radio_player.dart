@@ -30,12 +30,17 @@ class RadioPlayer extends StatelessWidget {
                     child: BlocBuilder<CurrentlyPlayingCommentaryBloc, CurrentlyPlayingCommentaryState>(
                       builder: (context, state) {
                         final bool isPlaying = state is CurrentlyPlayingCommentaryChannel && state.channelId == channelId;
-                        return LinearProgressIndicator(
-                          backgroundColor: theme.backgroundSecondary,
-                          valueColor: AlwaysStoppedAnimation(isPlaying ? theme.live : theme.textPrimary),
-                          value: 1,
-                          minHeight: 5,
-                          borderRadius: BorderRadius.circular(context.radius12),
+                        return Slider(
+                          value: isPlaying ? 1 : 0,
+                          min: 0,
+                          max: 1,
+                          allowedInteraction: SliderInteraction.slideOnly,
+                          onChanged: (value) {},
+                          activeColor: isPlaying ? theme.live : theme.textPrimary,
+                          inactiveColor: isPlaying ? theme.live : theme.textPrimary,
+                          thumbColor: isPlaying ? theme.live : theme.textPrimary,
+                          secondaryActiveColor: isPlaying ? theme.live : theme.textPrimary,
+                          overlayColor: MaterialStateProperty.all<Color>(isPlaying ? theme.live : theme.textPrimary),
                         );
                       },
                     ),

@@ -1,4 +1,6 @@
+import '../../../../core/config/config.dart';
 import '../../../../core/shared/shared.dart';
+import '../../../commentary/commentary.dart';
 import '../../fixture.dart';
 
 class FixturesPage extends StatelessWidget {
@@ -27,7 +29,10 @@ class FixturesPage extends StatelessWidget {
                   separatorBuilder: (_, __) => SizedBox(height: context.verticalMargin8),
                   itemBuilder: (_, index) {
                     final fixture = state.fixtures[index];
-                    return FixtureItemWidget(fixture: fixture);
+                    return BlocProvider(
+                      create: (context) => sl<CommentaryBloc>()..add(FetchCommentary(fixtureGuid: fixture.guid)),
+                      child: FixtureItemWidget(fixture: fixture),
+                    );
                   },
                 );
               } else if (state is FixturesError) {
