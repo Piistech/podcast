@@ -1,4 +1,3 @@
-import '../../../../core/config/config.dart';
 import '../../../../core/shared/shared.dart';
 import '../../../fixture/fixture.dart';
 import '../../commentary.dart';
@@ -48,14 +47,8 @@ class LivePage extends StatelessWidget {
                             bottom: 8,
                             left: 0,
                             right: 0,
-                            child: BlocProvider(
-                              create: (context) => sl<CommentaryBloc>()
-                                ..add(
-                                  FetchCommentary(fixtureGuid: fixture.guid),
-                                ),
-                              child: RadioPlayer(
-                                fixtureGuid: fixture.guid,
-                              ),
+                            child: RadioPlayer(
+                              fixtureGuid: fixture.guid,
                             ),
                           ),
                           Positioned(
@@ -83,17 +76,54 @@ class LivePage extends StatelessWidget {
                                   child: Container(
                                     width: context.width,
                                     padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 8),
-                                    child: Column(
-                                      mainAxisSize: MainAxisSize.min,
-                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                    child: Row(
                                       children: [
-                                        Text(
-                                          fixture.matchTitle,
-                                          style: context.textStyle17Medium(color: theme.textPrimary),
+                                        Expanded(
+                                          child: Column(
+                                            mainAxisSize: MainAxisSize.min,
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                fixture.matchTitle,
+                                                style: context.textStyle17Medium(color: theme.textPrimary),
+                                              ),
+                                              Text(
+                                                "T Score",
+                                                style: context.textStyle14Medium(color: theme.textSecondary),
+                                              ),
+                                            ],
+                                          ),
                                         ),
-                                        Text(
-                                          "T Score",
-                                          style: context.textStyle14Medium(color: theme.textSecondary),
+                                        BlocBuilder<CommentaryBloc, CommentaryState>(
+                                          builder: (context, state) {
+                                            if (state is CommentaryDone) {
+                                              final String channelId = state.commentary.channelId;
+                                              return BlocBuilder<CurrentlyPlayingCommentaryBloc,
+                                                  CurrentlyPlayingCommentaryState>(
+                                                builder: (context, state) {
+                                                  final bool isPlaying = state is CurrentlyPlayingCommentaryChannel &&
+                                                      state.channelId == channelId;
+                                                  if (isPlaying) {
+                                                    return Container(
+                                                        padding: EdgeInsets.symmetric(
+                                                          horizontal: context.horizontalMargin12,
+                                                          vertical: context.verticalMargin5,
+                                                        ),
+                                                        decoration: BoxDecoration(
+                                                          color: theme.live,
+                                                          borderRadius: BorderRadius.circular(context.radius4),
+                                                        ),
+                                                        child: Text(
+                                                          "Live",
+                                                          style: context.textStyle12Medium(color: theme.textPrimary),
+                                                        ));
+                                                  }
+                                                  return const SizedBox();
+                                                },
+                                              );
+                                            }
+                                            return const SizedBox();
+                                          },
                                         ),
                                       ],
                                     ),

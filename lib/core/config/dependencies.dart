@@ -20,7 +20,7 @@ Future<void> get _core async {
   );
 
   sl.registerLazySingleton(() => Client());
-  sl.registerLazySingleton<RtcEngine>(() => createAgoraRtcEngine());
+  sl.registerLazySingleton<AgoraManager>(() => AgoraManager());
   sl.registerLazySingleton(() => InternetConnectionChecker());
   sl.registerLazySingleton(
     () => List<AddressCheckOptions>.unmodifiable(
@@ -116,11 +116,80 @@ Future<void> get _commentary async {
       useCase: sl(),
     ),
   );
+  sl.registerFactory(
+    () => LiveCommentaryStatusBloc(
+      useCase: sl(),
+    ),
+  );
+  sl.registerFactory(
+    () => CurrentlyPlayingCommentaryBloc(
+      useCase: sl(),
+    ),
+  );
+  sl.registerFactory(
+    () => PlayCommentaryBloc(
+      useCase: sl(),
+    ),
+  );
+  sl.registerFactory(
+    () => StopCommentaryBloc(
+      useCase: sl(),
+    ),
+  );
 
   sl.registerFactory(
     () => FetchCommentaryUseCase(
       repository: sl(),
     ),
+  );
+
+  sl.registerFactory(
+    () => FindCommentaryByIdUseCase(
+      repository: sl(),
+    ),
+  );
+
+  sl.registerFactory(
+    () => LiveCommentaryStatusUseCase(
+      repository: sl(),
+    ),
+  );
+
+  sl.registerFactory(
+    () => CurrentlyPlayingCommentaryChannelUseCase(
+      repository: sl(),
+    ),
+  );
+
+  sl.registerFactory(
+    () => PlayCommentaryUseCase(
+      repository: sl(),
+    ),
+  );
+
+  sl.registerFactory(
+    () => StopCommentaryUseCase(
+      repository: sl(),
+    ),
+  );
+
+  sl.registerLazySingleton<CommentaryRepository>(
+    () => CommentaryRepositoryImpl(
+      network: sl(),
+      remote: sl(),
+      local: sl(),
+      agora: sl(),
+    ),
+  );
+
+  sl.registerLazySingleton<CommentaryRemoteDataSource>(
+    () => CommentaryRemoteDataSourceImpl(
+      client: sl(),
+    ),
+  );
+
+  sl.registerLazySingleton<CommentaryLocalDataSource>(
+    () => CommentaryLocalDataSourceImpl(),
   );
 }
 
@@ -128,6 +197,12 @@ Future<void> get _prediction async {
   sl.registerFactory(
     () => PredictionBloc(
       useCase: sl(),
+    ),
+  );
+
+  sl.registerFactory<PredictionUseCase>(
+    () => PredictionUseCase(
+      repository: sl(),
     ),
   );
 
@@ -142,36 +217,6 @@ Future<void> get _prediction async {
     () => PredictionDataSourceImpl(
       client: sl(),
     ),
-  );
-
-  sl.registerFactory(
-    () => FindCommentaryByIdUseCase(
-      repository: sl(),
-    ),
-  );
-
-  sl.registerLazySingleton<CommentaryRepository>(
-    () => CommentaryRepositoryImpl(
-      network: sl(),
-      remote: sl(),
-      local: sl(),
-    ),
-  );
-
-  sl.registerLazySingleton<CommentaryRemoteDataSource>(
-    () => CommentaryRemoteDataSourceImpl(
-      client: sl(),
-    ),
-  );
-
-  sl.registerFactory<PredictionUseCase>(
-    () => PredictionUseCase(
-      repository: sl(),
-    ),
-  );
-
-  sl.registerLazySingleton<CommentaryLocalDataSource>(
-    () => CommentaryLocalDataSourceImpl(),
   );
 }
 

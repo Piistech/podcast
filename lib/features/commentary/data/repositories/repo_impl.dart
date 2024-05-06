@@ -1,11 +1,11 @@
 import 'package:either_dart/either.dart';
 
-import '../../../../core/config/config.dart';
 import '../../../../core/shared/shared.dart';
 import '../../commentary.dart';
 
 class CommentaryRepositoryImpl implements CommentaryRepository {
   final NetworkInfo network;
+  final AgoraManager agora;
   final CommentaryLocalDataSource local;
   final CommentaryRemoteDataSource remote;
 
@@ -13,6 +13,7 @@ class CommentaryRepositoryImpl implements CommentaryRepository {
     required this.network,
     required this.local,
     required this.remote,
+    required this.agora,
   });
 
   @override
@@ -21,14 +22,15 @@ class CommentaryRepositoryImpl implements CommentaryRepository {
   }) async {
     try {
       final CommentaryModel commentary = local.findById(fixtureGuid: fixtureGuid);
+      await agora.initialize(appId: commentary.appId);
       return Right(commentary);
     } on CommentaryNotFoundFailure {
       if (await network.online) {
         try {
           final CommentaryModel commentary = await remote.fetch(fixtureGuid: fixtureGuid);
 
-          await sl<RtcEngine>().initialize(RtcEngineContext(appId: commentary.appId));
-          
+          await agora.initialize(appId: commentary.appId);
+
           local.cache(
             fixtureGuid: fixtureGuid,
             commentary: commentary,
@@ -52,6 +54,51 @@ class CommentaryRepositoryImpl implements CommentaryRepository {
       return Right(commentary);
     } on Failure catch (e) {
       return Left(e);
+    }
+  }
+
+  @override
+  Stream<bool> get live async* {
+    await for (final String? channelName in agora.channelController.stream) {
+      yield channelName != null;
+    }
+  }
+
+  @override
+  Stream<String?> get liveChannel async* {
+    await for (final String? channelName in agora.channelController.stream) {
+      yield channelName;
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> play({
+    required String token,
+    required String channelId,
+  }) async {
+    try {
+      await agora.joinChannel(token: token, channelId: channelId);
+      return const Right(null);
+    } catch (e) {
+      return Left(
+        LiveCommentaryPlayingFailure(
+          message: e.toString(),
+        ),
+      );
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> stop() async {
+    try {
+      await agora.leaveChannel();
+      return const Right(null);
+    } catch (e) {
+      return Left(
+        LiveCommentaryPlayingFailure(
+          message: e.toString(),
+        ),
+      );
     }
   }
 }
