@@ -33,7 +33,7 @@ class LivePage extends StatelessWidget {
                   physics: const ScrollPhysics(),
                   children: [
                     SizedBox(
-                      height: context.liveContainerHeight,
+                      height: context.height * .78,
                       child: Stack(
                         clipBehavior: Clip.antiAlias,
                         children: [
@@ -49,7 +49,7 @@ class LivePage extends StatelessWidget {
                             child: Stack(
                               children: [
                                 CachedNetworkImage(
-                                  height: context.liveImageHeight,
+                                  height: context.height * .65,
                                   imageUrl: fixture.logo,
                                   fit: BoxFit.cover,
                                   errorWidget: (context, url, error) => const Icon(Icons.error),
@@ -142,7 +142,7 @@ class LivePage extends StatelessWidget {
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: context.horizontalMargin16),
                       child: Text(
-                        fixture.matchDescription,
+                        "Welcome to the highly anticipated Bangladesh vs Sri Lanka cricket match! It's a beautiful day for cricket and the stadium is packed with enthusiastic fans from both.Welcome to the highly anticipated Bangladesh vs Sri Lanka cricket match! It's a beautiful day for cricket and the stadium is packed with enthusiastic fans from both",
                         style: context.textStyle12Medium(color: theme.textSecondary),
                       ),
                     )
