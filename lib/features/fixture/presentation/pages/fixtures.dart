@@ -1,8 +1,10 @@
+import '../../../../core/config/config.dart';
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../../../../core/shared/shared.dart';
+import '../../../commentary/commentary.dart';
 import '../../fixture.dart';
 
 class FixturesPage extends StatefulWidget {
@@ -39,7 +41,10 @@ class _FixturesPageState extends State<FixturesPage> {
                   separatorBuilder: (_, __) => SizedBox(height: context.verticalMargin8),
                   itemBuilder: (_, index) {
                     final fixture = state.fixtures[index];
-                    return FixtureItemWidget(fixture: fixture);
+                    return BlocProvider(
+                      create: (context) => sl<CommentaryBloc>()..add(FetchCommentary(fixtureGuid: fixture.guid)),
+                      child: FixtureItemWidget(fixture: fixture),
+                    );
                   },
                 );
               } else if (state is FixturesError) {

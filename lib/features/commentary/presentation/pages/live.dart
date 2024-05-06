@@ -82,15 +82,19 @@ class LivePage extends StatelessWidget {
                                             children: [
                                               Text(
                                                 fixture.matchTitle,
-                                                style: context.textStyle17Medium(color: theme.textPrimary),
+                                                style:
+                                                    context.textStyle17Medium(color: theme.textPrimary).copyWith(height: 1.2),
                                               ),
+                                              SizedBox(height: context.verticalMargin8),
                                               Text(
                                                 "T Score",
-                                                style: context.textStyle14Medium(color: theme.textSecondary),
+                                                style:
+                                                    context.textStyle14Medium(color: theme.textSecondary).copyWith(height: 1.2),
                                               ),
                                             ],
                                           ),
                                         ),
+                                        SizedBox(width: context.horizontalMargin4),
                                         BlocBuilder<CommentaryBloc, CommentaryState>(
                                           builder: (context, state) {
                                             if (state is CommentaryDone) {
@@ -102,18 +106,21 @@ class LivePage extends StatelessWidget {
                                                       state.channelId == channelId;
                                                   if (isPlaying) {
                                                     return Container(
-                                                        padding: EdgeInsets.symmetric(
-                                                          horizontal: context.horizontalMargin12,
-                                                          vertical: context.verticalMargin5,
-                                                        ),
-                                                        decoration: BoxDecoration(
-                                                          color: theme.live,
-                                                          borderRadius: BorderRadius.circular(context.radius4),
-                                                        ),
-                                                        child: Text(
-                                                          "Live now",
-                                                          style: context.textStyle12Medium(color: theme.textPrimary),
-                                                        ));
+                                                      padding: EdgeInsets.symmetric(
+                                                        horizontal: context.horizontalMargin12,
+                                                        vertical: context.verticalMargin5,
+                                                      ),
+                                                      decoration: BoxDecoration(
+                                                        color: theme.live,
+                                                        borderRadius: BorderRadius.circular(context.radius4),
+                                                      ),
+                                                      child: Text(
+                                                        "Live",
+                                                        style: context
+                                                            .textStyle12Medium(color: theme.textPrimary)
+                                                            .copyWith(height: 1.2),
+                                                      ),
+                                                    );
                                                   }
                                                   return const SizedBox();
                                                 },

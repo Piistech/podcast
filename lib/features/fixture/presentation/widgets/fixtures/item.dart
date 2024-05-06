@@ -1,5 +1,5 @@
 import '../../../../../core/shared/shared.dart';
-import '../../../../commentary/presentation/pages/live.dart';
+import '../../../../commentary/commentary.dart';
 import '../../../fixture.dart';
 
 class FixtureItemWidget extends StatelessWidget {
@@ -18,10 +18,8 @@ class FixtureItemWidget extends StatelessWidget {
           borderRadius: BorderRadius.circular(context.radius12),
           onTap: () {
             context.pushNamed(
-              FixtureDetailsPage.name,
-              pathParameters: {
-                'id': fixture.guid,
-              },
+              LivePage.name,
+              pathParameters: {'fixtureGuid': fixture.guid},
             );
           },
           child: Container(
@@ -83,30 +81,41 @@ class FixtureItemWidget extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    InkWell(
-                      onTap: () {
-                        context.pushNamed(
-                          LivePage.name,
-                          pathParameters: {'fixtureGuid': fixture.guid},
-                        );
+                    BlocBuilder<CommentaryBloc, CommentaryState>(
+                      builder: (context, state) {
+                        if (state is CommentaryDone) {
+                          final String channelId = state.commentary.channelId;
+                          return BlocBuilder<CurrentlyPlayingCommentaryBloc, CurrentlyPlayingCommentaryState>(
+                            builder: (context, state) {
+                              final isPlaying = state is CurrentlyPlayingCommentaryChannel && state.channelId == channelId;
+                              if (isPlaying) {
+                                return Lottie.asset(
+                                  'animation/waveform.json',
+                                  height: 24.h,
+                                );
+                              }
+                              return Row(
+                                children: [
+                                  CircleAvatar(
+                                    radius: context.radius12,
+                                    backgroundColor: theme.white,
+                                    child: Icon(
+                                      Icons.play_arrow_rounded,
+                                      color: theme.backgroundPrimary,
+                                    ),
+                                  ),
+                                  SizedBox(width: context.horizontalMargin4),
+                                  Text(
+                                    "Play Now",
+                                    style: context.textStyle12Medium(color: theme.textPrimary).copyWith(letterSpacing: -0.04),
+                                  ),
+                                ],
+                              );
+                            },
+                          );
+                        }
+                        return const SizedBox();
                       },
-                      child: Row(
-                        children: [
-                          CircleAvatar(
-                            radius: context.radius12,
-                            backgroundColor: theme.white,
-                            child: Icon(
-                              Icons.play_arrow_rounded,
-                              color: theme.backgroundPrimary,
-                            ),
-                          ),
-                          SizedBox(width: context.horizontalMargin4),
-                          Text(
-                            "Play Now",
-                            style: context.textStyle12Medium(color: theme.textPrimary).copyWith(letterSpacing: -0.04),
-                          ),
-                        ],
-                      ),
                     ),
                     Text(
                       fixture.startDate,
@@ -117,15 +126,26 @@ class FixtureItemWidget extends StatelessWidget {
                 SizedBox(height: context.verticalMargin16),
                 Align(
                   alignment: Alignment.centerRight,
-                  child: Container(
-                    padding: EdgeInsets.symmetric(horizontal: context.horizontalMargin8, vertical: context.verticalMargin4),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(context.radius5),
-                      color: theme.backgroundTertiary,
-                    ),
-                    child: Text(
-                      "Prediction",
-                      style: context.textStyle10Medium(color: theme.textPrimary).copyWith(height: 1.2),
+                  child: InkWell(
+                    borderRadius: BorderRadius.circular(context.radius5),
+                    onTap: () {
+                      context.pushNamed(
+                        FixtureDetailsPage.name,
+                        pathParameters: {
+                          'id': fixture.guid,
+                        },
+                      );
+                    },
+                    child: Container(
+                      padding: EdgeInsets.symmetric(horizontal: context.horizontalMargin8, vertical: context.verticalMargin4),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(context.radius5),
+                        color: theme.backgroundTertiary,
+                      ),
+                      child: Text(
+                        "Prediction",
+                        style: context.textStyle10Medium(color: theme.textPrimary).copyWith(height: 1.2),
+                      ),
                     ),
                   ),
                 ),
