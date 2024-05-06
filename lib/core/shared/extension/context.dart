@@ -135,6 +135,7 @@ extension BuildContextExtension on BuildContext {
   double get radius8 => 8.r;
   double get radius10 => 10.r;
   double get radius12 => 12.r;
+  double get radius16 => 16.r;
   double get radius52 => 52.r;
 
   double get horizontalMargin1 => 1.w;
@@ -162,6 +163,7 @@ extension BuildContextExtension on BuildContext {
   double get verticalMargin16 => 16.h;
   double get verticalMargin20 => 20.h;
   double get verticalMargin25 => 25.h;
+  double get verticalMargin40 => 40.h;
 
   double get flagHeight20 => 20.h;
   double get navBarHeight => 54.h;

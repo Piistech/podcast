@@ -22,91 +22,89 @@ class RadioPlayer extends StatelessWidget {
             } else if (state is CommentaryDone) {
               final String channelId = state.commentary.channelId;
               final String token = state.commentary.token;
-              return Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Container(
-                    margin: EdgeInsets.symmetric(horizontal: context.horizontalMargin12),
-                    child: BlocBuilder<CurrentlyPlayingCommentaryBloc, CurrentlyPlayingCommentaryState>(
+              return Padding(
+                padding: EdgeInsets.symmetric(horizontal: context.horizontalMargin15),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    BlocBuilder<CurrentlyPlayingCommentaryBloc, CurrentlyPlayingCommentaryState>(
                       builder: (context, state) {
                         final bool isPlaying = state is CurrentlyPlayingCommentaryChannel && state.channelId == channelId;
-                        return Slider(
-                          value: isPlaying ? 1 : 0,
-                          min: 0,
-                          max: 1,
-                          allowedInteraction: SliderInteraction.slideOnly,
-                          onChanged: (value) {},
-                          activeColor: isPlaying ? theme.live : theme.textPrimary,
-                          inactiveColor: isPlaying ? theme.live : theme.textPrimary,
-                          thumbColor: isPlaying ? theme.live : theme.textPrimary,
-                          secondaryActiveColor: isPlaying ? theme.live : theme.textPrimary,
-                          overlayColor: MaterialStateProperty.all<Color>(isPlaying ? theme.live : theme.textPrimary),
+                        return Row(
+                          children: [
+                            if (!isPlaying) Icon(Icons.circle, color: theme.white, size: context.radius16),
+                            Expanded(
+                              child: Container(
+                                width: double.maxFinite,
+                                height: context.verticalMargin4,
+                                decoration: BoxDecoration(
+                                  color: isPlaying ? theme.live : theme.textSecondary,
+                                  borderRadius: BorderRadius.circular(context.radius52),
+                                ),
+                              ),
+                            ),
+                            if (isPlaying) Icon(Icons.circle, color: theme.live, size: context.radius16),
+                          ],
                         );
                       },
                     ),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      IconButton(
-                        onPressed: () {},
-                        icon: Icon(
+                    SizedBox(height: context.verticalMargin16),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Icon(
                           Icons.skip_previous_rounded,
                           color: theme.textPrimary,
-                          size: 30.w,
+                          size: 28.h,
                         ),
-                      ),
-                      BlocBuilder<PlayCommentaryBloc, PlayCommentaryState>(
-                        builder: (context, state) {
-                          if (state is PlayCommentaryLoading) {
-                            return IconButton(
-                              onPressed: () {},
-                              icon: SizedBox(
+                        BlocBuilder<PlayCommentaryBloc, PlayCommentaryState>(
+                          builder: (context, state) {
+                            if (state is PlayCommentaryLoading) {
+                              return SizedBox(
                                 width: 40.w,
                                 height: 40.w,
                                 child: const CircularProgressIndicator(),
-                              ),
-                            );
-                          } else {
-                            return BlocBuilder<CurrentlyPlayingCommentaryBloc, CurrentlyPlayingCommentaryState>(
-                              builder: (context, state) {
-                                final bool isPlaying =
-                                    state is CurrentlyPlayingCommentaryChannel && state.channelId == channelId;
-                                return IconButton(
-                                  onPressed: () {
-                                    if (isPlaying) {
-                                      context.read<StopCommentaryBloc>().add(const StopCommentary());
-                                    } else {
-                                      context.read<PlayCommentaryBloc>().add(
-                                            PlayCommentary(
-                                              channelId: channelId,
-                                              token: token,
-                                            ),
-                                          );
-                                    }
-                                  },
-                                  icon: Icon(
-                                    isPlaying ? Icons.stop_circle_rounded : Icons.play_circle_fill_rounded,
-                                    size: 40.w,
-                                    color: isPlaying ? theme.live : theme.playButton,
-                                  ),
-                                );
-                              },
-                            );
-                          }
-                        },
-                      ),
-                      IconButton(
-                        onPressed: () {},
-                        icon: Icon(
+                              );
+                            } else {
+                              return BlocBuilder<CurrentlyPlayingCommentaryBloc, CurrentlyPlayingCommentaryState>(
+                                builder: (context, state) {
+                                  final bool isPlaying =
+                                      state is CurrentlyPlayingCommentaryChannel && state.channelId == channelId;
+                                  return InkWell(
+                                    borderRadius: BorderRadius.circular(context.radius52),
+                                    onTap: () {
+                                      if (isPlaying) {
+                                        context.read<StopCommentaryBloc>().add(const StopCommentary());
+                                      } else {
+                                        context.read<PlayCommentaryBloc>().add(
+                                              PlayCommentary(
+                                                channelId: channelId,
+                                                token: token,
+                                              ),
+                                            );
+                                      }
+                                    },
+                                    child: Icon(
+                                      isPlaying ? Icons.stop_circle_rounded : Icons.play_circle_fill_rounded,
+                                      size: 40.h,
+                                      color: isPlaying ? theme.live : theme.playButton,
+                                    ),
+                                  );
+                                },
+                              );
+                            }
+                          },
+                        ),
+                        Icon(
                           Icons.skip_next_rounded,
                           color: theme.textPrimary,
-                          size: 30.w,
+                          size: 28.h,
                         ),
-                      ),
-                    ],
-                  ),
-                ],
+                      ],
+                    ),
+                  ],
+                ),
               );
             } else {
               return const SizedBox.shrink();
