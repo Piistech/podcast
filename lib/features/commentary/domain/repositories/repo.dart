@@ -19,6 +19,9 @@ abstract class CommentaryRepository {
   Future<Either<Failure, void>> play({
     required String token,
     required String channelId,
+    required String fixtureGuid,
+    required String matchName,
+    required String fixtureIcon,
   });
 
   Future<Either<Failure, void>> stop();

@@ -1,7 +1,5 @@
 library config;
 
-
-
 import '../../features/analysis/analysis.dart';
 import '../../features/commentary/commentary.dart';
 import '../../features/fixture/fixture.dart';
@@ -26,6 +24,9 @@ class AppConfig {
 
     // Initialize the configurations
     await _setupDependencies();
+
+    final notification = sl<NotificationManager>();
+    notification.initialize();
   }
 
   static ThemeData theme({
@@ -104,3 +105,7 @@ class AppConfig {
         ),
       );
 }
+
+@pragma('vm:entry-point')
+void notificationTapBackground(NotificationResponse notificationResponse) =>
+    sl<NotificationManager>().onDidReceiveNotificationResponse;

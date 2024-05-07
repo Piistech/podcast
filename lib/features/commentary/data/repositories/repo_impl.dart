@@ -75,9 +75,18 @@ class CommentaryRepositoryImpl implements CommentaryRepository {
   Future<Either<Failure, void>> play({
     required String token,
     required String channelId,
+    required String fixtureGuid,
+    required String fixtureIcon,
+    required String matchName,
   }) async {
     try {
-      await agora.joinChannel(token: token, channelId: channelId);
+      await agora.joinChannel(
+        token: token,
+        channelId: channelId,
+        matchName: matchName,
+        fixtureGuid: fixtureGuid,
+        fixtureIcon: fixtureIcon,
+      );
       return const Right(null);
     } catch (e) {
       return Left(

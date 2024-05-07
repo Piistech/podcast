@@ -1,19 +1,23 @@
-import '../../../../core/shared/shared.dart';
+import '../shared.dart';
 
 class AgoraManager {
-  static final AgoraManager _singleton = AgoraManager._internal();
-
-  factory AgoraManager() {
-    return _singleton;
-  }
+  static final AgoraManager _instance = AgoraManager._internal();
 
   AgoraManager._internal();
 
+  static AgoraManager get instance => _instance;
+
 //! ------------------------------------ Agora SDK ------------------------------------
+
   bool _initialized = false;
   final RtcEngine engine = createAgoraRtcEngine();
+  final NotificationManager notificationManager = NotificationManager.instance;
 
   final StreamController<String?> channelController = StreamController<String?>.broadcast();
+
+  String matchName = '';
+  String fixtureGuid = '';
+  String fixtureIcon = '';
 
   Future<void> initialize({
     required String appId,
@@ -38,9 +42,17 @@ class AgoraManager {
       RtcEngineEventHandler(
         onJoinChannelSuccess: (connection, elapsed) {
           channelController.add(connection.channelId);
+          notificationManager.dismissActiveNotification();
+          notificationManager.onCommentaryStarted(
+            matchName: matchName,
+            channelId: connection.channelId!,
+            fixtureGuid: fixtureGuid,
+            icon: fixtureIcon,
+          );
         },
         onLeaveChannel: (connection, stats) {
           channelController.add(null);
+          notificationManager.dismissActiveNotification();
         },
         onConnectionStateChanged: (connection, state, reason) {
           if (state == ConnectionStateType.connectionStateConnected) {
@@ -59,11 +71,18 @@ class AgoraManager {
   Future<void> joinChannel({
     required String token,
     required String channelId,
+    required String matchName,
+    required String fixtureGuid,
+    required String fixtureIcon,
   }) async {
     // if ((await channelController.stream.first) != null) {
     //   await leaveChannel();
     // }
     try {
+      this.matchName = matchName;
+      this.fixtureGuid = fixtureGuid;
+      this.fixtureIcon = fixtureIcon;
+
       await engine.joinChannel(
         token: token,
         channelId: channelId,
@@ -79,7 +98,13 @@ class AgoraManager {
     } on AgoraRtcException catch (err) {
       if (err.code.abs() == ErrorCodeType.errJoinChannelRejected.value()) {
         await leaveChannel();
-        joinChannel(token: token, channelId: channelId);
+        joinChannel(
+          token: token,
+          channelId: channelId,
+          matchName: matchName,
+          fixtureGuid: fixtureGuid,
+          fixtureIcon: fixtureIcon,
+        );
       }
     }
   }

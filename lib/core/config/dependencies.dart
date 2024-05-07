@@ -20,7 +20,8 @@ Future<void> get _core async {
   );
 
   sl.registerLazySingleton(() => Client());
-  sl.registerLazySingleton<AgoraManager>(() => AgoraManager());
+  sl.registerLazySingleton<AgoraManager>(() => AgoraManager.instance);
+  sl.registerLazySingleton<NotificationManager>(() => NotificationManager.instance);
   sl.registerLazySingleton(() => InternetConnectionChecker());
   sl.registerLazySingleton(
     () => List<AddressCheckOptions>.unmodifiable(
