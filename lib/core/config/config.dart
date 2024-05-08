@@ -15,6 +15,7 @@ class AppConfig {
     WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
     FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
 
+
     // Bypass the SSL certificate verification
     HttpOverrides.global = MyHttpOverrides();
 
@@ -27,6 +28,13 @@ class AppConfig {
 
     final notification = sl<NotificationManager>();
     notification.initialize();
+    
+    SystemChrome.setSystemUIOverlayStyle(
+      SystemUiOverlayStyle(
+        systemNavigationBarColor: sl<ThemeBloc>().state.scheme.backgroundPrimary,
+        systemNavigationBarIconBrightness: Brightness.light,
+      ),
+    );
   }
 
   static ThemeData theme({
