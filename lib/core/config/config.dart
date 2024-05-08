@@ -1,7 +1,5 @@
 library config;
 
-
-
 import '../../features/analysis/analysis.dart';
 import '../../features/commentary/commentary.dart';
 import '../../features/fixture/fixture.dart';
@@ -17,6 +15,7 @@ class AppConfig {
     WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
     FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
 
+
     // Bypass the SSL certificate verification
     HttpOverrides.global = MyHttpOverrides();
 
@@ -26,6 +25,16 @@ class AppConfig {
 
     // Initialize the configurations
     await _setupDependencies();
+
+    final notification = sl<NotificationManager>();
+    notification.initialize();
+    
+    SystemChrome.setSystemUIOverlayStyle(
+      SystemUiOverlayStyle(
+        systemNavigationBarColor: sl<ThemeBloc>().state.scheme.backgroundPrimary,
+        systemNavigationBarIconBrightness: Brightness.light,
+      ),
+    );
   }
 
   static ThemeData theme({
@@ -37,6 +46,8 @@ class AppConfig {
         canvasColor: theme.backgroundPrimary,
         scaffoldBackgroundColor: theme.backgroundPrimary,
         splashFactory: InkRipple.splashFactory,
+        primaryColor: theme.live,
+        indicatorColor: theme.live,
         inputDecorationTheme: InputDecorationTheme(
           isDense: true,
           filled: true,
@@ -100,7 +111,12 @@ class AppConfig {
         ),
         colorScheme: ColorScheme.fromSeed(
           seedColor: theme.backgroundPrimary,
+          primary: theme.live,
           brightness: Brightness.dark,
         ),
       );
 }
+
+@pragma('vm:entry-point')
+void notificationTapBackground(NotificationResponse notificationResponse) =>
+    sl<NotificationManager>().onDidReceiveNotificationResponse;

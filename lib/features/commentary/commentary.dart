@@ -13,7 +13,6 @@ export 'data/datasources/remote.dart';
 export 'data/datasources/remote_impl.dart';
 export 'data/datasources/local.dart';
 export 'data/datasources/local_impl.dart';
-export 'data/datasources/agora.dart';
 
 export 'presentation/bloc/find_commentary_by_id_bloc.dart';
 export 'presentation/bloc/commentary_bloc.dart';

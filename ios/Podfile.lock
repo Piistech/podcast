@@ -36,6 +36,8 @@ PODS:
   - AgoraRtcEngine_iOS/VirtualBackground (4.3.0)
   - AgoraRtcEngine_iOS/VQA (4.3.0)
   - Flutter (1.0.0)
+  - flutter_local_notifications (0.0.1):
+    - Flutter
   - flutter_native_splash (0.0.1):
     - Flutter
   - iris_method_channel (0.0.1):
@@ -52,6 +54,7 @@ PODS:
 DEPENDENCIES:
   - agora_rtc_engine (from `.symlinks/plugins/agora_rtc_engine/ios`)
   - Flutter (from `Flutter`)
+  - flutter_local_notifications (from `.symlinks/plugins/flutter_local_notifications/ios`)
   - flutter_native_splash (from `.symlinks/plugins/flutter_native_splash/ios`)
   - iris_method_channel (from `.symlinks/plugins/iris_method_channel/ios`)
   - path_provider_foundation (from `.symlinks/plugins/path_provider_foundation/darwin`)
@@ -68,6 +71,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/agora_rtc_engine/ios"
   Flutter:
     :path: Flutter
+  flutter_local_notifications:
+    :path: ".symlinks/plugins/flutter_local_notifications/ios"
   flutter_native_splash:
     :path: ".symlinks/plugins/flutter_native_splash/ios"
   iris_method_channel:
@@ -84,6 +89,7 @@ SPEC CHECKSUMS:
   AgoraIrisRTC_iOS: 2caf892fa827777fe43b6ac7d12e9b42579eb865
   AgoraRtcEngine_iOS: 267c0980c1fb97e056d05b850f8629b05b6e467a
   Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
+  flutter_local_notifications: 4cde75091f6327eb8517fa068a0a5950212d2086
   flutter_native_splash: edf599c81f74d093a4daf8e17bd7a018854bc778
   iris_method_channel: 0617c689164d8154c020c50f63ca79f92b8a7b9d
   path_provider_foundation: 3784922295ac71e43754bd15e0653ccfd36a147c

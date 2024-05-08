@@ -16,6 +16,9 @@ class PlayCommentaryBloc extends Bloc<PlayCommentaryEvent, PlayCommentaryState> 
       final result = await useCase(
         token: event.token,
         channelId: event.channelId,
+        fixtureGuid: event.fixtureGuid,
+        matchName: event.matchName,
+        fixtureIcon: event.fixtureIcon,
       );
 
       await Future.delayed(const Duration(milliseconds: 800));
