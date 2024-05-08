@@ -33,10 +33,8 @@ class MainApp extends StatelessWidget {
             final theme = state.scheme;
             return MaterialApp.router(
               routerConfig: router,
-              theme: AppConfig.theme(
-                context: context,
-                theme: theme,
-              ),
+              theme: AppConfig.theme(context: context, theme: theme),
+              darkTheme: AppConfig.theme(context: context, theme: theme),
             );
           },
         );

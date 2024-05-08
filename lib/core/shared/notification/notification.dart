@@ -64,27 +64,24 @@ class NotificationManager {
       playSound: true,
       enableVibration: true,
       progress: 1,
-      category: AndroidNotificationCategory.status,
+      category: AndroidNotificationCategory.navigation,
       colorized: true,
-      color: const Color.fromARGB(255, 255, 0, 0),
+      color: sl<ThemeBloc>().state.scheme.live,
       showProgress: true,
       maxProgress: 1,
-      styleInformation: const MediaStyleInformation(),
+      styleInformation: const MediaStyleInformation(
+        htmlFormatContent: true,
+        htmlFormatTitle: true,
+      ),
       groupAlertBehavior: GroupAlertBehavior.all,
       visibility: NotificationVisibility.public,
-      actions: [
-        const AndroidNotificationAction(
-          'stop',
-          'Stop',
-          showsUserInterface: true,
-        ),
-      ],
+      autoCancel: false,
     );
 
     final NotificationDetails notificationDetails = NotificationDetails(android: androidNotificationDetails);
 
     _notification.show(
-      DateTime.now().microsecond,
+      0,
       matchName,
       'Live',
       notificationDetails,
