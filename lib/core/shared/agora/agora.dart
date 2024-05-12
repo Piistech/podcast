@@ -75,9 +75,6 @@ class AgoraManager {
     required String fixtureGuid,
     required String fixtureIcon,
   }) async {
-    // if ((await channelController.stream.first) != null) {
-    //   await leaveChannel();
-    // }
     try {
       this.matchName = matchName;
       this.fixtureGuid = fixtureGuid;

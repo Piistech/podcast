@@ -105,6 +105,7 @@ class _AnalysisWidgetState extends State<AnalysisWidget> {
                         ),
                         SizedBox(height: context.verticalMargin12),
                         ListView.separated(
+                          padding: EdgeInsets.zero,
                           separatorBuilder: (context, index) {
                             return SizedBox(height: context.verticalMargin20);
                           },
