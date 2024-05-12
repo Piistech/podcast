@@ -13,7 +13,7 @@ class TeamRemoteDataSourceImpl extends TeamRemoteDataSource {
     required String teamGuid,
   }) async {
     //! initialize headers
-    // final Map<String, String> headers = {'fixtureGuid': fixtureGuid};
+    // final Map<String, String> headers = {'teamGuid': teamGuid};
 
     //! initialize response
     // final Response response = await client.get(
