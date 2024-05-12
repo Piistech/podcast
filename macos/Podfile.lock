@@ -35,6 +35,8 @@ PODS:
   - AgoraRtcEngine_macOS/VideoCodecEnc (4.3.0)
   - AgoraRtcEngine_macOS/VirtualBackground (4.3.0)
   - AgoraRtcEngine_macOS/VQA (4.3.0)
+  - flutter_local_notifications (0.0.1):
+    - FlutterMacOS
   - FlutterMacOS (1.0.0)
   - iris_method_channel (0.0.1):
     - FlutterMacOS
@@ -47,6 +49,7 @@ PODS:
 
 DEPENDENCIES:
   - agora_rtc_engine (from `Flutter/ephemeral/.symlinks/plugins/agora_rtc_engine/macos`)
+  - flutter_local_notifications (from `Flutter/ephemeral/.symlinks/plugins/flutter_local_notifications/macos`)
   - FlutterMacOS (from `Flutter/ephemeral`)
   - iris_method_channel (from `Flutter/ephemeral/.symlinks/plugins/iris_method_channel/macos`)
   - path_provider_foundation (from `Flutter/ephemeral/.symlinks/plugins/path_provider_foundation/darwin`)
@@ -60,6 +63,8 @@ SPEC REPOS:
 EXTERNAL SOURCES:
   agora_rtc_engine:
     :path: Flutter/ephemeral/.symlinks/plugins/agora_rtc_engine/macos
+  flutter_local_notifications:
+    :path: Flutter/ephemeral/.symlinks/plugins/flutter_local_notifications/macos
   FlutterMacOS:
     :path: Flutter/ephemeral
   iris_method_channel:
@@ -73,6 +78,7 @@ SPEC CHECKSUMS:
   agora_rtc_engine: 69f23015669c4a4e91f268c5ed192aec026905c9
   AgoraIrisRTC_macOS: f575979d2de182f24e4f18778dae71ecccc9b576
   AgoraRtcEngine_macOS: d52d4a49cf17225c7973c51d05e496d348f43913
+  flutter_local_notifications: 3805ca215b2fb7f397d78b66db91f6a747af52e4
   FlutterMacOS: 8f6f14fa908a6fb3fba0cd85dbd81ec4b251fb24
   iris_method_channel: fba932d668df5b2a085f19bcd0b1f23d667a83cd
   path_provider_foundation: 3784922295ac71e43754bd15e0653ccfd36a147c

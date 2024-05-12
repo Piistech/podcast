@@ -35,7 +35,6 @@ class NotificationManager {
       AgoraManager.instance.engine.leaveChannel();
     }
   }
-
   void onCommentaryStarted({
     required String matchName,
     required String channelId,
@@ -76,6 +75,7 @@ class NotificationManager {
       groupAlertBehavior: GroupAlertBehavior.all,
       visibility: NotificationVisibility.public,
       autoCancel: false,
+
     );
 
     final NotificationDetails notificationDetails = NotificationDetails(android: androidNotificationDetails);
