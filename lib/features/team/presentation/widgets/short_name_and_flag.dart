@@ -26,6 +26,19 @@ class TeamShortNameAndFlagWidget extends StatelessWidget {
                 child: CachedNetworkImage(
                   imageUrl: team.flag,
                   height: context.flagHeight20,
+                  placeholder: (context, url) => SizedBox(
+                          width: context.flagHeight20,
+                          height: context.flagHeight20,
+                          child: const Center(
+                            child: CircularProgressIndicator(),
+                          ),
+                        ),
+                        errorWidget: (context, url, error) => SizedBox(
+                          width: context.flagHeight20,
+                          height: context.flagHeight20,
+                          child: Image.asset('images/splash.png'),
+                        ),
+                  
                 ),
               ),
             ],

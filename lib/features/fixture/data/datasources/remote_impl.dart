@@ -10,19 +10,9 @@ class FixtureRemoteDataSourceImpl extends FixtureRemoteDataSource {
 
   @override
   Future<List<FixtureModel>> get fixtures async {
-    //! initialize headers
-    // final Map<String, String> headers = {};
-
     //! initialize response
-    // final Response response = await client.get(
-    //   RemoteEndpoints.fixtures,
-    //   headers: headers,
-    // );
-
-    //! mock response
-    final Response response = Response(
-      await rootBundle.loadString('mock/fixtures.json'),
-      HttpStatus.ok,
+    final Response response = await client.get(
+      RemoteEndpoints.fixtures,
     );
 
     final RemoteResponse<List<dynamic>> result = RemoteResponse.parse(

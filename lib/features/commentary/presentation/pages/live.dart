@@ -44,8 +44,18 @@ class LivePage extends StatelessWidget {
                                   height: 538.h,
                                   imageUrl: fixture.logo,
                                   fit: BoxFit.cover,
-                                  errorWidget: (context, url, error) => const Icon(Icons.error),
-                                  placeholder: (context, url) => const CircularProgressIndicator(),
+                                  placeholder: (context, url) => SizedBox(
+                                    width: MediaQuery.of(context).size.width,
+                                    height: 538.h,
+                                    child: const Center(
+                                      child: CircularProgressIndicator(),
+                                    ),
+                                  ),
+                                  errorWidget: (context, url, error) => SizedBox(
+                                    width: MediaQuery.of(context).size.width,
+                                    height: 538.h,
+                                    child: Image.asset('images/splash.png'),
+                                  ),
                                 ),
                                 Positioned.fill(
                                   child: Container(
@@ -66,6 +76,7 @@ class LivePage extends StatelessWidget {
                                       vertical: context.verticalMargin8,
                                     ),
                                     child: Row(
+                                      mainAxisSize: MainAxisSize.min,
                                       children: [
                                         Expanded(
                                           child: Column(
@@ -136,7 +147,7 @@ class LivePage extends StatelessWidget {
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: context.horizontalMargin15),
                       child: Text(
-                        "Welcome to the highly anticipated Bangladesh vs Sri Lanka cricket match! It's a beautiful day for cricket and the stadium is packed with enthusiastic fans from both.Welcome to the highly anticipated Bangladesh vs Sri Lanka cricket match! It's a beautiful day for cricket and the stadium is packed with enthusiastic fans from both",
+                        fixture.matchDescription,
                         style: context.textStyle12Medium(color: theme.textSecondary).copyWith(height: 1.2),
                       ),
                     )

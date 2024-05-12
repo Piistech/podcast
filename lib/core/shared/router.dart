@@ -1,12 +1,9 @@
-
-import '../../host.dart';
-import '../config/config.dart';
-import 'shared.dart';
-
 import '../../features/analysis/analysis.dart';
 import '../../features/commentary/commentary.dart';
 import '../../features/fixture/fixture.dart';
 import '../../features/prediction/prediction.dart';
+import '../config/config.dart';
+import 'shared.dart';
 
 final router = GoRouter(
   initialLocation: FixturesPage.path,
@@ -16,7 +13,7 @@ final router = GoRouter(
       name: FixturesPage.name,
       builder: (context, state) => BlocProvider(
         create: (context) => sl<FixturesBloc>()..add(const FetchFixtures()),
-        child: const HostPage(),
+        child: const FixturesPage(),
       ),
     ),
     GoRoute(

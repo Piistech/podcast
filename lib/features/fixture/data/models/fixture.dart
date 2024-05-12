@@ -1,4 +1,4 @@
-import 'package:podcast/features/fixture/fixture.dart';
+import '../../fixture.dart';
 
 import '../../../../core/shared/shared.dart';
 
@@ -47,12 +47,12 @@ class FixtureModel extends FixtureEntity {
       );
 
       assert(
-        map.containsKey('startDate'),
+        map.containsKey('startTime'),
         "FixtureModel.parse: map doesn't contain key 'startDate'",
       );
       assert(
-        map['startDate'] is String,
-        "FixtureModel.parse: map['startDate'] is not a String",
+        map['startTime'] is String,
+        "FixtureModel.parse: map['startTime'] is not a String",
       );
 
       assert(
@@ -102,7 +102,7 @@ class FixtureModel extends FixtureEntity {
         guid: map['fixtureId'],
         matchTitle: map['matchTitle'],
         matchDescription: map['matchDescription'],
-        startedAt: DateTime.parse(map['startDate']),
+        startedAt: DateTime.parse(map['startTime']),
         result: map['result'],
         homeTeamId: map['homeTeamId'],
         awayTeamId: map['awayTeamId'],

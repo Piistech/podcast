@@ -57,7 +57,7 @@ class FixtureItemWidget extends StatelessWidget {
                         errorWidget: (context, url, error) => SizedBox(
                           width: 50.w,
                           height: 50.h,
-                          child: const Icon(Icons.error),
+                          child: Image.asset('images/splash.png'),
                         ),
                       ),
                     ),
