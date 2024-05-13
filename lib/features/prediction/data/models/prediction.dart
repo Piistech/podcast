@@ -7,19 +7,20 @@ class PredictionModel extends PredictionEntity {
     required super.winnerTeamIdAfterToss,
   });
 
-  factory PredictionModel.parse(Map<String, dynamic> map) {
+  factory PredictionModel.parse(List<Map<String, dynamic>> map) {
     try {
-      assert(
-        map.containsKey('winnerTeamId'),
-        "PredictionModel.parse: map doesn't contain key 'winnerTeamId'",
-      );
-      assert(
-        map.containsKey('winnerTeamIdAfterToss'),
-        "PredictionModel.parse: map doesn't contain key 'winnerTeamIdAfterToss'",
-      );
+      // assert(
+      //   map.containsKey('predictionwinnerId'),
+      //   "PredictionModel.parse: map doesn't contain key 'predictionwinnerId'",
+      // );
+      // assert(
+      //   map.containsKey('predictionwinnerAfterId'),
+      //   "PredictionModel.parse: map doesn't contain key 'predictionwinnerAfterId'",
+      // );
+
       return PredictionModel(
-        winnerTeamId: map['winnerTeamId'],
-        winnerTeamIdAfterToss: map['winnerTeamIdAfterToss'],
+        winnerTeamId: map.first['predictionwinnerId'],
+        winnerTeamIdAfterToss: map.first['predictionwinnerAfterId'],
       );
     } catch (e, stackTrace) {
       throw PredictionModelParsingFailure(
@@ -28,4 +29,5 @@ class PredictionModel extends PredictionEntity {
       );
     }
   }
+
 }

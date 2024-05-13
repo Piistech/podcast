@@ -13,6 +13,7 @@ class FixtureModel extends FixtureEntity {
     required super.awayTeamId,
     required super.stadiumName,
     required super.logo,
+    required super.isCompleted,
   });
 
   factory FixtureModel.parse({
@@ -97,6 +98,14 @@ class FixtureModel extends FixtureEntity {
         map['logo'] is String,
         "FixtureModel.parse: map['logo'] is not a String",
       );
+      assert(
+        map.containsKey('isCompleted'),
+        "FixtureModel.parse: map doesn't contain key 'isCompleted'",
+      );
+      assert(
+        map['isCompleted'] is bool,
+        "FixtureModel.parse: map['isCompleted'] is not a bool",
+      );
 
       return FixtureModel(
         guid: map['fixtureId'],
@@ -108,6 +117,7 @@ class FixtureModel extends FixtureEntity {
         awayTeamId: map['awayTeamId'],
         stadiumName: map['stadiumName'],
         logo: map['logo'],
+        isCompleted: map['isCompleted'] as bool,
       );
     } catch (e, stackTrace) {
       throw FixtureModelParsingFailure(

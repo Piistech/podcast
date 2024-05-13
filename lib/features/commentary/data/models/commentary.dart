@@ -6,43 +6,45 @@ class CommentaryModel extends CommentaryEntity {
     required super.appId,
     required super.token,
     required super.channelId,
+    required super.summary,
   });
 
   factory CommentaryModel.parse({
-    required Map<String, dynamic> map,
+    required List<Map<String, dynamic>> map,
   }) {
     try {
-      assert(
-        map.containsKey('appId'),
-        "CommentaryModel.parse: map doesn't contain key 'appId'",
-      );
-      assert(
-        map['appId'] is String,
-        "CommentaryModel.parse: map['appId'] is not a String",
-      );
+      // assert(
+      //   map.containsKey('appId'),
+      //   "CommentaryModel.parse: map doesn't contain key 'appId'",
+      // );
+      // assert(
+      //   map['appId'] is String,
+      //   "CommentaryModel.parse: map['appId'] is not a String",
+      // );
 
-      assert(
-        map.containsKey('token'),
-        "CommentaryModel.parse: map doesn't contain key 'token'",
-      );
-      assert(
-        map['token'] is String,
-        "CommentaryModel.parse: map['token'] is not a String",
-      );
+      // assert(
+      //   map.containsKey('token'),
+      //   "CommentaryModel.parse: map doesn't contain key 'token'",
+      // );
+      // assert(
+      //   map['token'] is String,
+      //   "CommentaryModel.parse: map['token'] is not a String",
+      // );
 
-      assert(
-        map.containsKey('channelId'),
-        "CommentaryModel.parse: map doesn't contain key 'channelId'",
-      );
-      assert(
-        map['channelId'] is String,
-        "CommentaryModel.parse: map['channelId'] is not a String",
-      );
+      // assert(
+      //   map.containsKey('channelId'),
+      //   "CommentaryModel.parse: map doesn't contain key 'channelId'",
+      // );
+      // assert(
+      //   map['channelId'] is String,
+      //   "CommentaryModel.parse: map['channelId'] is not a String",
+      // );
 
       return CommentaryModel(
-        appId: map['appId'],
-        token: map['token'],
-        channelId: map['channelId'],
+        appId: map.first['appId'],
+        token: map.first['token'],
+        channelId: map.first['channelName'],
+        summary: map.first['summary'],
       );
     } catch (e, stackTrace) {
       throw CommentaryModelParsingFailure(

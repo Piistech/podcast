@@ -1,3 +1,4 @@
+
 import '../../../../core/shared/shared.dart';
 
 import '../../../../core/config/config.dart';
@@ -34,127 +35,136 @@ class _AnalysisWidgetState extends State<AnalysisWidget> {
             if (state is AnalysisLoading) {
               return const Center(child: CircularProgressIndicator());
             } else if (state is AnalysisDone) {
-              return ListView(
-                padding: EdgeInsets.zero,
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                children: [
-                  Text.rich(
-                    TextSpan(
-                      children: [
-                        TextSpan(
-                          text: "Team Analysis",
-                          style: context.textStyle20Medium(color: theme.textPrimary),
-                        ),
-                        WidgetSpan(child: SizedBox(width: context.horizontalMargin4)),
-                        TextSpan(
-                          text: "(Last ${state.analysis.matchCount} matches)",
-                          style: context.textStyle12Medium(color: theme.textPrimary),
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(height: context.verticalMargin16),
-                  Container(
-                    decoration: BoxDecoration(
-                      color: theme.backgroundSecondary,
-                      borderRadius: BorderRadius.circular(context.radius10),
-                    ),
-                    padding: EdgeInsets.symmetric(
-                      horizontal: context.horizontalMargin19,
-                      vertical: context.verticalMargin14,
-                    ),
-                    child: ListView(
+              return state.analysis.factors.isEmpty
+                  ? Align(
+                      alignment: Alignment.center,
+                      child: Text(
+                        textAlign: TextAlign.center,
+                        "No analysis found",
+                        style: TextStyles.caption(context: context, color: theme.textPrimary),
+                      ),
+                    )
+                  : ListView(
                       padding: EdgeInsets.zero,
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
                       children: [
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Expanded(
-                              flex: 1,
-                              child: Text(
-                                "Bat/Bowl Fronts",
-                                style: context.textStyle10Medium(color: theme.textPrimary).copyWith(height: 1.2),
+                        Text.rich(
+                          TextSpan(
+                            children: [
+                              TextSpan(
+                                text: "Team Analysis",
+                                style: context.textStyle20Medium(color: theme.textPrimary),
                               ),
-                            ),
-                            Expanded(
-                              flex: 1,
-                              child: BlocProvider(
-                                create: (_) => sl<TeamBloc>()
-                                  ..add(
-                                    FetchTeam(
-                                      teamGuid: state.analysis.homeTeamId,
-                                    ),
-                                  ),
-                                child: const TeamShortNameAndFlagWidget(),
+                              WidgetSpan(child: SizedBox(width: context.horizontalMargin4)),
+                              TextSpan(
+                                text: "(Last % matches)",
+                                style: context.textStyle12Medium(color: theme.textPrimary),
                               ),
-                            ),
-                            BlocProvider(
-                              create: (_) => sl<TeamBloc>()
-                                ..add(
-                                  FetchTeam(
-                                    teamGuid: state.analysis.awayTeamId,
-                                  ),
-                                ),
-                              child: const TeamShortNameAndFlagWidget(),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
-                        SizedBox(height: context.verticalMargin12),
-                        ListView.separated(
-                          padding: EdgeInsets.zero,
-                          separatorBuilder: (context, index) {
-                            return SizedBox(height: context.verticalMargin20);
-                          },
-                          itemCount: state.analysis.factors.length,
-                          shrinkWrap: true,
-                          physics: const ScrollPhysics(),
-                          itemBuilder: (context, index) {
-                            final factor = state.analysis.factors[index];
-                            return Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Expanded(
-                                  flex: 1,
-                                  child: Align(
-                                    alignment: Alignment.centerLeft,
+                        SizedBox(height: context.verticalMargin16),
+                        Container(
+                          decoration: BoxDecoration(
+                            color: theme.backgroundSecondary,
+                            borderRadius: BorderRadius.circular(context.radius10),
+                          ),
+                          padding: EdgeInsets.symmetric(
+                            horizontal: context.horizontalMargin19,
+                            vertical: context.verticalMargin14,
+                          ),
+                          child: ListView(
+                            padding: EdgeInsets.zero,
+                            shrinkWrap: true,
+                            physics: const NeverScrollableScrollPhysics(),
+                            children: [
+                              Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Expanded(
+                                    flex: 1,
                                     child: Text(
-                                      factor.label,
+                                      "Bat/Bowl Fronts",
                                       style: context.textStyle10Medium(color: theme.textPrimary).copyWith(height: 1.2),
                                     ),
                                   ),
-                                ),
-                                Expanded(
-                                  flex: 1,
-                                  child: Align(
-                                    alignment: Alignment.center,
-                                    child: AnalysisIndicator(
-                                      score: factor.homeTeamScore,
+                                  Expanded(
+                                    flex: 1,
+                                    child: BlocProvider(
+                                      create: (_) => sl<TeamBloc>()
+                                        ..add(
+                                          FetchTeam(
+                                            teamGuid: state.analysis.homeTeamId,
+                                          ),
+                                        ),
+                                      child: const TeamShortNameAndFlagWidget(),
                                     ),
                                   ),
-                                ),
-                                Expanded(
-                                  flex: 1,
-                                  child: Align(
-                                    alignment: Alignment.centerRight,
-                                    child: AnalysisIndicator(
-                                      score: factor.awayTeamScore,
-                                    ),
+                                  BlocProvider(
+                                    create: (_) => sl<TeamBloc>()
+                                      ..add(
+                                        FetchTeam(
+                                          teamGuid: state.analysis.awayTeamId,
+                                        ),
+                                      ),
+                                    child: const TeamShortNameAndFlagWidget(),
                                   ),
-                                ),
-                              ],
-                            );
-                          },
-                        )
+                                ],
+                              ),
+                              SizedBox(height: context.verticalMargin12),
+                              ListView.separated(
+                                padding: EdgeInsets.zero,
+                                separatorBuilder: (context, index) {
+                                  return SizedBox(height: context.verticalMargin20);
+                                },
+                                itemCount: state.analysis.factors.length,
+                                shrinkWrap: true,
+                                physics: const ScrollPhysics(),
+                                itemBuilder: (context, index) {
+                                  final factor = state.analysis.factors[index];
+                                  return Row(
+                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Expanded(
+                                        flex: 1,
+                                        child: Align(
+                                          alignment: Alignment.centerLeft,
+                                          child: Text(
+                                            factor.label,
+                                            style: context.textStyle10Medium(color: theme.textPrimary).copyWith(height: 1.2),
+                                          ),
+                                        ),
+                                      ),
+                                      Expanded(
+                                        flex: 1,
+                                        child: Align(
+                                          alignment: Alignment.center,
+                                          child: AnalysisIndicator(
+                                            score: factor.homeTeamScore,
+                                          ),
+                                        ),
+                                      ),
+                                      Expanded(
+                                        flex: 1,
+                                        child: Align(
+                                          alignment: Alignment.centerRight,
+                                          child: AnalysisIndicator(
+                                            score: factor.awayTeamScore,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  );
+                                },
+                              )
+                            ],
+                          ),
+                        ),
                       ],
-                    ),
-                  ),
-                ],
-              );
+                    );
             } else {
               return Container();
             }

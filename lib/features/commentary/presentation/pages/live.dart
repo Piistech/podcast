@@ -144,12 +144,20 @@ class LivePage extends StatelessWidget {
                     ),
                     RadioPlayer(fixtureGuid: fixture.guid),
                     SizedBox(height: context.verticalMargin40),
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: context.horizontalMargin15),
-                      child: Text(
-                        fixture.matchDescription,
-                        style: context.textStyle12Medium(color: theme.textSecondary).copyWith(height: 1.2),
-                      ),
+                    BlocBuilder<CommentaryBloc, CommentaryState>(
+                      builder: (context, state) {
+                        if (state is CommentaryDone) {
+                          return Padding(
+                            padding: EdgeInsets.symmetric(horizontal: context.horizontalMargin15),
+                            child: Text(
+                              state.commentary.summary,
+                              style: context.textStyle12Medium(color: theme.textSecondary).copyWith(height: 1.2),
+                            ),
+                          );
+                        } else {
+                          return const SizedBox();
+                        }
+                      },
                     )
                   ],
                 );

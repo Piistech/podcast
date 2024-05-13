@@ -6,6 +6,7 @@ class AnalysisFactorModel extends AnalysisFactorEntity {
     required super.label,
     required super.homeTeamScore,
     required super.awayTeamScore,
+
   });
 
   factory AnalysisFactorModel.parse({
@@ -13,36 +14,37 @@ class AnalysisFactorModel extends AnalysisFactorEntity {
   }) {
     try {
       assert(
-        map.containsKey('label'),
-        "AnalysisFactorModel.parse: map doesn't contain key 'label'",
+        map.containsKey('name'),
+        "AnalysisFactorModel.parse: map doesn't contain key 'name'",
       );
       assert(
-        map['label'] is String,
-        "AnalysisFactorModel.parse: map['label'] is not a String",
+        map['name'] is String,
+        "AnalysisFactorModel.parse: map['name'] is not a String",
       );
 
       assert(
-        map.containsKey('homeTeamScore'),
-        "AnalysisFactorModel.parse: map doesn't contain key 'homeTeamScore'",
+        map.containsKey('homeScore'),
+        "AnalysisFactorModel.parse: map doesn't contain key 'homeScore'",
       );
       assert(
-        map['homeTeamScore'] is int,
-        "AnalysisFactorModel.parse: map['homeTeamScore'] is not an int",
+        map['homeScore'] is int,
+        "AnalysisFactorModel.parse: map['homeScore'] is not an int",
       );
 
       assert(
-        map.containsKey('awayTeamScore'),
-        "AnalysisFactorModel.parse: map doesn't contain key 'awayTeamScore'",
+        map.containsKey('awayscore'),
+        "AnalysisFactorModel.parse: map doesn't contain key 'awayscore'",
       );
       assert(
-        map['awayTeamScore'] is int,
-        "AnalysisFactorModel.parse: map['awayTeamScore'] is not an int",
+        map['awayscore'] is int,
+        "AnalysisFactorModel.parse: map['awayscore'] is not an int",
       );
+
 
       return AnalysisFactorModel(
-        label: map['label'],
-        homeTeamScore: map['homeTeamScore'],
-        awayTeamScore: map['awayTeamScore'],
+        label: map['name'] as String,
+        homeTeamScore: map['homeScore'] as int,
+        awayTeamScore: map['awayscore'] as int,
       );
     } catch (e, stackTrace) {
       throw AnalysisFactorModelParsingFailure(
