@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:podcast/core/shared/task_notifier.dart';
 
 import '../../../../../core/shared/shared.dart';
