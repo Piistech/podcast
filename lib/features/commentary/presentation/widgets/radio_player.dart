@@ -1,3 +1,5 @@
+import 'package:podcast/core/shared/task_notifier.dart';
+
 import '../../../../core/shared/shared.dart';
 import '../../../fixture/fixture.dart';
 import '../../commentary.dart';
@@ -32,7 +34,7 @@ class RadioPlayer extends StatelessWidget {
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          BlocBuilder<CurrentlyPlayingCommentaryBloc, CurrentlyPlayingCommentaryState>(
+                          BlocConsumer<CurrentlyPlayingCommentaryBloc, CurrentlyPlayingCommentaryState>(
                             builder: (context, state) {
                               final bool isPlaying = state is CurrentlyPlayingCommentaryChannel && state.channelId == channelId;
                               return Row(
@@ -51,6 +53,11 @@ class RadioPlayer extends StatelessWidget {
                                   if (isPlaying) Icon(Icons.circle, color: theme.live, size: context.radius16),
                                 ],
                               );
+                            },
+                            listener: (BuildContext context, CurrentlyPlayingCommentaryState state) {
+                              if (state is CurrentlyPlayingCommentaryTokenExpired) {
+                                TaskNotifier.instance.error(context, message: "Token expired");
+                              }
                             },
                           ),
                           SizedBox(height: context.verticalMargin16),

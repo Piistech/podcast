@@ -8,5 +8,5 @@ class CurrentlyPlayingCommentaryChannelUseCase {
     required this.repository,
   });
 
-  Stream<String?> get call => repository.liveChannel;
+  Stream<Either<Failure, String?>> get call => repository.liveChannel;
 }

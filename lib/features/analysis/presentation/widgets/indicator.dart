@@ -23,9 +23,9 @@ class AnalysisIndicator extends StatelessWidget {
               return Container(
                 color: index + 1 > score
                     ? theme.textSecondary
-                    : score <= 2
+                    : score <= 3
                         ? theme.negative
-                        : score <= 5
+                        : score <= 6
                             ? theme.warning
                             : theme.positive,
                 child: SizedBox(

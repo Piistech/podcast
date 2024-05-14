@@ -58,7 +58,7 @@ class _AnalysisWidgetState extends State<AnalysisWidget> {
                               ),
                               WidgetSpan(child: SizedBox(width: context.horizontalMargin4)),
                               TextSpan(
-                                text: "(Last % matches)",
+                                text: "(Last 5% matches)",
                                 style: context.textStyle12Medium(color: theme.textPrimary),
                               ),
                             ],

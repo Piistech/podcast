@@ -11,11 +11,10 @@ class TeamFullNameWidget extends StatelessWidget {
     return BlocBuilder<ThemeBloc, ThemeState>(
       builder: (context, state) {
         final theme = state.scheme;
-
         return TeamInfoWidget(
           builder: (team) => Text(
             team.name.toUpperCase(),
-            style: context.textStyle17Medium(color: theme.textPrimary).copyWith(height: 1.2),
+            style: context.textStyle14Medium(color: theme.textPrimary).copyWith(height: 1.2),
           ),
         );
       },

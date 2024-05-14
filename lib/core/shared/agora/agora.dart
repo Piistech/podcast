@@ -51,18 +51,21 @@ class AgoraManager {
           );
         },
         onLeaveChannel: (connection, stats) {
-          channelController.add(null);
           notificationManager.dismissActiveNotification();
         },
         onConnectionStateChanged: (connection, state, reason) {
           if (state == ConnectionStateType.connectionStateConnected) {
             channelController.add(connection.channelId);
-          } else {
+          } else if (state == ConnectionStateType.connectionStateFailed &&
+              reason == ConnectionChangedReasonType.connectionChangedTokenExpired) {
+            channelController.addError(AgoraTokenExpiredFailure());
+          } else if (reason == ConnectionChangedReasonType.connectionChangedLeaveChannel &&
+              state == ConnectionStateType.connectionStateDisconnected) {
             channelController.add(null);
           }
         },
         onError: (err, msg) {
-          debugPrint('Agora Error: $err, $msg');
+          debugPrint("Agora Error: $err $msg");
         },
       ),
     );

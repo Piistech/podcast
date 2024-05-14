@@ -57,7 +57,7 @@ class _BeforeTossPredictionState extends State<BeforeTossPrediction> {
                 alignment: Alignment.center,
                 child: Text(
                   'Match Prediction',
-                  style: context.textStyle17Medium(color: theme.textPrimary).copyWith(height: 1.2),
+                  style: context.textStyle14Medium(color: theme.textPrimary).copyWith(height: 1.2),
                 ),
               ),
               SizedBox(height: context.verticalMargin25),
@@ -67,7 +67,7 @@ class _BeforeTossPredictionState extends State<BeforeTossPrediction> {
                 children: [
                   Text(
                     'Match Winner',
-                    style: context.textStyle17Medium(color: theme.textPrimary).copyWith(height: 1.2),
+                    style: context.textStyle14Medium(color: theme.textPrimary).copyWith(height: 1.2),
                   ),
                   const TeamFullNameWidget(),
                 ],

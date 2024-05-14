@@ -1,4 +1,3 @@
-import 'package:either_dart/either.dart';
 
 import '../../../../core/shared/shared.dart';
 import '../../analysis.dart';

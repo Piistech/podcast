@@ -1,5 +1,3 @@
-import 'package:either_dart/either.dart';
-
 import '../../../../core/shared/shared.dart';
 import '../../commentary.dart';
 
@@ -14,7 +12,7 @@ abstract class CommentaryRepository {
 
   Stream<bool> get live;
 
-  Stream<String?> get liveChannel;
+  Stream<Either<Failure, String?>> get liveChannel;
 
   Future<Either<Failure, void>> play({
     required String token,

@@ -91,3 +91,7 @@ class LiveCommentaryPlayingFailure extends Failure {
     required super.message,
   });
 }
+
+class AgoraTokenExpiredFailure extends Failure {
+  AgoraTokenExpiredFailure() : super(message: 'Token expired');
+}
