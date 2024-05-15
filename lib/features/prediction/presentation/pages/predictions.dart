@@ -1,9 +1,4 @@
-import 'package:podcast/core/config/config.dart';
-import 'package:podcast/features/team/presentation/bloc/team_bloc.dart';
-import 'package:podcast/features/team/team.dart';
-
 import '../../../../core/shared/shared.dart';
-import '../../../commentary/commentary.dart';
 import '../../../fixture/fixture.dart';
 import '../../../live_audio/presentation/widgets/shimmer/item.dart';
 import '../widgets/item.dart';
@@ -16,9 +11,6 @@ class PredictionsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: true,
-      ),
       body: RefreshIndicator(
         onRefresh: () async {
           context.read<FixturesBloc>().add(const FetchFixtures());
@@ -31,18 +23,40 @@ class PredictionsPage extends StatelessWidget {
                 itemBuilder: (_, __) => const ShimmerItem(),
               );
             } else if (state is FixturesDone) {
-              return ListView.separated(
-                itemCount: state.fixtures.length,
-                padding: EdgeInsets.symmetric(
-                  horizontal: context.horizontalMargin15,
-                  vertical: context.verticalMargin15,
-                ),
-                separatorBuilder: (_, __) => SizedBox(height: context.verticalMargin8),
-                physics: const AlwaysScrollableScrollPhysics(),
-                itemBuilder: (_, index) {
-                  final fixture = state.fixtures[index];
-                  return PredictionItemWidget(fixture: fixture);
-                },
+              return Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: context.horizontalMargin16, vertical: context.verticalMargin8),
+                    child: Text(
+                      "Upcoming matches",
+                      style: TextStyles.title(
+                        context: context,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: ListView.separated(
+                      itemCount: state.fixtures.length,
+                      padding: EdgeInsets.symmetric(
+                        horizontal: context.horizontalMargin15,
+                        vertical: context.verticalMargin15,
+                      ),
+                      separatorBuilder: (_, __) => SizedBox(height: context.verticalMargin8),
+                      physics: const AlwaysScrollableScrollPhysics(),
+                      itemBuilder: (_, index) {
+                        final fixture = state.fixtures[index];
+                        if (fixture.isUpcoming) {
+                          return PredictionItemWidget(fixture: fixture);
+                        } else {
+                          return Container();
+                        }
+                      },
+                    ),
+                  ),
+                ],
               );
             } else if (state is FixturesError) {
               return Center(child: Text(state.failure.message));

@@ -1,9 +1,5 @@
-import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-
 import '../../../../core/config/config.dart';
 import '../../../../core/shared/shared.dart';
-import '../../../commentary/commentary.dart';
 import '../../../fixture/fixture.dart';
 import '../../../team/team.dart';
 import 'team.dart';
@@ -48,19 +44,35 @@ class PredictionItemWidget extends StatelessWidget {
                   ),
                 ],
               ),
-              const SizedBox(height: 8),
-              BlocProvider(
-                create: (context) => sl<TeamBloc>(),
-                child: TeamNameAndFlagWidget(
-                  teamGuid: fixture.homeTeamId,
+              SizedBox(height: context.verticalMargin8),
+              Row(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  BlocProvider(
+                    create: (context) => sl<TeamBloc>()..add(FetchTeam(teamGuid: fixture.homeTeamId)),
+                    child: const TeamNameAndFlagWidget(
+                      isEnd: false,
+                    ),
+                  ),
+                  SizedBox(width: context.horizontalMargin12),
+                  BlocProvider(
+                    create: (context) => sl<TeamBloc>()..add(FetchTeam(teamGuid: fixture.awayTeamId)),
+                    child: const TeamNameAndFlagWidget(
+                      isEnd: true,
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(height: context.verticalMargin8),
+              Align(
+                alignment: Alignment.center,
+                child: Text(
+                  fixture.startDate,
+                  style: context.textStyle12Medium(color: Colors.blue),
                 ),
               ),
-              SizedBox(height: context.verticalMargin12),
-              Text(
-                fixture.matchDescription,
-                style: context.textStyle10Regular(color: theme.textPrimary).copyWith(height: 1.2),
-              ),
-              SizedBox(height: context.verticalMargin16),
+              SizedBox(height: context.verticalMargin8),
               Align(
                 alignment: Alignment.centerRight,
                 child: InkWell(
@@ -86,7 +98,6 @@ class PredictionItemWidget extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(height: context.verticalMargin16),
             ],
           ),
         );

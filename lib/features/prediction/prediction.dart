@@ -10,3 +10,4 @@ export 'presentation/bloc/prediction_bloc.dart';
 export 'presentation/widgets/after_toss.dart';
 export 'presentation/widgets/before_toss.dart';
 export 'presentation/widgets/prediction.dart';
+export 'presentation/pages/predictions.dart';

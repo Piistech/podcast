@@ -1,8 +1,8 @@
-import 'package:podcast/features/fixture/presentation/pages/fixtures.dart';
-
 import '../../../../core/shared/shared.dart';
+import '../../../fixture/fixture.dart';
 import '../../../live_audio/presentation/pages/lives_radio.dart';
 import '../../../more/presentation/pages/more.dart';
+import '../../../prediction/prediction.dart';
 
 class HomePage extends StatefulWidget {
   static const String path = '/home';
@@ -22,6 +22,7 @@ class _HomePageState extends State<HomePage> {
     fragments = [
       const FixturesPage(),
       const LiveRadioPage(),
+      const PredictionsPage(),
       const MorePage(),
     ];
     super.initState();
@@ -45,7 +46,7 @@ class _HomePageState extends State<HomePage> {
               width: double.maxFinite,
               height: 54.h + (context.bottomInset / 2),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   currentIndex == 0
                       ? SelectedNavItem(
@@ -75,6 +76,19 @@ class _HomePageState extends State<HomePage> {
                         ),
                   currentIndex == 2
                       ? SelectedNavItem(
+                          icon: "images/icons/prediction.svg",
+                          title: "Prediction",
+                          index: 2,
+                          previous: currentIndex,
+                        )
+                      : UnselectedNavItem(
+                          icon: "images/icons/prediction.svg",
+                          onTap: () {
+                            setState(() => currentIndex = 2);
+                          },
+                        ),
+                  currentIndex == 3
+                      ? SelectedNavItem(
                           icon: "images/icons/more.svg",
                           title: "More",
                           index: 3,
@@ -83,7 +97,7 @@ class _HomePageState extends State<HomePage> {
                       : UnselectedNavItem(
                           icon: "images/icons/more.svg",
                           onTap: () {
-                            setState(() => currentIndex = 2);
+                            setState(() => currentIndex = 3);
                           },
                         ),
                 ],

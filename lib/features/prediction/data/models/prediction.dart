@@ -7,7 +7,7 @@ class PredictionModel extends PredictionEntity {
     required super.winnerTeamIdAfterToss,
   });
 
-  factory PredictionModel.parse(List<Map<String, dynamic>> map) {
+  factory PredictionModel.parse(Map<String, dynamic> map) {
     try {
       // assert(
       //   map.containsKey('predictionwinnerId'),
@@ -19,8 +19,8 @@ class PredictionModel extends PredictionEntity {
       // );
 
       return PredictionModel(
-        winnerTeamId: map.first['predictionwinnerId'],
-        winnerTeamIdAfterToss: map.first['predictionwinnerAfterId'],
+        winnerTeamId: map['predictionwinnerId'],
+        winnerTeamIdAfterToss: map['predictionwinnerAfterId'],
       );
     } catch (e, stackTrace) {
       throw PredictionModelParsingFailure(

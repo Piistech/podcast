@@ -26,7 +26,7 @@ class LiveRadioPage extends StatelessWidget {
                   itemBuilder: (_, __) => const ShimmerItem(),
                 );
               } else if (state is FixturesDone) {
-                return state.fixtures.isEmpty
+                return state.fixtures.where((element) => element.isLive).isEmpty
                     ? Container(
                         alignment: Alignment.center,
                         padding: EdgeInsets.symmetric(

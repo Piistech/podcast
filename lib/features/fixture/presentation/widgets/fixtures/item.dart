@@ -2,7 +2,6 @@ import 'package:podcast/core/shared/task_notifier.dart';
 
 import '../../../../../core/shared/shared.dart';
 import '../../../../commentary/commentary.dart';
-import '../../../../prediction/presentation/pages/predictions.dart';
 import '../../../fixture.dart';
 
 class FixtureItemWidget extends StatelessWidget {
@@ -154,14 +153,11 @@ class FixtureItemWidget extends StatelessWidget {
                   child: InkWell(
                     borderRadius: BorderRadius.circular(context.radius5),
                     onTap: () {
-                      // context.pushNamed(
-                      //   FixtureDetailsPage.name,
-                      //   pathParameters: {
-                      //     'id': fixture.guid,
-                      //   },
-                      // );
                       context.pushNamed(
-                        PredictionsPage.name,
+                        FixtureDetailsPage.name,
+                        pathParameters: {
+                          'id': fixture.guid,
+                        },
                       );
                     },
                     child: Container(

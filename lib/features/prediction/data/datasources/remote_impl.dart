@@ -29,17 +29,12 @@ class PredictionDataSourceImpl extends PredictionRemoteDataSource {
     //   HttpStatus.ok,
     // );
 
-    final RemoteResponse<List<dynamic>> result = RemoteResponse.parse(
-      response: response,
-    );
+    final RemoteResponse<Map<String, dynamic>> result = RemoteResponse.parse(response: response);
 
     if (result.success) {
-
       //final PredictionModel prediction = PredictionModel.parse(result.result!);
 
-      final PredictionModel prediction = PredictionModel.parse(
-        List<Map<String, dynamic>>.from(result.result!),
-      );
+      final PredictionModel prediction = PredictionModel.parse(result.result!);
       return prediction;
     } else {
       throw RemoteFailure(message: result.error!);

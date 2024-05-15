@@ -29,14 +29,12 @@ class CommentaryRemoteDataSourceImpl extends CommentaryRemoteDataSource {
     //   HttpStatus.ok,
     // );
 
-    final RemoteResponse<List<dynamic>> result = RemoteResponse.parse(
+    final RemoteResponse<Map<String, dynamic>> result = RemoteResponse.parse(
       response: response,
     );
 
     if (result.success) {
-      final CommentaryModel commentary = CommentaryModel.parse(
-        map: List<Map<String, dynamic>>.from(result.result!),
-      );
+      final CommentaryModel commentary = CommentaryModel.parse(map: result.result!);
       return commentary;
     } else {
       throw RemoteFailure(message: result.error!);

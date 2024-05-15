@@ -10,7 +10,7 @@ class CommentaryModel extends CommentaryEntity {
   });
 
   factory CommentaryModel.parse({
-    required List<Map<String, dynamic>> map,
+    required Map<String, dynamic> map,
   }) {
     try {
       // assert(
@@ -41,10 +41,10 @@ class CommentaryModel extends CommentaryEntity {
       // );
 
       return CommentaryModel(
-        appId: map.first['appId'],
-        token: map.first['token'],
-        channelId: map.first['channelName'],
-        summary: map.first['summary'],
+        appId: map['appId'],
+        token: map['token'],
+        channelId: map['channelName'],
+        summary: map['summary'],
       );
     } catch (e, stackTrace) {
       throw CommentaryModelParsingFailure(

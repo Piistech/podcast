@@ -5,6 +5,7 @@
         "predictionwinner",
         "roboto",
         "Usecase",
-        "usecases"
+        "usecases",
+        "vsync"
     ]
 }

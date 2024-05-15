@@ -1,15 +1,13 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import '../../../../core/shared/shared.dart';
 import '../../../team/team.dart';
 
-class TeamNameAndFlagWidget extends StatefulWidget {
-  final String teamGuid;
-  const TeamNameAndFlagWidget({super.key, required this.teamGuid});
-
-  @override
-  State<TeamNameAndFlagWidget> createState() => _TeamNameAndFlagWidgetState();
-}
-
-class _TeamNameAndFlagWidgetState extends State<TeamNameAndFlagWidget> {
+class TeamNameAndFlagWidget extends StatelessWidget {
+  final bool isEnd;
+  const TeamNameAndFlagWidget({
+    super.key,
+    required this.isEnd,
+  });
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ThemeBloc, ThemeState>(
@@ -22,36 +20,35 @@ class _TeamNameAndFlagWidgetState extends State<TeamNameAndFlagWidget> {
             } else if (state is TeamDone) {
               return Column(
                 mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: isEnd ? CrossAxisAlignment.end : CrossAxisAlignment.start,
                 children: [
                   ClipRRect(
-                    borderRadius: BorderRadius.circular(context.radius8),
+                    borderRadius: BorderRadius.circular(context.radius10),
                     clipBehavior: Clip.antiAliasWithSaveLayer,
                     child: CachedNetworkImage(
                       imageUrl: state.team.flag,
                       fit: BoxFit.cover,
-                      width: 20.w,
+                      width: 40.w,
                       height: 20.h,
                       placeholder: (context, url) => SizedBox(
-                        width: 20.w,
+                        width: 40.w,
                         height: 20.h,
                         child: const Center(
                           child: CircularProgressIndicator(),
                         ),
                       ),
                       errorWidget: (context, url, error) => SizedBox(
-                        width: 20.w,
+                        width: 40.w,
                         height: 20.h,
                         child: Image.asset('images/splash.png'),
                       ),
                     ),
                   ),
-                  SizedBox(width: context.horizontalMargin8),
-                  Expanded(
-                      child: Text(
+                  SizedBox(height: context.horizontalMargin12),
+                  Text(
                     state.team.name,
-                    style: context.textStyle10Medium(color: theme.textPrimary).copyWith(height: 1.2),
-                  )),
+                    style: context.textStyle17Medium(color: theme.textPrimary).copyWith(height: 1.2),
+                  ),
                 ],
               );
             } else {

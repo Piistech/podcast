@@ -1,12 +1,19 @@
+import 'package:app_settings/app_settings.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:permission_handler/permission_handler.dart';
 import '../../../../core/shared/constants.dart';
 import '../../../../core/shared/shared.dart';
 
-class MorePage extends StatelessWidget {
+class MorePage extends StatefulWidget {
   static const String path = '/more';
   static const String name = 'morePage';
   const MorePage({super.key});
 
+  @override
+  State<MorePage> createState() => _MorePageState();
+}
+
+class _MorePageState extends State<MorePage> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ThemeBloc, ThemeState>(
@@ -20,13 +27,6 @@ class MorePage extends StatelessWidget {
             vertical: context.verticalMargin15,
           ),
           children: [
-            Align(
-              alignment: Alignment.center,
-              child: Text(
-                "More",
-                style: TextStyles.title(context: context, color: theme.textPrimary).copyWith(fontSize: 24.sp),
-              ),
-            ),
             SizedBox(height: context.verticalMargin10),
             Text(
               "Other options".toUpperCase(),
@@ -40,13 +40,36 @@ class MorePage extends StatelessWidget {
                 contentPadding: EdgeInsets.zero,
                 leading: Icon(Icons.notifications_active_outlined, color: theme.white),
                 horizontalTitleGap: 8.w,
+                onTap: () {},
                 title: Text(
                   "Notification",
                   style: TextStyles.body(context: context, color: theme.white).copyWith(height: 1.2),
                 ),
-                trailing: CupertinoSwitch(
-                  value: true,
-                  onChanged: (value) {},
+                trailing: FutureBuilder<bool>(
+                  future: checkPermission(Permission.notification),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      return CupertinoSwitch(
+                        value: snapshot.data ?? false,
+                        onChanged: (switchValue) async {
+                          Permission.notification.status.then(
+                            (value) {
+                              if (value.isGranted) {
+                                AppSettings.openAppSettings(type: AppSettingsType.notification);
+                                setState(() {
+                                  switchValue = true;
+                                });
+                              } else {
+                                AppSettings.openAppSettings(type: AppSettingsType.notification);
+                              }
+                            },
+                          );
+                        },
+                      );
+                    } else {
+                      return const CupertinoActivityIndicator();
+                    }
+                  },
                 ),
               ),
             ),
@@ -204,5 +227,13 @@ class CardWidget extends StatelessWidget {
         );
       },
     );
+  }
+}
+
+Future<bool> checkPermission(Permission permission) async {
+  if (await permission.isGranted) {
+    return true;
+  } else {
+    return false;
   }
 }

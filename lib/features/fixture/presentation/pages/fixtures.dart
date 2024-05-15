@@ -1,9 +1,6 @@
-import 'package:podcast/features/live_audio/presentation/widgets/shimmer/item.dart';
-
-import '../../../../core/config/config.dart';
 import '../../../../core/shared/shared.dart';
-import '../../../commentary/commentary.dart';
-import '../../fixture.dart';
+import '../widgets/fixtures/tab/tab_cricket.dart';
+import '../widgets/fixtures/tab/tab_football.dart';
 
 class FixturesPage extends StatefulWidget {
   static const String path = '/fixtures';
@@ -15,49 +12,68 @@ class FixturesPage extends StatefulWidget {
   State<FixturesPage> createState() => _FixturesPageState();
 }
 
-class _FixturesPageState extends State<FixturesPage> {
+class _FixturesPageState extends State<FixturesPage> with SingleTickerProviderStateMixin {
+  late final TabController tabController;
   int currentIndex = 0;
+  @override
+  void initState() {
+    super.initState();
+    tabController = TabController(length: 2, vsync: this);
+  }
 
   @override
   Widget build(BuildContext context) {
-    return RefreshIndicator(
-          onRefresh: () async {
-            context.read<FixturesBloc>().add(const FetchFixtures());
-          },
-          child: BlocBuilder<FixturesBloc, FixturesState>(
-            builder: (_, state) {
-              if (state is FixturesLoading) {
-                return ListView.builder(
-                  itemCount: 4,
-                  itemBuilder: (_, __) => const ShimmerItem(),
-                );
-              } else if (state is FixturesDone) {
-                return ListView.separated(
-                  itemCount: state.fixtures.length,
-                  padding: EdgeInsets.symmetric(
-                    horizontal: context.horizontalMargin15,
-                    vertical: context.verticalMargin15,
+    return BlocBuilder<ThemeBloc, ThemeState>(
+      builder: (context, state) {
+        final theme = state.scheme;
+        return DefaultTabController(
+          length: 2,
+          initialIndex: 0,
+          child: Scaffold(
+            backgroundColor: theme.backgroundPrimary,
+            appBar: TabBar(
+              labelStyle: TextStyles.body(context: context, color: theme.textPrimary).copyWith(fontWeight: FontWeight.bold),
+              unselectedLabelStyle: TextStyles.body(context: context, color: theme.textSecondary),
+              indicatorWeight: 3,
+              tabAlignment: TabAlignment.center,
+              dividerColor: Colors.transparent,
+              indicatorColor: theme.warning,
+              physics: const ScrollPhysics(),
+              isScrollable: true,
+              controller: tabController,
+              indicatorSize: TabBarIndicatorSize.label,
+              tabs: [
+                Tab(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: Text(
+                      "Cricket",
+                      style: context.textStyle17Medium(color: theme.textPrimary).copyWith(height: 1.2),
+                    ),
                   ),
-                  separatorBuilder: (_, __) => SizedBox(height: context.verticalMargin8),
-                  physics: const AlwaysScrollableScrollPhysics(),
-                  itemBuilder: (_, index) {
-                    final fixture = state.fixtures[index];
-                    return BlocProvider(
-                      create: (context) => sl<CommentaryBloc>()
-                        ..add(
-                          FetchCommentary(fixtureGuid: fixture.guid),
-                        ),
-                      child: FixtureItemWidget(fixture: fixture),
-                    );
-                  },
-                );
-              } else if (state is FixturesError) {
-                return Center(child: Text(state.failure.message));
-              } else {
-                return Container();
-              }
-            },
+                ),
+                Tab(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: Text(
+                      "Football",
+                      style: context.textStyle17Medium(color: theme.textPrimary).copyWith(height: 1.2),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            body: TabBarView(
+              physics: const NeverScrollableScrollPhysics(),
+              controller: tabController,
+              children: const [
+                TabCricket(),
+                TabFootball(),
+              ],
+            ),
           ),
-        );    
+        );
+      },
+    );
   }
 }
