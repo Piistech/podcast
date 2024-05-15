@@ -4,11 +4,13 @@ class CommentaryEntity extends Equatable {
   final String appId;
   final String token;
   final String channelId;
+  final String summary;
 
   const CommentaryEntity({
     required this.appId,
     required this.token,
     required this.channelId,
+    required this.summary,
   });
 
   @override
@@ -16,5 +18,6 @@ class CommentaryEntity extends Equatable {
         appId,
         token,
         channelId,
+        summary,
       ];
 }

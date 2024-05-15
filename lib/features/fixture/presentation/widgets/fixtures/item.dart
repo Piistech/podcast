@@ -1,3 +1,5 @@
+import 'package:podcast/core/shared/task_notifier.dart';
+
 import '../../../../../core/shared/shared.dart';
 import '../../../../commentary/commentary.dart';
 import '../../../fixture.dart';
@@ -17,10 +19,16 @@ class FixtureItemWidget extends StatelessWidget {
         return InkWell(
           borderRadius: BorderRadius.circular(context.radius12),
           onTap: () {
-            context.pushNamed(
-              LivePage.name,
-              pathParameters: {'fixtureGuid': fixture.guid},
-            );
+            if (fixture.isLive) {
+              context.pushNamed(
+                LivePage.name,
+                pathParameters: {'fixtureGuid': fixture.guid},
+              );
+            } else if (fixture.isUpcoming) {
+              TaskNotifier.instance.warning(context, message: "Match is not started yet!");
+            } else {
+              TaskNotifier.instance.success(context, message: "Match has been finished");
+            }
           },
           child: Container(
             padding: EdgeInsets.symmetric(
@@ -57,7 +65,7 @@ class FixtureItemWidget extends StatelessWidget {
                         errorWidget: (context, url, error) => SizedBox(
                           width: 50.w,
                           height: 50.h,
-                          child: const Icon(Icons.error),
+                          child: Image.asset('images/splash.png'),
                         ),
                       ),
                     ),
@@ -114,7 +122,23 @@ class FixtureItemWidget extends StatelessWidget {
                             },
                           );
                         }
-                        return const SizedBox();
+                        return Row(
+                          children: [
+                            CircleAvatar(
+                              radius: context.radius12,
+                              backgroundColor: theme.white,
+                              child: Icon(
+                                Icons.play_arrow_rounded,
+                                color: theme.backgroundPrimary,
+                              ),
+                            ),
+                            SizedBox(width: context.horizontalMargin4),
+                            Text(
+                              "Play Now",
+                              style: context.textStyle12Medium(color: theme.textPrimary).copyWith(letterSpacing: -0.04),
+                            ),
+                          ],
+                        );
                       },
                     ),
                     Text(
@@ -149,6 +173,56 @@ class FixtureItemWidget extends StatelessWidget {
                     ),
                   ),
                 ),
+                SizedBox(height: context.verticalMargin16),
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: Container(
+                    padding: EdgeInsets.symmetric(horizontal: context.horizontalMargin8, vertical: context.verticalMargin4),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(context.radius5),
+                      color: fixture.isLive
+                          ? theme.negative
+                          : fixture.isUpcoming
+                              ? theme.warning
+                              : theme.positive,
+                    ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Visibility(
+                          visible: fixture.isLive,
+                          child: Icon(
+                            Icons.circle,
+                            size: 8.h,
+                            color: theme.textPrimary,
+                          )
+                              .animate(
+                                onPlay: (controller) => controller.repeat(),
+                                onComplete: (controller) => controller.repeat(),
+                              )
+                              .fadeIn(duration: const Duration(milliseconds: 700)),
+                        ),
+                        SizedBox(width: context.verticalMargin5),
+                        Text(
+                          fixture.isLive
+                              ? "Live now"
+                              : fixture.isUpcoming
+                                  ? "Upcoming"
+                                  : "Finished",
+                          style: context
+                              .textStyle10Regular(
+                                color: fixture.isLive
+                                    ? theme.textPrimary
+                                    : fixture.isUpcoming
+                                        ? theme.backgroundPrimary
+                                        : theme.textPrimary,
+                              )
+                              .copyWith(height: 1.2, fontWeight: FontWeight.bold),
+                        ),
+                      ],
+                    ),
+                  ),
+                )
               ],
             ),
           ),

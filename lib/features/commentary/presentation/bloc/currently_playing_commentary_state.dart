@@ -7,6 +7,10 @@ sealed class CurrentlyPlayingCommentaryState extends Equatable {
   List<Object> get props => [];
 }
 
+final class CurrentlyPlayingCommentaryTokenExpired extends CurrentlyPlayingCommentaryState {
+  const CurrentlyPlayingCommentaryTokenExpired();
+}
+
 final class CurrentlyNotPlayingCommentary extends CurrentlyPlayingCommentaryState {}
 
 final class CurrentlyPlayingCommentaryChannel extends CurrentlyPlayingCommentaryState {

@@ -1,4 +1,4 @@
-import 'package:podcast/features/team/team.dart';
+import '../../team.dart';
 
 abstract class TeamRemoteDataSource {
   Future<TeamModel> fetch({

@@ -14,24 +14,26 @@ class PredictionDataSourceImpl extends PredictionRemoteDataSource {
   }) async {
     //! initialize headers
     // final Map<String, String> headers = {};
-    // final Map<String, String> headers = {"fixtureGuid": fixtureGuid};
+    final Map<String, String> headers = {
+      "fixtureId": fixtureGuid,
+    };
     //! initialize response
-    // final Response response = await client.get(
-    //   RemoteEndpoints.prediction,
-    //   headers: headers,
-    // );
+    final Response response = await client.get(
+      RemoteEndpoints.prediction,
+      headers: headers,
+    );
 
     //! mock response
-    final Response response = Response(
-      await rootBundle.loadString('mock/prediction.json'),
-      HttpStatus.ok,
-    );
+    // final Response response = Response(
+    //   await rootBundle.loadString('mock/prediction.json'),
+    //   HttpStatus.ok,
+    // );
 
-    final RemoteResponse<Map<String, dynamic>> result = RemoteResponse.parse(
-      response: response,
-    );
+    final RemoteResponse<Map<String, dynamic>> result = RemoteResponse.parse(response: response);
 
     if (result.success) {
+      //final PredictionModel prediction = PredictionModel.parse(result.result!);
+
       final PredictionModel prediction = PredictionModel.parse(result.result!);
       return prediction;
     } else {

@@ -58,7 +58,7 @@ class _AfterTossPredictionState extends State<AfterTossPrediction> {
                 child: Text.rich(TextSpan(children: [
                   TextSpan(
                     text: 'Match Prediction',
-                    style: context.textStyle17Medium(color: theme.textPrimary).copyWith(height: 1.2),
+                    style: context.textStyle14Medium(color: theme.textPrimary).copyWith(height: 1.2),
                   ),
                   WidgetSpan(child: SizedBox(width: context.horizontalMargin8)),
                   TextSpan(
@@ -74,7 +74,7 @@ class _AfterTossPredictionState extends State<AfterTossPrediction> {
                 children: [
                   Text(
                     'Match Winner',
-                    style: context.textStyle17Medium(color: theme.textPrimary).copyWith(height: 1.2),
+                    style: context.textStyle14Medium(color: theme.textPrimary).copyWith(height: 1.2),
                   ),
                   const TeamFullNameWidget(),
                 ],

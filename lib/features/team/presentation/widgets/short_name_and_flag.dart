@@ -20,12 +20,24 @@ class TeamShortNameAndFlagWidget extends StatelessWidget {
                 team.shortName,
                 style: context.textStyle20Medium(color: theme.textPrimary).copyWith(height: 1.2),
               ),
-              SizedBox(width: context.horizontalMargin1),
+              SizedBox(width: context.horizontalMargin2),
               ClipRRect(
                 borderRadius: BorderRadius.circular(context.radius52),
                 child: CachedNetworkImage(
                   imageUrl: team.flag,
-                  height: context.flagHeight20,
+                  height: context.flagHeight24,
+                  placeholder: (context, url) => SizedBox(
+                    width: context.flagHeight24,
+                    height: context.flagHeight24,
+                    child: const Center(
+                      child: CircularProgressIndicator(),
+                    ),
+                  ),
+                  errorWidget: (context, url, error) => SizedBox(
+                    width: context.flagHeight24,
+                    height: context.flagHeight24,
+                    child: Image.asset('images/splash.png'),
+                  ),
                 ),
               ),
             ],

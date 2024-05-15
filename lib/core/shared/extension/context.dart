@@ -84,6 +84,13 @@ extension BuildContextExtension on BuildContext {
           color: color,
         ),
       );
+  TextStyle textStyle24Medium({required Color color}) => GoogleFonts.rubik(
+        textStyle: TextStyle(
+          fontSize: 24.sp,
+          fontWeight: FontWeight.w600,
+          color: color,
+        ),
+      );
   TextStyle textStyle17Medium({required Color color}) => GoogleFonts.rubik(
         textStyle: TextStyle(
           fontSize: 17.sp,
@@ -165,6 +172,6 @@ extension BuildContextExtension on BuildContext {
   double get verticalMargin25 => 25.h;
   double get verticalMargin40 => 40.h;
 
-  double get flagHeight20 => 20.h;
+  double get flagHeight24 => 24.h;
   double get navBarHeight => 54.h;
 }

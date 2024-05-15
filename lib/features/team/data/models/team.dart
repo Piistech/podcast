@@ -12,24 +12,24 @@ class TeamModel extends TeamEntity {
   }) {
     try {
       assert(
-        map.containsKey('name'),
+        map.containsKey('teamName'),
         "TeamModel.parse: map doesn't contain key 'name'",
       );
-       assert(
-        map['name'] is String,
-        "TeamModel.parse: map['name'] is not a String",
+      assert(
+        map['teamName'] is String,
+        "TeamModel.parse: map['teamName'] is not a String",
       );
       assert(
         map.containsKey('flag'),
         "TeamModel.parse: map doesn't contain key 'flag'",
       );
-       assert(
+      assert(
         map['flag'] is String,
         "TeamModel.parse: map['flag'] is not a String",
       );
       return TeamModel(
-        name: map['name'],
-        flag: map['flag'],
+        name: map['teamName'].toString().trim(),
+        flag: map['flag'].toString().trim(),
       );
     } catch (e, stackTrace) {
       throw TeamModelParsingFailure(

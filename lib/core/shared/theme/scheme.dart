@@ -15,6 +15,7 @@ class ThemeScheme {
   final Color pink;
   final Color white;
   final Color playButton;
+  final Color shimmerColor;
   final Gradient gradient;
 
   ThemeScheme({
@@ -33,6 +34,7 @@ class ThemeScheme {
     required this.white,
     required this.gradient,
     required this.playButton,
+    required this.shimmerColor,
   });
 
   factory ThemeScheme.find({
@@ -53,6 +55,7 @@ class ThemeScheme {
       pink: const Color(0xFFC521FF),
       playButton: const Color(0xFFD9D9D9),
       white: const Color(0xFFFFFFFF),
+      shimmerColor: Colors.grey.shade700,
       gradient: const LinearGradient(
         begin: Alignment.topCenter,
         end: Alignment.bottomCenter,

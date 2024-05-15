@@ -1,5 +1,3 @@
-import 'package:either_dart/either.dart';
-
 import '../../../../core/shared/shared.dart';
 import '../../commentary.dart';
 
@@ -65,10 +63,15 @@ class CommentaryRepositoryImpl implements CommentaryRepository {
   }
 
   @override
-  Stream<String?> get liveChannel async* {
-    await for (final String? channelName in agora.channelController.stream) {
-      yield channelName;
-    }
+  Stream<Either<Failure, String?>> get liveChannel {
+    return agora.channelController.stream.transform(StreamTransformer.fromHandlers(
+      handleData: (data, sink) {
+        sink.add(Right(data));
+      },
+      handleError: (error, stackTrace, sink) {
+        sink.add(Left(error as Failure));
+      },
+    ));
   }
 
   @override

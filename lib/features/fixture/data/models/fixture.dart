@@ -1,4 +1,4 @@
-import 'package:podcast/features/fixture/fixture.dart';
+import '../../fixture.dart';
 
 import '../../../../core/shared/shared.dart';
 
@@ -13,6 +13,7 @@ class FixtureModel extends FixtureEntity {
     required super.awayTeamId,
     required super.stadiumName,
     required super.logo,
+    required super.isCompleted,
   });
 
   factory FixtureModel.parse({
@@ -47,12 +48,12 @@ class FixtureModel extends FixtureEntity {
       );
 
       assert(
-        map.containsKey('startDate'),
+        map.containsKey('startTime'),
         "FixtureModel.parse: map doesn't contain key 'startDate'",
       );
       assert(
-        map['startDate'] is String,
-        "FixtureModel.parse: map['startDate'] is not a String",
+        map['startTime'] is String,
+        "FixtureModel.parse: map['startTime'] is not a String",
       );
 
       assert(
@@ -97,17 +98,26 @@ class FixtureModel extends FixtureEntity {
         map['logo'] is String,
         "FixtureModel.parse: map['logo'] is not a String",
       );
+      assert(
+        map.containsKey('isCompleted'),
+        "FixtureModel.parse: map doesn't contain key 'isCompleted'",
+      );
+      assert(
+        map['isCompleted'] is bool,
+        "FixtureModel.parse: map['isCompleted'] is not a bool",
+      );
 
       return FixtureModel(
         guid: map['fixtureId'],
         matchTitle: map['matchTitle'],
         matchDescription: map['matchDescription'],
-        startedAt: DateTime.parse(map['startDate']),
+        startedAt: DateTime.parse(map['startTime']),
         result: map['result'],
         homeTeamId: map['homeTeamId'],
         awayTeamId: map['awayTeamId'],
         stadiumName: map['stadiumName'],
         logo: map['logo'],
+        isCompleted: map['isCompleted'] as bool,
       );
     } catch (e, stackTrace) {
       throw FixtureModelParsingFailure(

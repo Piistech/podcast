@@ -8,7 +8,7 @@ extension FixtureEntityExtension on FixtureEntity {
   }
 
   bool get isLive {
-    return result != null ? false : DateTime.now().isAfter(startedAt);
+    return (result != "" && isCompleted==false && (startedAt.isAfter(DateTime.now())|| startedAt.isAtSameMomentAs(DateTime.now()))) ? false : DateTime.now().isAfter(startedAt);
   }
 
   bool get isUpcoming {
@@ -16,7 +16,7 @@ extension FixtureEntityExtension on FixtureEntity {
   }
 
   bool get isFinished {
-    return !isLive && !isUpcoming && result != null;
+    return !isLive && !isUpcoming && (result != "" || result!=null) && isCompleted;
   }
 
   String get startTime {

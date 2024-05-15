@@ -1,4 +1,4 @@
-import 'package:podcast/core/shared/shared.dart';
+import '../../../../core/shared/shared.dart';
 
 import '../../team.dart';
 

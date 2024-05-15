@@ -21,6 +21,7 @@ class RemoteResponse<T> {
     final bool success = payload['success'] as bool;
     final String? error = payload['error'] as String?;
     final T? result = payload['result'] as T?;
+    //print(result);
 
     if (success) {
       return RemoteResponse._success(result: result);

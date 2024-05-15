@@ -28,7 +28,20 @@ class _PredictionWidgetState extends State<PredictionWidget> {
     return BlocBuilder<PredictionBloc, PredictionState>(
       builder: (context, state) {
         if (state is PredictionLoading) {
-          return const Center(child: CircularProgressIndicator());
+          return Center(
+            child: Text(
+              "No prediction found",
+              style: context.textStyle14Medium(color: Colors.white),
+            )
+                .animate(
+                  onPlay: (controller) => controller.repeat(),
+                  onComplete: (controller) => controller.repeat(),
+                )
+                .shimmer(
+                  duration: const Duration(milliseconds: 1000),
+                  color: Colors.orange,
+                ),
+          );
         } else if (state is PredictionDone) {
           return ListView(
             padding: EdgeInsets.zero,
